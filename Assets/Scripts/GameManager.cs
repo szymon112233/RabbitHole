@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public RabbitSpawnManager RabbitSpawnManager { get => m_RabbitSpawnManager; }
     [SerializeField] private RabbitPoolManager m_RabbitPoolManager;
     public RabbitPoolManager RabbitPoolManager { get => m_RabbitPoolManager; }
+    [SerializeField] private RabbitHoldController m_RabbitHoldController;
+    public RabbitHoldController RabbitHoldController { get => m_RabbitHoldController; }
 
     private void Awake() 
     { 

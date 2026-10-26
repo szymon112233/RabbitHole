@@ -426,7 +426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5900361059491677431, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.9470492
       objectReference: {fileID: 0}
     - target: {fileID: 5900361059491677431, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
       propertyPath: m_LocalRotation.x
@@ -434,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5900361059491677431, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70710677
+      value: -0.3210886
       objectReference: {fileID: 0}
     - target: {fileID: 5900361059491677431, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
       propertyPath: m_LocalRotation.z
@@ -446,7 +446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5900361059491677431, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -37.458
       objectReference: {fileID: 0}
     - target: {fileID: 5900361059491677431, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 240539419}
   m_Layer: 0
   m_Name: Cube (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1657,7 +1657,7 @@ GameObject:
   - component: {fileID: 639168450}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4383,7 +4383,7 @@ GameObject:
   - component: {fileID: 2002927909}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4702,6 +4702,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4953937949849946604, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
+      propertyPath: m_RabbitHoldController
+      value: 
+      objectReference: {fileID: 712564747}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
