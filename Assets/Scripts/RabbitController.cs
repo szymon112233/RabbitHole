@@ -102,10 +102,13 @@ public class RabbitController : MonoBehaviour
         double randomAngle = UnityEngine.Random.Range(0.0f, 2.0f) * Math.PI;
         double x = Math.Cos(randomAngle);
         double z = Math.Sin(randomAngle);
-        Vector3 forewardDir = new Vector3((float)x, 0, (float)z);
+        Vector3 forwardDir = new Vector3((float)x, 0, (float)z);
         
-        Rbody.AddForce(forewardDir * hopPower, ForceMode.Impulse);
+        Rbody.AddForce(forwardDir * hopPower, ForceMode.Impulse);
         Rbody.AddForce(Vector3.up * hopPower, ForceMode.Impulse);
+        
+        Quaternion lookRotation = Rbody.rotation * Quaternion.FromToRotation(-Rbody.transform.forward, forwardDir);
+        Rbody.MoveRotation(lookRotation);
 
         readyToHop = false;
         timeToHop = RandomHopCD();

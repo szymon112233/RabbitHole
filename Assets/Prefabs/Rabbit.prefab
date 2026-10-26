@@ -87,8 +87,8 @@ Rigidbody:
   m_GameObject: {fileID: 1249118337805041473}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 0.05
+  m_AngularDamping: 0.6
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -121,6 +121,8 @@ MonoBehaviour:
   HopPower: 10
   MaximumHopCooldown: 20
   Rbody: {fileID: 8318158423782490278}
+  SphereCollider: {fileID: 0}
+  BoxCollider: {fileID: 0}
 --- !u!1001 &754242192827772628
 PrefabInstance:
   m_ObjectHideFlags: 0
