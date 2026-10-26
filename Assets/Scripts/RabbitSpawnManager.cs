@@ -26,6 +26,11 @@ public class RabbitSpawnManager : MonoBehaviour
     {
         
     }
+    
+    public int GetRabbitCount()
+    {
+        return RabbitList.Count;
+    }
 
     private IEnumerator SpawnRabbitCoroutine()
     {
