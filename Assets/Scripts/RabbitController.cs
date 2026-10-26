@@ -86,7 +86,6 @@ public class RabbitController : MonoBehaviour
     {
         float hopPower = RandomHopPower();
         double randomAngle = UnityEngine.Random.Range(0.0f, 2.0f) * Math.PI;
-        Debug.Log(randomAngle);
         double x = Math.Cos(randomAngle);
         double z = Math.Sin(randomAngle);
         Vector3 forewardDir = new Vector3((float)x, 0, (float)z);
