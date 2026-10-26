@@ -4,7 +4,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private RabbitSpawnManager RabbitManager;
+
+    [SerializeField] private RabbitSpawnManager m_RabbitSpawnManager;
+    public RabbitSpawnManager RabbitSpawnManager { get => m_RabbitSpawnManager; }
+    [SerializeField] private RabbitPoolManager m_RabbitPoolManager;
+    public RabbitPoolManager RabbitPoolManager { get => m_RabbitPoolManager; }
 
     private void Awake() 
     { 
@@ -27,17 +31,17 @@ public class GameManager : MonoBehaviour
 
     public int GetUndisposedRabbitCount()
     {
-        if (RabbitManager == null)
+        if (m_RabbitSpawnManager == null)
         {
-            RabbitManager = FindAnyObjectByType<RabbitSpawnManager>();
+            m_RabbitSpawnManager = FindAnyObjectByType<RabbitSpawnManager>();
         }
 
-        if (RabbitManager == null)
+        if (m_RabbitSpawnManager == null)
         {
             return -1;
         }
 
-        return RabbitManager.GetRabbitCount();
+        return m_RabbitSpawnManager.GetRabbitCount();
     }
     
 }

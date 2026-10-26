@@ -13,6 +13,8 @@ public class RabbitController : MonoBehaviour
 
     [SerializeField]
     protected Rigidbody Rbody;
+    [SerializeField]
+    protected SphereCollider SphereCollider;
 
     protected bool frozen;
     protected float timeToHop;
@@ -20,8 +22,22 @@ public class RabbitController : MonoBehaviour
 
     void Awake()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         timeToHop = RandomHopCD();
+        frozen = false;
         readyToHop = false;
+    }
+
+    public void Kill()
+    {
+        frozen = true;
+        // this could be merged somehow ig
+        GameManager.Instance.RabbitPoolManager.ReturnToPool(this);
+        GameManager.Instance.RabbitSpawnManager.RemoveRabbit(this);
     }
     
     void Update()
@@ -86,4 +102,6 @@ public class RabbitController : MonoBehaviour
     {
         return Renderer.isVisible;
     }
+
+    
 }
