@@ -13,8 +13,6 @@ public class RabbitController : MonoBehaviour
 
     [SerializeField]
     protected Rigidbody Rbody;
-    [SerializeField]
-    protected SphereCollider SphereCollider;
 
     protected bool frozen;
     protected float timeToHop;
@@ -35,6 +33,8 @@ public class RabbitController : MonoBehaviour
     public void Kill()
     {
         frozen = true;
+        Rbody.angularVelocity = Vector3.zero;
+        Rbody.linearVelocity = Vector3.zero;
         // this could be merged somehow ig
         GameManager.Instance.RabbitPoolManager.ReturnToPool(this);
         GameManager.Instance.RabbitSpawnManager.RemoveRabbit(this);
