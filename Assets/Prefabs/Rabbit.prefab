@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5900361059491677431}
   - component: {fileID: 8823148800127862446}
   - component: {fileID: 8318158423782490278}
+  - component: {fileID: 407940998765757281}
   m_Layer: 6
   m_Name: Rabbit
   m_TagString: Untagged
@@ -82,6 +83,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &407940998765757281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249118337805041473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af186623cb4555d478788c8c64567dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RabbitController
+  Renderer: {fileID: 2140915057771344464}
+  DEBUG_IsVisible: 0
 --- !u!1001 &754242192827772628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,5 +157,10 @@ PrefabInstance:
 --- !u!4 &1007999525255711039 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3c84ff10e0bccd7418f32848470920e5, type: 3}
+  m_PrefabInstance: {fileID: 754242192827772628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2140915057771344464 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 3c84ff10e0bccd7418f32848470920e5, type: 3}
   m_PrefabInstance: {fileID: 754242192827772628}
   m_PrefabAsset: {fileID: 0}
