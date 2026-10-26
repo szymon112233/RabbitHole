@@ -889,54 +889,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351203827}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1359719869
-GameObject:
+--- !u!1001 &1878307818
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1359719871}
-  - component: {fileID: 1359719870}
-  m_Layer: 0
-  m_Name: RabbitSpawnManager
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1359719870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359719869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0563924f0ac825c4a98ed30038bbdf7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RabbitSpawnManager
-  RabbitPrefab: {fileID: 407940998765757281, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
-  RabbitSpawnDeltaTime: 1
-  QueryRabbitCount: 100
-  MaxRabbitCount: 500
---- !u!4 &1359719871
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359719869}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.88, y: 0.48, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 102674466833740538, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_Name
+      value: RabbitSpawnManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.34373
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.23035
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001969671261929860, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c149f214124dff6ffb5476f7e92ad1ff, type: 3}
 --- !u!1001 &9156347143826488031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1002,4 +1011,4 @@ SceneRoots:
   - {fileID: 799385575}
   - {fileID: 9156347143826488031}
   - {fileID: 318546853}
-  - {fileID: 1359719871}
+  - {fileID: 1878307818}
