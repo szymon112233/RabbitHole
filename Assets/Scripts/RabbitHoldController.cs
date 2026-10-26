@@ -83,7 +83,7 @@ public class RabbitHoldController : MonoBehaviour
         return true;
     }
 
-    void DropRabbit()
+    public void DropRabbit()
     {
         if (joint.connectedBody == null)
         {
@@ -91,6 +91,19 @@ public class RabbitHoldController : MonoBehaviour
         }
         
         joint.connectedBody = null;
+    }
+
+    public void DropRabbit(Rigidbody rabbitRB)
+    {
+        if (joint.connectedBody == null)
+        {
+            return;
+        }
+
+        if (rabbitRB == joint.connectedBody)
+        { 
+            joint.connectedBody = null;
+        }
     }
 
     void ThrowRabbit()

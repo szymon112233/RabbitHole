@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class RabbitController : MonoBehaviour
@@ -14,12 +15,25 @@ public class RabbitController : MonoBehaviour
     [SerializeField]
     protected Rigidbody Rbody;
 
+    [SerializeField]
+    protected SphereCollider SphereCollider;
+
+    [SerializeField]
+    protected BoxCollider BoxCollider;
+
     protected bool frozen;
     protected float timeToHop;
     protected bool readyToHop;
+    protected bool hitWall;
+
+    private Transform T;
+    private Vector3 lastWallNormal;
 
     void Awake()
     {
+        T = transform;
+        SphereCollider = GetComponent<SphereCollider>();
+        BoxCollider = GetComponent<BoxCollider>();
         Initialize();
     }
 
@@ -102,5 +116,48 @@ public class RabbitController : MonoBehaviour
         return Renderer.isVisible;
     }
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Wall") && !hitWall)
+        {
+            hitWall = true;
+
+            T.localScale = new Vector3(2.4f, 1.43f, 0.0056f);
+            Rbody.angularVelocity = Vector3.zero;
+            Rbody.linearVelocity = Vector3.zero;
+            Rbody.isKinematic = true;
+
+            lastWallNormal = collision.GetContact(0).normal;
+
+            T.forward = UnityEngine.Random.value > 0.5f ? collision.GetContact(0).normal : -collision.GetContact(0).normal;
+            T.position = collision.GetContact(0).point + collision.GetContact(0).normal * 0.005f;
+            T.RotateAround(T.position, T.forward, UnityEngine.Random.Range(-20f, 20f));
+
+            SphereCollider.enabled = false;
+            BoxCollider.enabled = true;
+
+            // HACK #SO it should be released by RabbitHoldController
+            frozen = true;
+            GameManager.Instance.RabbitHoldController.DropRabbit(Rbody);
+            StartCoroutine(FallOffCoroutine());
+        }
+    }
+
+    private IEnumerator FallOffCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Rbody.isKinematic = false;
+        Rbody.AddForceAtPosition(lastWallNormal * 40f, T.position + Vector3.up * 1.1f);
+
+        yield return new WaitForSeconds(1.5f);
+
+        SphereCollider.enabled = true;
+        BoxCollider.enabled = false;
+        T.localScale = Vector3.one;
+        hitWall = false;
+        Rbody.AddForce(new Vector3(UnityEngine.Random.Range(-.75f, .75f), 1f, UnityEngine.Random.Range(-.75f, .75f)).normalized * 5f, ForceMode.Impulse);
+
+    }
+
 }
