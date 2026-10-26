@@ -96,7 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RabbitController
   Renderer: {fileID: 2140915057771344464}
-  DEBUG_IsVisible: 0
+  HopPower: 10
+  MaximumHopCooldown: 20
+  Rbody: {fileID: 8318158423782490278}
 --- !u!1001 &754242192827772628
 PrefabInstance:
   m_ObjectHideFlags: 0
