@@ -22,22 +22,7 @@ public class RabbitHoldController : MonoBehaviour
 
     private void OnInteractPerformed(InputAction.CallbackContext obj)
     {
-        var layerMask = LayerMask.GetMask("Rabbit");
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        
-        if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit,
-                maxPickupDistance, layerMask))
-        {
-            // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            // Debug.Log("Did Hit");
-            TryHoldRabbit(hit.rigidbody);
-        }
-        else
-        {
-            // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            // Debug.Log("Did not Hit");
-        }
+        TryHoldRabbit();
     }
 
     private void OnDropPerformed(InputAction.CallbackContext obj)
@@ -47,23 +32,47 @@ public class RabbitHoldController : MonoBehaviour
 
     private void OnAttackPerformed(InputAction.CallbackContext obj)
     {
-        ThrowRabbit();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        if (IsHoldingARabbit())
+        {
+            ThrowRabbit();
+        }
+        else
+        {
+            TryHoldRabbit();
+        }
         
     }
-    bool TryHoldRabbit(Rigidbody rabbit)
+
+    bool IsHoldingARabbit()
     {
-        if (joint.connectedBody != null)
+        return joint.connectedBody != null && joint.connectedBody.gameObject.CompareTag("Rabbit");
+    }
+    
+    bool TryHoldRabbit()
+    {
+        if (IsHoldingARabbit())
         {
             return false;
         }
 
-        if (rabbit == null)
+        Rigidbody rabbit;
+        
+        var layerMask = LayerMask.GetMask("Rabbit");
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        
+        if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit,
+                maxPickupDistance, layerMask))
         {
+            // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            // Debug.Log("Did Hit");
+            rabbit = hit.rigidbody;
+        }
+        else
+        {
+            // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            // Debug.Log("Did not Hit");
+            
             return false;
         }
         

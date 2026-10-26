@@ -26,15 +26,20 @@ public class RabbitSpawnManager : MonoBehaviour
     {
         
     }
+    
+    public int GetRabbitCount()
+    {
+        return RabbitList.Count;
+    }
 
     private IEnumerator SpawnRabbitCoroutine()
     {
         if (RabbitList.Count == 0)
         {
-            SpawnRabbit(T.position);
-            SpawnRabbit(T.position);
+            CreateRabbit(T.position);
+            CreateRabbit(T.position);
         }
-        else
+        else if (RabbitList.Count < MaxRabbitCount)
         {
             List<int> uniqueRabbitIDs = new List<int>();
 
@@ -55,7 +60,7 @@ public class RabbitSpawnManager : MonoBehaviour
                 RabbitController rabbit = RabbitList[uniqueRabbitIDs[i]];
                 if (!rabbit.IsVisible())
                 {
-                    SpawnRabbit(RabbitList[uniqueRabbitIDs[i]].transform.position);
+                    CreateRabbit(RabbitList[uniqueRabbitIDs[i]].transform.position);
                 }
             }
         }
@@ -65,9 +70,21 @@ public class RabbitSpawnManager : MonoBehaviour
         StartCoroutine(SpawnRabbitCoroutine());
     }
 
-    private void SpawnRabbit(Vector3 position, bool addRandomOffset = true)
+    private void CreateRabbit(Vector3 position, bool addRandomOffset = true)
     {
-        Vector3 randomOffset = new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
-        RabbitList.Add(Instantiate(RabbitPrefab, addRandomOffset ? position + randomOffset : position, Quaternion.Euler(0f, Random.Range(-180f, 180f), 0f), T).GetComponent<RabbitController>());
+        RabbitController newRabbit = GameManager.Instance.RabbitPoolManager.RequestRabbit();
+
+        if (newRabbit)
+        {
+            newRabbit.Initialize();
+            Vector3 spawnPosition = addRandomOffset ? position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f)) : position;
+            newRabbit.transform.position = spawnPosition;
+            RabbitList.Add(newRabbit);
+        }
+    }
+
+    public void RemoveRabbit(RabbitController rabbit)
+    {
+        RabbitList.Remove(rabbit);
     }
 }
