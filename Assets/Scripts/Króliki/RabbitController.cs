@@ -150,6 +150,8 @@ public class RabbitController : MonoBehaviour
     {
         if (!hitWall && Rbody.linearVelocity.magnitude > MinVelocityToSlap && Vector3.Dot(collision.GetContact(0).normal, Vector3.up) < 0.5f)
         {
+            //Debug.Log($"Rbody.linearVelocity.magnitude: {Rbody.linearVelocity.magnitude}");
+
             hitWall = true;
 
             T.localScale = new Vector3(2.4f, 1.43f, 0.0056f);
@@ -160,7 +162,7 @@ public class RabbitController : MonoBehaviour
             lastWallNormal = collision.GetContact(0).normal;
 
             T.forward = UnityEngine.Random.value > 0.5f ? collision.GetContact(0).normal : -collision.GetContact(0).normal;
-            T.position = collision.GetContact(0).point + collision.GetContact(0).normal * 0.005f;
+            T.position = collision.GetContact(0).point + collision.GetContact(0).normal * 0.035f;
             T.RotateAround(T.position, T.forward, UnityEngine.Random.Range(-20f, 20f));
 
             SphereCollider.enabled = false;
