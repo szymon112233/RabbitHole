@@ -16,17 +16,13 @@ public class RabbitController : MonoBehaviour
     protected float LeashLength = 20.0f;
 
     [SerializeField]
-
-    [SerializeField]
     protected float MaximumAngleRotationTwoardsGround = 5.0f;
+
     [SerializeField]
     protected Rigidbody Rbody;
 	
     [SerializeField]
     protected float MinVelocityToSlap = 1.5f;
-
-    [SerializeField]
-    protected Rigidbody Rbody;
 
     [SerializeField]
     protected SphereCollider SphereCollider;
@@ -117,7 +113,6 @@ public class RabbitController : MonoBehaviour
         double x = Math.Cos(randomAngle);
         double z = Math.Sin(randomAngle);
 
-        if(Vector3.Distance(transform.position, RabbitHandler.transform.position) >= LeashLength)
 
         if(Vector3.Distance(transform.position, GameManager.Instance.RabbitSpawnManager.transform.position) >= LeashLength)
         {
