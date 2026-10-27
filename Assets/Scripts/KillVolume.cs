@@ -3,15 +3,14 @@ using UnityEngine;
 public class KillVolume : MonoBehaviour
 {
     private const string RabbitTag = "Rabbit";
-
-    [SerializeField]
-    private int PointsPerRabbit = 1;
+    public int MoneyForThisTrigger = 0;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(RabbitTag))
         {
-            GameManager.Instance.Points += PointsPerRabbit;
+            GameManager.Instance.DisposedRabbits += 1;
+            GameManager.Instance.AddMoney(MoneyForThisTrigger);
             other.GetComponent<RabbitController>()?.Kill();
         }
     }

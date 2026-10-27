@@ -81,7 +81,8 @@ public class RabbitHoldController : MonoBehaviour
         
         if(snapPosition)
         {
-            rabbit.position = transform.position;        
+            rabbit.position = transform.position;
+            rabbit.rotation = Quaternion.identity;
         }
         
         rabbit.linearVelocity = Vector3.zero;
