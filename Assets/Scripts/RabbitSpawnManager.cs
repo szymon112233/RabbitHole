@@ -77,6 +77,7 @@ public class RabbitSpawnManager : MonoBehaviour
         if (newRabbit)
         {
             newRabbit.Initialize();
+            newRabbit.RabbitHandler = this;
             Vector3 spawnPosition = addRandomOffset ? position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f)) : position;
             newRabbit.transform.position = spawnPosition;
             RabbitList.Add(newRabbit);

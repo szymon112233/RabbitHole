@@ -120,7 +120,9 @@ MonoBehaviour:
   Renderer: {fileID: 2140915057771344464}
   HopPower: 10
   MaximumHopCooldown: 20
+  LeashLength: 12
   Rbody: {fileID: 8318158423782490278}
+  RabbitHandler: {fileID: 0}
   SphereCollider: {fileID: 0}
   BoxCollider: {fileID: 0}
 --- !u!1001 &754242192827772628
