@@ -69,7 +69,6 @@ public class RabbitHoldController : MonoBehaviour
                 maxPickupDistance, layerMask))
         {
             // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
             rabbit = hit.rigidbody;
         }
         else

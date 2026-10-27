@@ -87,7 +87,7 @@ Rigidbody:
   m_GameObject: {fileID: 1249118337805041473}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0.05
+  m_LinearDamping: 0.2
   m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RabbitController
   Renderer: {fileID: 2140915057771344464}
   HopPower: 10
-  MaximumHopCooldown: 20
+  MaximumHopCooldown: 40
   LeashLength: 12
   Rbody: {fileID: 8318158423782490278}
   RabbitHandler: {fileID: 0}
