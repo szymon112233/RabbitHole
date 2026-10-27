@@ -8,6 +8,7 @@ public class KillVolume : MonoBehaviour
     {
         if (other.CompareTag(RabbitTag))
         {
+            GameManager.Instance.Points += 1;
             other.GetComponent<RabbitController>()?.Kill();
         }
     }

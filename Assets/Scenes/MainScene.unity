@@ -1465,72 +1465,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427064848}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &608285686
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 608285688}
-  - component: {fileID: 608285687}
-  - component: {fileID: 608285689}
-  m_Layer: 6
-  m_Name: RabbitCounterTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &608285687
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608285686}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6.9999995, y: 4, z: 11}
-  m_Center: {x: 0.00000023841858, y: -1.5, z: -1}
---- !u!4 &608285688
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608285686}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.81082, y: -17.61436, z: -11.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &608285689
+--- !u!114 &471509023 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6758649521703988762, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
+  m_PrefabInstance: {fileID: 1155050263016383464}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608285686}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a90f148fd17e49a7a163271f22a984b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d92e85d8ad223de486bce0d8db9568d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RabbitCounterTrigger
+  m_EditorClassIdentifier: '::'
 --- !u!1 &628746273
 GameObject:
   m_ObjectHideFlags: 0
@@ -5235,7 +5180,7 @@ PrefabInstance:
     - target: {fileID: 4953937949849946604, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: m_RabbitHoldController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 471509023}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5505,7 +5450,6 @@ SceneRoots:
   - {fileID: 768929580}
   - {fileID: 4510585}
   - {fileID: 1523696392}
-  - {fileID: 608285688}
   - {fileID: 5218190639065620923}
   - {fileID: 2473065223332826909}
   - {fileID: 1485681054}
