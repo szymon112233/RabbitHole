@@ -74,10 +74,17 @@ public class Hand : Tool
         
         rabbit.linearVelocity = Vector3.zero;
         rabbit.GetComponent<RabbitController>().Grabbed();
+        rabbit.GetComponent<RabbitController>().OnKilled += OnHeldRabbitKilled;
         _handController.EnterGrabState();
         joint.connectedBody = rabbit;
 
         return true;
+    }
+
+    private void OnHeldRabbitKilled()
+    {
+        _handController.ExitGrabState();
+        joint.connectedBody = null;
     }
 
     void ThrowRabbit()
@@ -90,6 +97,7 @@ public class Hand : Tool
         var rabbit = joint.connectedBody;
         
         joint.connectedBody.GetComponent<RabbitController>().Thrown();
+        joint.connectedBody.GetComponent<RabbitController>().OnKilled -= OnHeldRabbitKilled;
         _handController.ExitGrabState();
         joint.connectedBody = null;
         
@@ -104,6 +112,7 @@ public class Hand : Tool
         }
         
         joint.connectedBody.GetComponent<RabbitController>().Thrown();
+        joint.connectedBody.GetComponent<RabbitController>().OnKilled -= OnHeldRabbitKilled;
         _handController.ExitGrabState();
         joint.connectedBody = null;
 

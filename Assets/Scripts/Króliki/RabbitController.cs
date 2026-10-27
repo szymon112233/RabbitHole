@@ -30,6 +30,9 @@ public class RabbitController : MonoBehaviour
     [SerializeField]
     protected BoxCollider BoxCollider;
 
+
+    public Action OnKilled;
+
     protected bool frozen;
     protected float timeToHop;
     protected bool readyToHop;
@@ -61,6 +64,7 @@ public class RabbitController : MonoBehaviour
         // this could be merged somehow ig
         GameManager.Instance.RabbitPoolManager.ReturnToPool(this);
         GameManager.Instance.RabbitSpawnManager.RemoveRabbit(this);
+        OnKilled?.Invoke();
     }
     
     void Update()
