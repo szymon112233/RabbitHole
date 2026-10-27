@@ -16,13 +16,17 @@ public class RabbitController : MonoBehaviour
     protected float LeashLength = 20.0f;
 
     [SerializeField]
+
+    [SerializeField]
     protected float MaximumAngleRotationTwoardsGround = 5.0f;
+    [SerializeField]
+    protected Rigidbody Rbody;
+	
+    [SerializeField]
+    protected float MinVelocityToSlap = 1.5f;
 
     [SerializeField]
     protected Rigidbody Rbody;
-
-    [SerializeField]
-    public RabbitSpawnManager RabbitHandler;
 
     [SerializeField]
     protected SphereCollider SphereCollider;
@@ -114,8 +118,10 @@ public class RabbitController : MonoBehaviour
         double z = Math.Sin(randomAngle);
 
         if(Vector3.Distance(transform.position, RabbitHandler.transform.position) >= LeashLength)
+
+        if(Vector3.Distance(transform.position, GameManager.Instance.RabbitSpawnManager.transform.position) >= LeashLength)
         {
-            Vector3 dir = (RabbitHandler.transform.position - transform.position).normalized;
+            Vector3 dir = (GameManager.Instance.RabbitSpawnManager.transform.position - transform.position).normalized;
             x = dir.x;
             z = dir.z;
         }
@@ -157,7 +163,7 @@ public class RabbitController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Wall") && !hitWall)
+        if (!hitWall && Rbody.linearVelocity.magnitude > MinVelocityToSlap && Vector3.Dot(collision.GetContact(0).normal, Vector3.up) < 0.5f)
         {
             hitWall = true;
 
@@ -175,7 +181,6 @@ public class RabbitController : MonoBehaviour
             SphereCollider.enabled = false;
             BoxCollider.enabled = true;
 
-            // HACK #SO it should be released by RabbitHoldController
             frozen = true;
             GameManager.Instance.RabbitHoldController.DropRabbit(Rbody);
             StartCoroutine(FallOffCoroutine());
