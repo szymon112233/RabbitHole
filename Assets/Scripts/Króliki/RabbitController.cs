@@ -45,6 +45,7 @@ public class RabbitController : CachedMonoBehaviour
     private bool m_IsVacuumed = false;
     public bool m_IsSlappable = false;
     public bool IsVacuumed => m_IsVacuumed;
+    public Rigidbody Rigidbody => Rbody;
 
     private Vector3 lastWallNormal;
     [HideInInspector]
