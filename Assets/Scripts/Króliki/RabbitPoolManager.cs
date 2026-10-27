@@ -26,18 +26,31 @@ public class RabbitPoolManager : MonoBehaviour
 
     public RabbitController RequestRabbit()
     {
+        return RequestRabbit(Vector3.zero);
+    }
+
+    public RabbitController RequestRabbit(Vector3 position)
+    {
+        RabbitController rabbitToRelease = null;
+
         if (RabbitPool.Count > 0)
         {
-            RabbitController rabbitToRelease = RabbitPool[RabbitPool.Count - 1];
+            rabbitToRelease = RabbitPool[RabbitPool.Count - 1];
             rabbitToRelease.gameObject.SetActive(true);
             RabbitPool.Remove(rabbitToRelease);
-
-            return rabbitToRelease;
         }
         else 
         {
-            return SpawnRabbit();
+            rabbitToRelease = SpawnRabbit();
         }
+
+        if (rabbitToRelease)
+        {
+            rabbitToRelease.Initialize();
+            rabbitToRelease.transform.position = position;
+        }
+
+        return rabbitToRelease;
     }
 
     private RabbitController SpawnRabbit()

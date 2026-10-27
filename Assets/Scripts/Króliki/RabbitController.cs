@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class RabbitController : MonoBehaviour
+public class RabbitController : CachedMonoBehaviour
 {
     [SerializeField] private Renderer Renderer;
 
@@ -41,12 +42,16 @@ public class RabbitController : MonoBehaviour
     protected bool readyToHop;
     protected bool hitWall;
 
-    private Transform T;
+    private bool m_IsVacuumed = false;
+    public bool m_IsSlappable = false;
+    public bool IsVacuumed => m_IsVacuumed;
+
     private Vector3 lastWallNormal;
+    [HideInInspector]
+    public UnityEvent onVacuumed;
 
     void Awake()
     {
-        T = transform;
         SphereCollider = GetComponent<SphereCollider>();
         BoxCollider = GetComponent<BoxCollider>();
         Initialize();
@@ -55,8 +60,12 @@ public class RabbitController : MonoBehaviour
     public void Initialize()
     {
         timeToHop = RandomHopCD();
+        Transform.localScale = Vector3.one;
         frozen = false;
         readyToHop = false;
+        m_IsVacuumed = false;
+        hitWall = false;
+        m_IsSlappable = false;
 
         if (Random.value < _goldRabbitChance)
         {
@@ -170,22 +179,20 @@ public class RabbitController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!hitWall && Rbody.linearVelocity.magnitude > MinVelocityToSlap && Vector3.Dot(collision.GetContact(0).normal, Vector3.up) < 0.5f)
+        if (!hitWall && !frozen && m_IsSlappable && Vector3.Dot(collision.GetContact(0).normal, Vector3.up) < 0.5f)
         {
-            //Debug.Log($"Rbody.linearVelocity.magnitude: {Rbody.linearVelocity.magnitude}");
-
             hitWall = true;
-
-            T.localScale = new Vector3(2.4f, 1.43f, 0.0056f);
+            m_IsSlappable = false;
+            Transform.localScale = new Vector3(2.4f, 1.43f, 0.0056f);
             Rbody.angularVelocity = Vector3.zero;
             Rbody.linearVelocity = Vector3.zero;
             Rbody.isKinematic = true;
 
             lastWallNormal = collision.GetContact(0).normal;
 
-            T.forward = UnityEngine.Random.value > 0.5f ? collision.GetContact(0).normal : -collision.GetContact(0).normal;
-            T.position = collision.GetContact(0).point + collision.GetContact(0).normal * 0.035f;
-            T.RotateAround(T.position, T.forward, UnityEngine.Random.Range(-20f, 20f));
+            Transform.forward = UnityEngine.Random.value > 0.5f ? collision.GetContact(0).normal : -collision.GetContact(0).normal;
+            Transform.position = collision.GetContact(0).point + collision.GetContact(0).normal * 0.035f;
+            Transform.RotateAround(Transform.position, Transform.forward, UnityEngine.Random.Range(-20f, 20f));
 
             SphereCollider.enabled = false;
             BoxCollider.enabled = true;
@@ -207,16 +214,44 @@ public class RabbitController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         Rbody.isKinematic = false;
-        Rbody.AddForceAtPosition(lastWallNormal * 40f, T.position + Vector3.up * 1.1f);
+        Rbody.AddForceAtPosition(lastWallNormal * 40f, Transform.position + Vector3.up * 1.1f);
 
         yield return new WaitForSeconds(1.5f);
 
         SphereCollider.enabled = true;
         BoxCollider.enabled = false;
-        T.localScale = Vector3.one;
+        Transform.localScale = Vector3.one;
         hitWall = false;
         Rbody.AddForce(new Vector3(UnityEngine.Random.Range(-.75f, .75f), 1f, UnityEngine.Random.Range(-.75f, .75f)).normalized * 5f, ForceMode.Impulse);
 
+    }
+
+    public void Vacuum(Transform vacuumPointTransform)
+    {
+        m_IsVacuumed = true;
+        StartCoroutine(GetVacuumedCoroutine(vacuumPointTransform));
+    }
+
+    private IEnumerator GetVacuumedCoroutine(Transform vacuumPointTransform)
+    {
+        float length = .3f;
+        float timer = 0f;
+
+        Vector3 startScale = Transform.localScale;
+
+        while (timer < length)
+        {
+            float progress = timer / length;
+
+            Transform.position = Vector3.Lerp(Transform.position, vacuumPointTransform.position, progress);
+            Transform.localScale = Vector3.Lerp(startScale, Vector3.zero, progress);
+
+            timer += Time.fixedDeltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        onVacuumed.Invoke();
+        Kill();
     }
 
     public void SetRabbitMaterial(Material material)
