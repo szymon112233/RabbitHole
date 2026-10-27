@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class RabbitSpawnManager : MonoBehaviour
 {
-    [Header("Spawn Data")]
-    [SerializeField] private RabbitController RabbitPrefab;
-
     [Header("Spawn Settings")]
     [SerializeField] private float RabbitSpawnDeltaTime = 0.1f;
     [Tooltip("Number of rabbits that will be checked every RabbitSpawnDeltaTime if they can have a baby!:)")]
@@ -20,11 +17,6 @@ public class RabbitSpawnManager : MonoBehaviour
     {
         T = transform;
         StartCoroutine(SpawnRabbitCoroutine());
-    }
-
-    void Update()
-    {
-        
     }
     
     public int GetRabbitCount()
@@ -76,7 +68,6 @@ public class RabbitSpawnManager : MonoBehaviour
 
         if (newRabbit)
         {
-            newRabbit.Initialize();
             Vector3 spawnPosition = addRandomOffset ? position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f)) : position;
             newRabbit.transform.position = spawnPosition;
             RabbitList.Add(newRabbit);

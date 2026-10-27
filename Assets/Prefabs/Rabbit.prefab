@@ -104,7 +104,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 3
+  m_CollisionDetection: 2
 --- !u!114 &407940998765757281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +126,8 @@ MonoBehaviour:
   MinVelocityToSlap: 11
   SphereCollider: {fileID: 0}
   BoxCollider: {fileID: 0}
+  _goldRabbitMaterial: {fileID: 2100000, guid: 3a06a391d3c5c344aa93f6d422743088, type: 2}
+  _goldRabbitChance: 0.005
 --- !u!1001 &754242192827772628
 PrefabInstance:
   m_ObjectHideFlags: 0
