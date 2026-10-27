@@ -1,18 +1,17 @@
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class RabbitHoldController : MonoBehaviour
 {
-
     public SpringJoint joint;
-
     public Camera cam;
-    
     
     public bool snapPosition = false;
     public float maxPickupDistance = 2000.0f;
     public float throwPower = 1000.0f;
-    
+
+    private HandController _handController;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +19,13 @@ public class RabbitHoldController : MonoBehaviour
         InputSystem.actions.FindAction("Attack").performed += OnAttackPerformed;
         // InputSystem.actions.FindAction("Drop").performed += OnDropPerformed;
         // InputSystem.actions.FindAction("Interact").performed += OnInteractPerformed;
+
+        _handController = FindAnyObjectByType<HandController>();
+
+        if (_handController == null)
+        {
+            Debug.LogError("BROOO! Put HandController on the scene!");
+        }
     }
 
     private void OnInteractPerformed(InputAction.CallbackContext obj)
@@ -81,6 +87,7 @@ public class RabbitHoldController : MonoBehaviour
         
         rabbit.linearVelocity = Vector3.zero;
         rabbit.GetComponent<RabbitController>().Grabbed();
+        _handController.EnterGrabState();
         joint.connectedBody = rabbit;
 
         return true;
@@ -94,6 +101,7 @@ public class RabbitHoldController : MonoBehaviour
         }
         
         joint.connectedBody.GetComponent<RabbitController>().Thrown();
+        _handController.ExitGrabState();
         joint.connectedBody = null;
 
     }
@@ -120,6 +128,8 @@ public class RabbitHoldController : MonoBehaviour
 
         var rabbit = joint.connectedBody;
         
+        joint.connectedBody.GetComponent<RabbitController>().Thrown();
+        _handController.ExitGrabState();
         joint.connectedBody = null;
         
         rabbit.AddForce(cam.transform.forward * throwPower);
