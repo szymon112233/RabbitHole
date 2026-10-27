@@ -130,4 +130,14 @@ public class Hand : Tool
             joint.connectedBody = null;
         }
     }
+
+    public override void Activate()
+    {
+        enabled = true;
+    }
+
+    public override void Deactivate()
+    {
+        enabled = false;
+    }
 }

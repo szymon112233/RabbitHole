@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3244988385353590453}
   - component: {fileID: 2082420404810340114}
   - component: {fileID: 6684106454594323211}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "prawe skrzyd\u0142o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 6570066485540931283}
   - component: {fileID: 7952376184535094195}
   - component: {fileID: 2910161144537335973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "\u0142opata"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,8 +254,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -272,6 +272,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shovel
   Rigidbody: {fileID: 7952376184535094195}
+  SwingSpeed_DegreePerSecond: 400
+  MaxSwingRoataion: 25
+  SwingStrength: 8
+  FrontPoint: {fileID: 3257135483376976276}
+  isSwinging: 0
+  dir: 0
+  _original_rotation: 0
 --- !u!1 &4558825491477390620
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +291,7 @@ GameObject:
   - component: {fileID: 6191648605656515006}
   - component: {fileID: 1736393391686338197}
   - component: {fileID: 4116818106379479082}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "Lewe skrzyd\u0142o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +403,7 @@ GameObject:
   - component: {fileID: 5659075051000557800}
   - component: {fileID: 6261766481341774323}
   - component: {fileID: 4921251649306413724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "g\xF3a"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +515,7 @@ GameObject:
   - component: {fileID: 1159651516433490198}
   - component: {fileID: 5519871603536388124}
   - component: {fileID: 8787246959696250612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "g\u0142owa"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
