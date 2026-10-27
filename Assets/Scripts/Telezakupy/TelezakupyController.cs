@@ -13,7 +13,7 @@ public class TelezakupyController : MonoBehaviour {
 
     [SerializeField] 
     protected VideoPlayer _VideoPlayer;
-    
+
     [SerializeField]
     public LayerMask _TriggerLayers;
     
@@ -32,6 +32,7 @@ public class TelezakupyController : MonoBehaviour {
 
     public List<VideoClip> CurrentPrograms {
         get {
+            
             //TODO: filter by the list of currently available programms
             
             var result = new List<VideoClip>();
