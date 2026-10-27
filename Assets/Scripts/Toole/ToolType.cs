@@ -4,5 +4,6 @@ using UnityEngine.XR;
 public enum ToolType
 {
     HAND,
-    SHOVEL
+    SHOVEL,
+    VACUUM
 }

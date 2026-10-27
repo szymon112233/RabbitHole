@@ -125,6 +125,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "SwapToTool_2",
+                    "type": "Button",
+                    "id": "2e329402-4062-4aa4-88bf-ef66d3ae7b68",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -576,6 +586,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwapToTool_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc90bde9-7cc5-4e7e-a3e5-eeb092cbaaa2",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "SwapToTool_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d1685ca-cc11-45c2-a78f-77efb15b0885",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwapToTool_2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem.Android;
 
-public abstract class Tool : MonoBehaviour
+public abstract class Tool : CachedMonoBehaviour
 {
     
     [SerializeField]
@@ -16,7 +16,17 @@ public abstract class Tool : MonoBehaviour
         
     }
 
+    public virtual void Stop_Main()
+    {
+        
+    }
+
     public virtual void Use_Alt()
+    {
+        
+    }
+
+    public virtual void Stop_Alt()
     {
         
     }

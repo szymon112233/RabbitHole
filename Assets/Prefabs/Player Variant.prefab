@@ -192,6 +192,7 @@ MonoBehaviour:
   Tools:
   - {fileID: 5783637762575605015}
   - {fileID: 6614959842189462667}
+  - {fileID: 757872728983516980}
 --- !u!114 &5783637762575605015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +347,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9156347143994207885, guid: c82236c16aae9d34fbd437f8dea6e2c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3532104393515176337}
+    - targetCorrespondingSourceObject: {fileID: 9156347143994207885, guid: c82236c16aae9d34fbd437f8dea6e2c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8988411628493162906}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9156347143994207886, guid: c82236c16aae9d34fbd437f8dea6e2c9, type: 3}
       insertIndex: -1
@@ -414,6 +418,83 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 9156347144040445546, guid: c82236c16aae9d34fbd437f8dea6e2c9, type: 3}
   m_PrefabInstance: {fileID: 118502028951729048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4383160273055732263
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9130170562041830677}
+    m_Modifications:
+    - target: {fileID: 3973020929970375336, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_Name
+      value: VacuumCleaner
+      objectReference: {fileID: 0}
+    - target: {fileID: 3973020929970375336, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7623651
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.03690075
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6401065
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.08775857
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -3.215
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 79.742
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 10.448
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+--- !u!114 &757872728983516980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3913799809665066259, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+  m_PrefabInstance: {fileID: 4383160273055732263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7430803656c453444a493c58f67d680c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VacuumCleaner
+--- !u!4 &8988411628493162906 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4641344019560143805, guid: b77ecee01d84c8f4499c7043c881ac16, type: 3}
+  m_PrefabInstance: {fileID: 4383160273055732263}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8336152781226738734
 PrefabInstance:

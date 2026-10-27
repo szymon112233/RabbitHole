@@ -2,7 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
-public class VacuumCleaner : CachedMonoBehaviour
+public class VacuumCleaner : Tool
 {
     private Collider[] m_HitColliders;
     [SerializeField] private Vector3 m_VacuumHalfExtents;
@@ -15,41 +15,56 @@ public class VacuumCleaner : CachedMonoBehaviour
 
     private Sequence m_DoTweenSequence;
 
+    public override ToolType Type => ToolType.VACUUM;
+
     private bool m_IsVacuumTriggerHeld = false;
     private bool m_IsShootTriggerHeld = false;
     private LayerMask m_LayerMask;
 
-    protected void Start()
+    protected void Awake()
     {
         m_HitColliders = new Collider[5];
         m_LayerMask = LayerMask.GetMask("Rabbit");
 
     }
 
-    private void Update()
+    public override void Use_Main()
+    {
+        if (!CanUse())
+        {
+            return;
+        }
+        PullVacuumTrigger();
+    }
+
+    public override void Stop_Main()
     {
         if (!CanUse())
         {
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        ReleaseVacuumTrigger();
+    }
+
+    public override void Use_Alt()
+    {
+        if (!CanUse())
         {
-            PullVacuumTrigger();
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            PullShootTrigger();
+            return;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        PullShootTrigger();
+    }
+
+    public override void Stop_Alt()
+    {
+        if (!CanUse())
         {
-            ReleaseVacuumTrigger();
+            return;
         }
-        if (Input.GetMouseButtonUp(1))
-        {
-            ReleaseShootTrigger();
-        }
+
+        ReleaseShootTrigger();
     }
 
     private void FixedUpdate()
@@ -69,8 +84,6 @@ public class VacuumCleaner : CachedMonoBehaviour
             HoldShootTrigger();
         }
     }
-
-   
 
     private bool CanUse()
     {

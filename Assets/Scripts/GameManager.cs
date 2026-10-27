@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
             Destroy(this); 
         } 
         else 
-        { 
+        {
             Instance = this; 
         } 
     }
@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     
     public int DisposedRabbits;
     public int Money;
-
 
 
     public void AddMoney(int moni)
