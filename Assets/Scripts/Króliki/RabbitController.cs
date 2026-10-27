@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RabbitController : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class RabbitController : MonoBehaviour
     [SerializeField]
     protected BoxCollider BoxCollider;
 
+    [SerializeField] private Material _goldRabbitMaterial;
+    [SerializeField] private float _goldRabbitChance;
 
     public Action OnKilled;
 
@@ -54,6 +57,11 @@ public class RabbitController : MonoBehaviour
         timeToHop = RandomHopCD();
         frozen = false;
         readyToHop = false;
+
+        if (Random.value < _goldRabbitChance)
+        {
+            Renderer.material = _goldRabbitMaterial;
+        }
     }
 
     public void Kill()
@@ -211,4 +219,8 @@ public class RabbitController : MonoBehaviour
 
     }
 
+    public void SetRabbitMaterial(Material material)
+    {
+        Renderer.material = material;
+    }
 }
