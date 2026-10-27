@@ -13,7 +13,13 @@ public class RabbitController : MonoBehaviour
     protected float MaximumHopCooldown = 20.0f;
 
     [SerializeField]
+    protected float LeashLength = 20.0f;
+
+    [SerializeField]
     protected Rigidbody Rbody;
+
+    [SerializeField]
+    public RabbitSpawnManager RabbitHandler;
 
     [SerializeField]
     protected SphereCollider SphereCollider;
@@ -102,13 +108,37 @@ public class RabbitController : MonoBehaviour
         double randomAngle = UnityEngine.Random.Range(0.0f, 2.0f) * Math.PI;
         double x = Math.Cos(randomAngle);
         double z = Math.Sin(randomAngle);
-        Vector3 forewardDir = new Vector3((float)x, 0, (float)z);
+
+        Debug.Log("LEash: " + Vector3.Distance(transform.position, RabbitHandler.transform.position)); 
+        if(Vector3.Distance(transform.position, RabbitHandler.transform.position) >= LeashLength)
+        {
+            Vector3 dir = (RabbitHandler.transform.position - transform.position).normalized;
+            x = dir.x;
+            z = dir.z;
+        }
+
+        Vector3 forwardDir = new Vector3((float)x, 0, (float)z);
         
-        Rbody.AddForce(forewardDir * hopPower, ForceMode.Impulse);
+        Rbody.AddForce(forwardDir * hopPower, ForceMode.Impulse);
         Rbody.AddForce(Vector3.up * hopPower, ForceMode.Impulse);
+        
+        Quaternion lookRotation = Rbody.rotation * Quaternion.FromToRotation(-Rbody.transform.forward, forwardDir);
+        Rbody.MoveRotation(lookRotation);
 
         readyToHop = false;
         timeToHop = RandomHopCD();
+    }
+
+    public void Grabbed()
+    {
+        Rbody.linearVelocity = Vector3.zero;
+        Rbody.angularVelocity = Vector3.zero;
+        frozen = true;
+    }
+
+    public void Thrown()
+    {
+        frozen = false;
     }
 
     public bool IsVisible()
