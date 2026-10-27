@@ -179,7 +179,13 @@ public class RabbitController : MonoBehaviour
             BoxCollider.enabled = true;
 
             frozen = true;
-            GameManager.Instance.RabbitHoldController.DropRabbit(Rbody);
+
+            if (GameManager.Instance.RabbitHoldController.ActiveTool.Type == ToolType.HAND)
+            {
+                ((Hand)GameManager.Instance.RabbitHoldController.ActiveTool).DropRabbit(Rbody);
+                
+            }
+
             StartCoroutine(FallOffCoroutine());
         }
     }

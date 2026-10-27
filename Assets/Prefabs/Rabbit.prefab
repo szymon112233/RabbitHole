@@ -119,10 +119,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RabbitController
   Renderer: {fileID: 2140915057771344464}
   HopPower: 10
-  MaximumHopCooldown: 40
+  MaximumHopCooldown: 30
   LeashLength: 12
-  MinVelocityToSlap: 11
+  MaximumAngleRotationTwoardsGround: 5
   Rbody: {fileID: 8318158423782490278}
+  MinVelocityToSlap: 11
   SphereCollider: {fileID: 0}
   BoxCollider: {fileID: 0}
 --- !u!1001 &754242192827772628

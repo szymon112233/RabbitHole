@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 4431150367535137068}
   - component: {fileID: 217587491000214121}
   - component: {fileID: 6758649521703988762}
+  - component: {fileID: 5783637762575605015}
   m_Layer: 2
   m_Name: RabbitPoint
   m_TagString: Untagged
@@ -187,6 +188,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d92e85d8ad223de486bce0d8db9568d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  ActiveTool: {fileID: 5783637762575605015}
+  Tools:
+  - {fileID: 5783637762575605015}
+  - {fileID: 6614959842189462667}
+--- !u!114 &5783637762575605015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988463856480598904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b855d1a3e941ada4b99f0093963ccc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hand
+  Rigidbody: {fileID: 4431150367535137068}
   joint: {fileID: 217587491000214121}
   cam: {fileID: 9130170562041830675}
   snapPosition: 1
@@ -325,6 +343,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9156347143994207885, guid: c82236c16aae9d34fbd437f8dea6e2c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6753244759149908766}
+    - targetCorrespondingSourceObject: {fileID: 9156347143994207885, guid: c82236c16aae9d34fbd437f8dea6e2c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3532104393515176337}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9156347143994207886, guid: c82236c16aae9d34fbd437f8dea6e2c9, type: 3}
       insertIndex: -1
@@ -508,3 +529,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4804066411577480639, guid: c1148b535c90daf4e8db35338eb2272e, type: 3}
   m_PrefabInstance: {fileID: 8336152781226738734}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6614959842189462667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2910161144537335973, guid: c1148b535c90daf4e8db35338eb2272e, type: 3}
+  m_PrefabInstance: {fileID: 8336152781226738734}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32465aaee0e372041ad0ce39f2c6c275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shovel

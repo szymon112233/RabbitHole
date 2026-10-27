@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 
 public abstract class Tool : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public abstract class Tool : MonoBehaviour
     protected Rigidbody Rigidbody;
 
     
+    public virtual bool UsesHandGraphics => true;
     public virtual ToolType Type => ToolType.HAND;
 
     public virtual void Use_Main()
@@ -19,5 +21,13 @@ public abstract class Tool : MonoBehaviour
         
     }
 
-    
+    public virtual void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
 }

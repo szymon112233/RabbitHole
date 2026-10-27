@@ -1,26 +1,42 @@
+using System;
+using System.Collections.Generic;
 using DefaultNamespace;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class RabbitHoldController : MonoBehaviour
 {
-    public Joint joint;
-    public Camera cam;
-    
-    public bool snapPosition = false;
-    public float maxPickupDistance = 2000.0f;
-    public float throwPower = 1000.0f;
+
+    public Tool ActiveTool;
+
+    public List<Tool> Tools;
 
     private HandController _handController;
-    
+    private List<Action<InputAction.CallbackContext>> toolSwappingCallbacks;
+
+    void Awake()
+    {
+        toolSwappingCallbacks = new List<Action<InputAction.CallbackContext>>();
+        ActiveTool.Activate();
+        
+    }
+ 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InputSystem.actions.FindAction("Attack").performed += OnAttackPerformed;
-        InputSystem.actions.FindAction("Drop").performed += OnDropPerformed;
-        // InputSystem.actions.FindAction("Interact").performed += OnInteractPerformed;
+        InputSystem.actions.FindAction("Attack").performed += OnActionPerformed;
+        InputSystem.actions.FindAction("Drop").performed += OnAltActionPerformed;
 
+        toolSwappingCallbacks.Add((InputAction.CallbackContext x) => {OnToolSwap(0);});
+        InputSystem.actions.FindAction("SwapToTool_0").performed += toolSwappingCallbacks[0];
+        
+        toolSwappingCallbacks.Add((InputAction.CallbackContext x) => {OnToolSwap(1);});
+        InputSystem.actions.FindAction("SwapToTool_1").performed += toolSwappingCallbacks[1];
+        // InputSystem.actions.FindAction("Interact").performed += OnInteractPerformed;
+        
         _handController = FindAnyObjectByType<HandController>();
+
 
         if (_handController == null)
         {
@@ -28,109 +44,36 @@ public class RabbitHoldController : MonoBehaviour
         }
     }
 
-    private void OnInteractPerformed(InputAction.CallbackContext obj)
+    void OnDestroy()
     {
-        TryHoldRabbit();
-    }
-
-    private void OnDropPerformed(InputAction.CallbackContext obj)
-    {
-        DropRabbit();
-    }
-
-    private void OnAttackPerformed(InputAction.CallbackContext obj)
-    {
-        if (IsHoldingARabbit())
-        {
-            ThrowRabbit();
-        }
-        else
-        {
-            TryHoldRabbit();
-        }
-        
-    }
-
-    bool IsHoldingARabbit()
-    {
-        return joint.connectedBody != null && joint.connectedBody.gameObject.CompareTag("Rabbit");
-    }
-    
-    bool TryHoldRabbit()
-    {
-
-        Rigidbody rabbit;
-        
-        var layerMask = LayerMask.GetMask("Rabbit");
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        
-        if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit,
-                maxPickupDistance, layerMask))
-        {
-            // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            rabbit = hit.rigidbody;
-        }
-        else
-        {
-            // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            // Debug.Log("Did not Hit");
-            
-            return false;
-        }
-        
-        if(snapPosition)
-        {
-            rabbit.position = transform.position;        
-        }
-        
-        rabbit.linearVelocity = Vector3.zero;
-        rabbit.GetComponent<RabbitController>().Grabbed();
-        _handController.EnterGrabState();
-        joint.connectedBody = rabbit;
-
-        return true;
-    }
-
-    public void DropRabbit()
-    {
-        if (joint.connectedBody == null)
-        {
-            return;
-        }
-        
-        joint.connectedBody.GetComponent<RabbitController>().Thrown();
-        _handController.ExitGrabState();
-        joint.connectedBody = null;
+        InputSystem.actions.FindAction("Attack").performed -= OnActionPerformed;
+        InputSystem.actions.FindAction("Drop").performed -= OnAltActionPerformed;
+        InputSystem.actions.FindAction("SwapToTool_0").performed -= toolSwappingCallbacks[0];
+        InputSystem.actions.FindAction("SwapToTool_1").performed -= toolSwappingCallbacks[1];
 
     }
+    // private void OnInteractPerformed(InputAction.CallbackContext obj)
+    // {
+    //     TryHoldRabbit();
+    // }
 
-    public void DropRabbit(Rigidbody rabbitRB)
+    private void OnAltActionPerformed(InputAction.CallbackContext obj)
     {
-        if (joint.connectedBody == null)
-        {
-            return;
-        }
-
-        if (rabbitRB == joint.connectedBody)
-        { 
-            joint.connectedBody = null;
-        }
+        ActiveTool.Use_Alt();
     }
 
-    void ThrowRabbit()
+    private void OnActionPerformed(InputAction.CallbackContext obj)
     {
-        if (joint.connectedBody == null)
-        {
-            return;
-        }
+        ActiveTool.Use_Main();
+    }
 
-        var rabbit = joint.connectedBody;
-        
-        joint.connectedBody.GetComponent<RabbitController>().Thrown();
-        _handController.ExitGrabState();
-        joint.connectedBody = null;
-        
-        rabbit.AddForce(cam.transform.forward * throwPower);
+    private void OnToolSwap(int id)
+    {
+        ActiveTool.Deactivate();
+        ActiveTool = Tools[id];
+        ActiveTool.Activate();
+
+        _handController.gameObject.SetActive(ActiveTool.UsesHandGraphics);
+
     }
 }
