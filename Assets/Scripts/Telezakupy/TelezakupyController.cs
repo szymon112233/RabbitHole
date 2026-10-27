@@ -1,15 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.Video;
 
 namespace UnityEngine.Rendering.Universal {
 public class TelezakupyController : MonoBehaviour {
 
-    [SerializeField] 
-    protected VideoClip _NoProgramm;
+    [SerializeField]
+    protected TelezakupyConfig  _TelezakupyConfig;
     
-    [SerializeField] 
-    protected List<VideoClip> _Programms;
+    [SerializeField]
+    protected TelezakupyPlayerState  _PlayerState;
 
     [SerializeField] 
     protected VideoPlayer _VideoPlayer;
@@ -19,45 +18,66 @@ public class TelezakupyController : MonoBehaviour {
     
     [SerializeField]
     protected float _InteractionDistance = 2;
-
-    [SerializeField] 
-    protected GameObject _SwitchProgramPrompt;
     
-    [SerializeField] 
-    protected GameObject _PurchasePrompt;
+    [SerializeField]
+    protected TelezakupyUIObserver _TelezakupyUIObserver;
 
     private int _CurrentProgram;
 
-    private bool _PressRegistered;
-
-    public List<VideoClip> CurrentPrograms {
-        get {
-            
-            //TODO: filter by the list of currently available programms
-            
-            var result = new List<VideoClip>();
-
-            result.Add(_NoProgramm);
-            result.AddRange(_Programms);
-            
-            return result;
-        }
-    }
+    private bool _QPressRegistered;
     
-    public void SwitchProgramm() {
-        var currPrograms = CurrentPrograms;
+    private bool _EPressRegistered;
 
-        _CurrentProgram = (_CurrentProgram + 1 % currPrograms.Count);
+    private int _LastReportedProgram = -1;
+
+    private bool _WasIsInteractionReadz = false;
+    
+    public void SwitchProgram() {
+        var availableUpgrades = _TelezakupyConfig.GetAvailableUpgrades();
+        var totalProgramsCount = availableUpgrades.Count + 1;
+        _CurrentProgram = (_CurrentProgram + 1 % totalProgramsCount);
         UpdateVideoProgram();
     }
 
+    public void TryBuyUpgrade() {
+        var currentUpgrade = CurrentlyAiringUpgrade();
+
+        if (currentUpgrade == null)
+            return;
+
+        // register
+        _PlayerState.SavePurchasedUpgrade(currentUpgrade);
+        _CurrentProgram = 1;
+        UpdateVideoProgram();
+
+        var curr = CurrentlyAiringUpgrade();
+        _TelezakupyUIObserver.RaiseUpgradesForPurchase(curr);
+    }
+
+    private PurchasableUpgrade CurrentlyAiringUpgrade() {
+        var availableUpgrades = _TelezakupyConfig.GetAvailableUpgrades();
+        var totalProgramsCount = availableUpgrades.Count + 1;
+        var currProgramId = _CurrentProgram % totalProgramsCount;
+
+        if (currProgramId == 0) {
+            return null;
+        }
+        else {
+            return availableUpgrades[currProgramId - 1];
+        }
+    }
+
     private void UpdateVideoProgram() {
-        _VideoPlayer.clip = CurrentPrograms[_CurrentProgram % CurrentPrograms.Count];
+        var currProgram = CurrentlyAiringUpgrade();
+        
+        _VideoPlayer.clip = currProgram == null 
+            ? _TelezakupyConfig.NoProgramm
+            : currProgram.AdClip;
     }
 
     private void Awake() {
         _CurrentProgram = 0;
-        SwitchProgramm();
+        SwitchProgram();
     }
 
     private void Update() {
@@ -77,19 +97,39 @@ public class TelezakupyController : MonoBehaviour {
                 // Put your interaction or UI highlighting logic here
             }
         }
+
+        if (isInteractionReady != _WasIsInteractionReadz) {
+            _WasIsInteractionReadz = isInteractionReady;
+            _TelezakupyUIObserver.RaiseCanSwitchPrograms(isInteractionReady);
+        }
         
-        _SwitchProgramPrompt.gameObject.SetActive(isInteractionReady);
-        _PurchasePrompt.gameObject.SetActive(isInteractionReady && _CurrentProgram != 0);
+        var newProgram = isInteractionReady ? _CurrentProgram : -1;
+        if (newProgram != _LastReportedProgram) {
+            _LastReportedProgram = newProgram;
+            
+            _TelezakupyUIObserver.RaiseUpgradesForPurchase(_LastReportedProgram < 0 
+                ? null
+                : CurrentlyAiringUpgrade());
+        }
 
         if (isInteractionReady) {
-            if (Keyboard.current.qKey.isPressed && !_PressRegistered) {
-                _PressRegistered = true;
-                SwitchProgramm();
+            if (Keyboard.current.qKey.isPressed && !_QPressRegistered) {
+                _QPressRegistered = true;
+                SwitchProgram();
+            }
+            
+            if (Keyboard.current.eKey.isPressed && !_EPressRegistered) {
+                _EPressRegistered = true;
+                TryBuyUpgrade();
             }
         }
 
         if (!Keyboard.current.qKey.isPressed) {
-            _PressRegistered = false;
+            _QPressRegistered = false;
+        }
+        
+        if (!Keyboard.current.eKey.isPressed) {
+            _EPressRegistered = false;
         }
     }
 }
