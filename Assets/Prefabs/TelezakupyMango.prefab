@@ -292,6 +292,7 @@ MonoBehaviour:
   _Programms:
   - {fileID: 32900000, guid: 688b2f6e67a0d4d10b44036506a0e9c5, type: 3}
   - {fileID: 32900000, guid: d2ea8bf71bdcd46ec86d19cd9ea0312b, type: 3}
+  - {fileID: 32900000, guid: 196bdb33aab3bfc47bf8c2afb0ab0c2b, type: 3}
   _VideoPlayer: {fileID: 4575264706899088819}
   _TriggerLayers:
     serializedVersion: 2
