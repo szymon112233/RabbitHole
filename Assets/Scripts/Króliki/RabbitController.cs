@@ -18,8 +18,7 @@ public class RabbitController : MonoBehaviour
     [SerializeField]
     protected Rigidbody Rbody;
 
-    [SerializeField]
-    public RabbitSpawnManager RabbitHandler;
+    private RabbitSpawnManager RabbitSpawnManager;
 
     [SerializeField]
     protected SphereCollider SphereCollider;
@@ -40,6 +39,7 @@ public class RabbitController : MonoBehaviour
         T = transform;
         SphereCollider = GetComponent<SphereCollider>();
         BoxCollider = GetComponent<BoxCollider>();
+        RabbitSpawnManager = GameManager.Instance.RabbitSpawnManager;
         Initialize();
     }
 
@@ -109,10 +109,10 @@ public class RabbitController : MonoBehaviour
         double x = Math.Cos(randomAngle);
         double z = Math.Sin(randomAngle);
 
-        Debug.Log("LEash: " + Vector3.Distance(transform.position, RabbitHandler.transform.position)); 
-        if(Vector3.Distance(transform.position, RabbitHandler.transform.position) >= LeashLength)
+        Debug.Log("LEash: " + Vector3.Distance(transform.position, RabbitSpawnManager.transform.position)); 
+        if(Vector3.Distance(transform.position, RabbitSpawnManager.transform.position) >= LeashLength)
         {
-            Vector3 dir = (RabbitHandler.transform.position - transform.position).normalized;
+            Vector3 dir = (RabbitSpawnManager.transform.position - transform.position).normalized;
             x = dir.x;
             z = dir.z;
         }
