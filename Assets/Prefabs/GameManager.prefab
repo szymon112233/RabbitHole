@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   m_RabbitSpawnManager: {fileID: 3720660151078036987}
   m_RabbitPoolManager: {fileID: 4460152226207828653}
+  m_RabbitHoldController: {fileID: 0}
   Points: 0
 --- !u!1 &2067396286159578563
 GameObject:
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RabbitSpawnManager
   RabbitPrefab: {fileID: 407940998765757281, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
-  RabbitSpawnDeltaTime: 5
+  RabbitSpawnDeltaTime: 2.5
   QueryRabbitCount: 10
   MaxRabbitCount: 1500
 --- !u!1 &4430892156176142327
