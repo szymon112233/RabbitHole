@@ -171,6 +171,7 @@ public class RabbitController : CachedMonoBehaviour
 
     public void Thrown()
     {
+        m_IsSlappable = true;
         frozen = false;
     }
 
