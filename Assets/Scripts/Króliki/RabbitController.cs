@@ -143,6 +143,7 @@ public class RabbitController : MonoBehaviour
     {
         Rbody.linearVelocity = Vector3.zero;
         Rbody.angularVelocity = Vector3.zero;
+        timeToHop = RandomHopCD();
         frozen = true;
     }
 

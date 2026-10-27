@@ -272,6 +272,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shovel
   Rigidbody: {fileID: 7952376184535094195}
+  SwingSpeed: 36
+  MaxSwingRoataion: 115
+  isSwinging: 0
+  dir: 0
 --- !u!1 &4558825491477390620
 GameObject:
   m_ObjectHideFlags: 0
