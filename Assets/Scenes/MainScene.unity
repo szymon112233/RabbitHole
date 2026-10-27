@@ -2284,6 +2284,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805616264}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &844237312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4988463856480598904, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
+  m_PrefabInstance: {fileID: 1155050263016383464}
+  m_PrefabAsset: {fileID: 0}
+--- !u!59 &844237319
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844237312}
+  serializedVersion: 3
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.50000006, z: 0}
+  m_Axis: {x: 0, y: 0, z: 1}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0.51, z: 0}
+  m_UseSpring: 1
+  m_Spring:
+    spring: 7.65
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_ExtendedLimits: 0
+  m_UseAcceleration: 0
+  m_Limits:
+    min: 0
+    max: 1.27
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &847787964
 GameObject:
   m_ObjectHideFlags: 0
@@ -5071,6 +5115,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2892184100445582566, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988463856480598904, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 9d4c2e2df6e54f6068628349761ce9cd, type: 3}
+    - target: {fileID: 6758649521703988762, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
+      propertyPath: joint
+      value: 
+      objectReference: {fileID: 844237319}
     - target: {fileID: 9130170562497594866, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.27
@@ -5115,10 +5171,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 217587491000214121, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4988463856480598904, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 844237319}
   m_SourcePrefab: {fileID: 100100000, guid: 7cfe0752309dbe3468e2fd0a770503ca, type: 3}
 --- !u!1001 &2473065223332826909
 PrefabInstance:
@@ -5251,7 +5311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3288385903536565150, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1815.0001
+      value: 2037.4866
       objectReference: {fileID: 0}
     - target: {fileID: 3288385903536565150, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.y
