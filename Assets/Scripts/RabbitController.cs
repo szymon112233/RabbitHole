@@ -114,6 +114,18 @@ public class RabbitController : MonoBehaviour
         timeToHop = RandomHopCD();
     }
 
+    public void Grabbed()
+    {
+        Rbody.linearVelocity = Vector3.zero;
+        Rbody.angularVelocity = Vector3.zero;
+        frozen = true;
+    }
+
+    public void Thrown()
+    {
+        frozen = false;
+    }
+
     public bool IsVisible()
     {
         return Renderer.isVisible;

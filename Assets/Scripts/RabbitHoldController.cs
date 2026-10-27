@@ -9,15 +9,17 @@ public class RabbitHoldController : MonoBehaviour
     public Camera cam;
     
     
+    public bool snapPosition = false;
     public float maxPickupDistance = 2000.0f;
+    public float throwPower = 1000.0f;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InputSystem.actions.FindAction("Attack").performed += OnAttackPerformed;
-        InputSystem.actions.FindAction("Drop").performed += OnDropPerformed;
-        InputSystem.actions.FindAction("Interact").performed += OnInteractPerformed;
+        // InputSystem.actions.FindAction("Drop").performed += OnDropPerformed;
+        // InputSystem.actions.FindAction("Interact").performed += OnInteractPerformed;
     }
 
     private void OnInteractPerformed(InputAction.CallbackContext obj)
@@ -50,10 +52,6 @@ public class RabbitHoldController : MonoBehaviour
     
     bool TryHoldRabbit()
     {
-        if (IsHoldingARabbit())
-        {
-            return false;
-        }
 
         Rigidbody rabbit;
         
@@ -65,7 +63,7 @@ public class RabbitHoldController : MonoBehaviour
                 maxPickupDistance, layerMask))
         {
             // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            // Debug.Log("Did Hit");
+            Debug.Log("Did Hit");
             rabbit = hit.rigidbody;
         }
         else
@@ -76,8 +74,13 @@ public class RabbitHoldController : MonoBehaviour
             return false;
         }
         
-        rabbit.position = transform.position;
+        if(snapPosition)
+        {
+            rabbit.position = transform.position;        
+        }
+        
         rabbit.linearVelocity = Vector3.zero;
+        rabbit.GetComponent<RabbitController>().Grabbed();
         joint.connectedBody = rabbit;
 
         return true;
@@ -90,7 +93,9 @@ public class RabbitHoldController : MonoBehaviour
             return;
         }
         
+        joint.connectedBody.GetComponent<RabbitController>().Thrown();
         joint.connectedBody = null;
+
     }
 
     public void DropRabbit(Rigidbody rabbitRB)
@@ -117,6 +122,6 @@ public class RabbitHoldController : MonoBehaviour
         
         joint.connectedBody = null;
         
-        rabbit.AddForce(cam.transform.forward * 1000);
+        rabbit.AddForce(cam.transform.forward * throwPower);
     }
 }

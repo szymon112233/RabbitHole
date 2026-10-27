@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
     }
     
     
-    
-    
     public int Points;
 
     public int GetUndisposedRabbitCount()

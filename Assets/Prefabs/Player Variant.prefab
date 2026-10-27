@@ -134,9 +134,9 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_Spring: 30
-  m_Damper: 0.2
-  m_MinDistance: 0
-  m_MaxDistance: 0
+  m_Damper: 5
+  m_MinDistance: 0.05
+  m_MaxDistance: 0.2
   m_Tolerance: 0.025
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -158,7 +158,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   joint: {fileID: 217587491000214121}
   cam: {fileID: 9130170562041830675}
-  maxPickupDistance: 2000
+  snapPosition: 1
+  maxPickupDistance: 3.5
+  throwPower: 1000
 --- !u!1001 &118502028951729048
 PrefabInstance:
   m_ObjectHideFlags: 0
