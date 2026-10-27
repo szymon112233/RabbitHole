@@ -38,14 +38,10 @@ public class TelezakupyConfig : ScriptableObject {
     
     public List<PurchasableUpgrade> GetAvailableUpgrades() {
         var result = _InitialUpgrades.Where(x => !_TPlayerState.IsUpgradePurchased(x)).ToList();
-
-        Debug.Log("Av Purchases");
         
         GetPurchasedUpgrades()
             .ForEach(x => {
-                Debug.Log(" - "+x.Name);
                 x.Unlocks.ForEach(u => {
-                    Debug.Log(" ---> "+u.Name+" IsP: "+_TPlayerState.IsUpgradePurchased(u));
                     if (_TPlayerState.IsUpgradePurchased(u)) return;
                     if (result.Exists(y => y.ID == u.ID))
                         return;

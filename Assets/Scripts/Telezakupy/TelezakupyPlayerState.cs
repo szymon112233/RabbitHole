@@ -25,5 +25,6 @@ public class TelezakupyPlayerState : ScriptableObject {
     public bool IsUpgradePurchased(string id) {
         return _PurchasedUpgradeIds.Contains(id);
     }
+
 }
 }

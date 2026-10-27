@@ -31,7 +31,7 @@ public class UpgradePurchaseDisplayer : MonoBehaviour {
         }
         else {
             _PurchaseText.gameObject.SetActive(true);
-            _PurchaseText.text = "[E] Purchase " + upgrade.Name + " - " + upgrade.Price;
+            _PurchaseText.text = "[E] Buy("+upgrade.Price+"$) " + upgrade.Name;
         }
     }
     
