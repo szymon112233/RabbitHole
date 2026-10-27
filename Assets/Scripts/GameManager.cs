@@ -27,7 +27,31 @@ public class GameManager : MonoBehaviour
     }
     
     
-    public int Points;
+    public int DisposedRabbits;
+    public int Money;
+
+
+
+    public void AddMoney(int moni)
+    {
+        Money += moni;
+    }
+
+    public bool HasMoney(int moni)
+    {
+        return Money >= moni;
+    }
+    
+    public bool TrySpendMoney(int moni)
+    {
+        if (HasMoney(moni))
+        {
+            Money -= moni;
+            return true;
+        }
+
+        return false;
+    }
 
     public int GetUndisposedRabbitCount()
     {

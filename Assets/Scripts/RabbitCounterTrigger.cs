@@ -8,7 +8,7 @@ public class RabbitCounterTrigger : MonoBehaviour
     {
         if (other.tag == "Rabbit")
         {
-            GameManager.Instance.Points += 1;
+            GameManager.Instance.DisposedRabbits += 1;
             other.GetComponent<RabbitController>()?.Kill();
         }
     }
