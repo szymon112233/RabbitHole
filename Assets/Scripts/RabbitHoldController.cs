@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class RabbitHoldController : MonoBehaviour
 {
-    public SpringJoint joint;
+    public Joint joint;
     public Camera cam;
     
     public bool snapPosition = false;
@@ -17,7 +17,7 @@ public class RabbitHoldController : MonoBehaviour
     void Start()
     {
         InputSystem.actions.FindAction("Attack").performed += OnAttackPerformed;
-        // InputSystem.actions.FindAction("Drop").performed += OnDropPerformed;
+        InputSystem.actions.FindAction("Drop").performed += OnDropPerformed;
         // InputSystem.actions.FindAction("Interact").performed += OnInteractPerformed;
 
         _handController = FindAnyObjectByType<HandController>();
@@ -69,7 +69,6 @@ public class RabbitHoldController : MonoBehaviour
                 maxPickupDistance, layerMask))
         {
             // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
             rabbit = hit.rigidbody;
         }
         else

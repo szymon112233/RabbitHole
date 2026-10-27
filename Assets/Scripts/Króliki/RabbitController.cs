@@ -16,10 +16,13 @@ public class RabbitController : MonoBehaviour
     protected float LeashLength = 20.0f;
 
     [SerializeField]
-    protected float MinVelocityToSlap = 1.5f;
+    protected float MaximumAngleRotationTwoardsGround = 5.0f;
 
     [SerializeField]
     protected Rigidbody Rbody;
+	
+    [SerializeField]
+    protected float MinVelocityToSlap = 1.5f;
 
     [SerializeField]
     protected SphereCollider SphereCollider;
@@ -83,6 +86,7 @@ public class RabbitController : MonoBehaviour
 
         if(!readyToHop)
         {
+            RotateTowardsGround();
             return;
         }
         else
@@ -94,7 +98,7 @@ public class RabbitController : MonoBehaviour
 
     protected float RandomHopCD()
     {
-        return UnityEngine.Random.Range(MaximumHopCooldown * 0.2f, MaximumHopCooldown);
+        return UnityEngine.Random.Range(MaximumHopCooldown * 0.5f, MaximumHopCooldown);
     }
 
     protected float RandomHopPower()
@@ -109,7 +113,7 @@ public class RabbitController : MonoBehaviour
         double x = Math.Cos(randomAngle);
         double z = Math.Sin(randomAngle);
 
-        Debug.Log("LEash: " + Vector3.Distance(transform.position, GameManager.Instance.RabbitSpawnManager.transform.position)); 
+
         if(Vector3.Distance(transform.position, GameManager.Instance.RabbitSpawnManager.transform.position) >= LeashLength)
         {
             Vector3 dir = (GameManager.Instance.RabbitSpawnManager.transform.position - transform.position).normalized;
@@ -118,7 +122,7 @@ public class RabbitController : MonoBehaviour
         }
 
         Vector3 forwardDir = new Vector3((float)x, 0, (float)z);
-        
+
         Rbody.AddForce(forwardDir * hopPower, ForceMode.Impulse);
         Rbody.AddForce(Vector3.up * hopPower, ForceMode.Impulse);
         
@@ -127,6 +131,12 @@ public class RabbitController : MonoBehaviour
 
         readyToHop = false;
         timeToHop = RandomHopCD();
+    }
+
+    protected void RotateTowardsGround()
+    {
+        Quaternion upRotation = Quaternion.RotateTowards(Rbody.rotation, Quaternion.Euler(0, Rbody.transform.eulerAngles.y, 0), MaximumAngleRotationTwoardsGround);
+        Rbody.MoveRotation(upRotation);
     }
 
     public void Grabbed()
