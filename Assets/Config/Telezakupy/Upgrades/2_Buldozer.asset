@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6f606b0c3f4464aa65497136a990f0, type: 3}
+  m_Name: 2_Buldozer
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.PurchasableUpgrade
+  _ID: 2d194d47-e3a5-4b4c-b067-6ee0fa0a28d0
+  _AdClip: {fileID: 32900000, guid: d2ea8bf71bdcd46ec86d19cd9ea0312b, type: 3}
+  _Name: Buldozer
+  _Price: 15
+  _Unlocks: []
