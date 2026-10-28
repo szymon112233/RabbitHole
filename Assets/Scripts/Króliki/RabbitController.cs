@@ -182,7 +182,7 @@ public class RabbitController : CachedMonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!hitWall && !frozen && m_IsSlappable && Vector3.Dot(collision.GetContact(0).normal, Vector3.up) < 0.5f)
+        if (!hitWall && !frozen && m_IsSlappable && Vector3.Dot(collision.GetContact(0).normal, Vector3.up) < 0.5f && !collision.collider.CompareTag("Rabbit"))
         {
             hitWall = true;
             m_IsSlappable = false;
