@@ -17,6 +17,7 @@ public class VacuumCleaner : Tool
     [SerializeField] protected MeshRenderer _bulb;
     [SerializeField] protected Material _greenBulbMaterial;
     [SerializeField] protected Material _redBulbMaterial;
+    [SerializeField] protected RabbitPileDisplay _rabbitDisplay;
     [SerializeField] protected List<FakeRabbitInsideVacuum> _fakeRabbits;
 
     private Sequence m_DoTweenSequence;
@@ -277,5 +278,6 @@ public class VacuumCleaner : Tool
     private void UpdateLightBulb()
     {
         _bulb.material = m_VacuumedBunnies.Count >= m_MaxVacuumedRabbitCount ? _redBulbMaterial : _greenBulbMaterial;
+        _rabbitDisplay.SetAmountDisplayed(m_VacuumedBunnies.Count);
     }
 }

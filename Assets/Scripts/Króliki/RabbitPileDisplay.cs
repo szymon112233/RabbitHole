@@ -34,6 +34,18 @@ public class RabbitPileDisplay : MonoBehaviour
         ObjectInOrderToShow[Counter].SetActive(true);
         Counter++;
     }
+    
+    public void Decrement()
+    {
+        if (Counter <= 0)
+        {
+            Debug.LogWarning($"Cannot decrease the display {gameObject.name}- at min");
+            return;
+        }
+        Counter--;
+        ObjectInOrderToShow[Counter].SetActive(false);
+        
+    }
 
     public void SetAmountDisplayed(int amount)
     {

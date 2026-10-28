@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e9a701bbb14fbb8f27fc43b76af832, type: 3}
   m_Name: PlayerTelezakupyState
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.TelezakupyPlayerState
-  _PurchasedUpgradeIds: []
+  _PurchasedUpgradeIds:
+  - f223f1f9-6931-4386-b517-79d31b2630d6
+  - b305757b-009c-4428-a43e-e2885d97680b
+  - 2332f0c9-9815-44f1-ac8d-298174fdf6bd
+  - b82b779e-62a0-4eda-b0a5-9bc704d62777
+  - 2d194d47-e3a5-4b4c-b067-6ee0fa0a28d0
