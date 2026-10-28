@@ -5,7 +5,10 @@ using UnityEditor;
 using UnityEngine.Video;
 
 namespace UnityEngine.Rendering.Universal {
-[Serializable][InitializeOnLoad]
+#if UNITY_EDITOR
+[InitializeOnLoad]
+#endif
+[Serializable]
 [CreateAssetMenu(fileName = "PurchasableUpgradeConfig", menuName = "RabbitHole/TVMango/PurchasableUpgradeConfig")]
 public class PurchasableUpgrade : ScriptableObject {
 
