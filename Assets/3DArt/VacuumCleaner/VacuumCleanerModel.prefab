@@ -68,6 +68,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: VacuumCleanerModel
       objectReference: {fileID: 0}
+    - target: {fileID: 3421218022673578739, guid: da894a07801240d428fd57408f05c5a1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 59e76d7f587b9ab45a14ab5d4dcee335, type: 2}
+    - target: {fileID: 6643374466619448991, guid: da894a07801240d428fd57408f05c5a1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0adfb68dda0991c47853b1ca4bf08253, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
