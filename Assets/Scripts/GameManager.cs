@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RabbitHoldController m_RabbitHoldController;
     public RabbitHoldController RabbitHoldController { get => m_RabbitHoldController; }
 
+    public bool DebugEnabled;
+
     private void Awake() 
     { 
         // If there is an instance, and it's not me, delete myself.

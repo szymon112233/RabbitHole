@@ -49,7 +49,7 @@ public class TelezakupyController : MonoBehaviour {
         if(GameManager.Instance.TrySpendMoney(currentUpgrade.Price))
         {
             currentUpgrade.RuntimeFields.Bought();
-            
+
             _PlayerState.SavePurchasedUpgrade(currentUpgrade);
             _CurrentProgram = 1;
             UpdateVideoProgram();
@@ -86,7 +86,22 @@ public class TelezakupyController : MonoBehaviour {
         SwitchProgram();
     }
 
-    private void Update() {
+        private void Start()
+        {
+
+        }
+
+        private void Update() {
+            if(GameManager.Instance.DebugEnabled)
+            {
+                foreach(PurchasableUpgrade upgrade in _TelezakupyConfig.GetAvailableUpgrades())
+                {
+                    Debug.Log("Unlcoked: " + upgrade.Name);
+                    upgrade.RuntimeFields.Bought();
+                    _PlayerState.SavePurchasedUpgrade(upgrade);
+
+                }
+            }
         // 1. Define the origin and direction (e.g., forward from the camera or player)
         Vector3 origin = Camera.main.transform.position;
         Vector3 direction = Camera.main.transform.forward;

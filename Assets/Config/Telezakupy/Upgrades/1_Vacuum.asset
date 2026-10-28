@@ -15,6 +15,6 @@ MonoBehaviour:
   _ID: b82b779e-62a0-4eda-b0a5-9bc704d62777
   _AdClip: {fileID: 32900000, guid: 688b2f6e67a0d4d10b44036506a0e9c5, type: 3}
   _Name: Vacuum
-  _Price: 400
+  _Price: 0
   _Unlocks:
   - {fileID: 11400000, guid: 4b6dd329ec3ad484a939c10f55bad1e7, type: 2}

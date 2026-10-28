@@ -15,6 +15,6 @@ MonoBehaviour:
   _ID: f223f1f9-6931-4386-b517-79d31b2630d6
   _AdClip: {fileID: 32900000, guid: 196bdb33aab3bfc47bf8c2afb0ab0c2b, type: 3}
   _Name: Strong arm beer
-  _Price: 40
+  _Price: 0
   _Unlocks:
   - {fileID: 11400000, guid: 1c7fb1847247f8f4f887afe0eb9dbc1b, type: 2}
