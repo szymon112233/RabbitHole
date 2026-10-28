@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class RabbitSpawnManager : MonoBehaviour
 {
@@ -17,8 +20,18 @@ public class RabbitSpawnManager : MonoBehaviour
     {
         T = transform;
         StartCoroutine(SpawnRabbitCoroutine());
+        
+        InputSystem.actions.FindAction("SpawnKrulkis").performed += OnCheatSpawnPerformed;
     }
-    
+
+    private void OnCheatSpawnPerformed(InputAction.CallbackContext obj)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            CreateRabbit(T.position);
+        }
+    }
+
     public int GetRabbitCount()
     {
         return RabbitList.Count;

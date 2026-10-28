@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
@@ -34,6 +35,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         PlayerState.Clear();
+        
+        InputSystem.actions.FindAction("GibMoni").performed += OnCheatMoniPerformed;
+    }
+
+    private void OnCheatMoniPerformed(InputAction.CallbackContext obj)
+    {
+        AddMoney(100);
     }
 
 

@@ -1138,6 +1138,56 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "3b519d45-a8ad-4a05-9cc0-a8315dd3b140",
+            "actions": [
+                {
+                    "name": "GibMoni",
+                    "type": "Button",
+                    "id": "c3965094-903f-484c-be4c-73583e08144a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "SpawnKrulkis",
+                    "type": "Button",
+                    "id": "cc81591a-7b88-4212-80e1-c98cd300fe00",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8f3ecfc9-bad3-44de-9684-5ba2e80bb08c",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "GibMoni",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9197ec8-21b8-4702-9cbc-4b1ddd65b75b",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "SpawnKrulkis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
