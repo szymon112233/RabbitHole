@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using System;
 using System.Collections.Generic;
 
 public class VacuumCleaner : Tool
@@ -12,6 +11,10 @@ public class VacuumCleaner : Tool
 
     [SerializeField] protected Transform m_ProjectileSpawnPoint;
     [SerializeField] protected ParticleSystem m_ParticleEffect;
+    
+    [SerializeField] protected MeshRenderer _bulb;
+    [SerializeField] protected Material _greenBulbMaterial;
+    [SerializeField] protected Material _redBulbMaterial;
 
     private Sequence m_DoTweenSequence;
 
@@ -22,16 +25,12 @@ public class VacuumCleaner : Tool
     private bool m_IsShootTriggerHeld = false;
     private LayerMask m_LayerMask;
 
-    private List<ERabbitType> m_VacuumedBunnies = new List<ERabbitType>();
+    private List<ERabbitType> m_VacuumedBunnies = new();
 
     protected void Awake()
     {
-        // apparently unity saves state of non-serialized variables between plays now???
-
-        m_VacuumedBunnies = new List<ERabbitType>();
         m_HitColliders = new Collider[5];
         m_LayerMask = LayerMask.GetMask("Rabbit");
-
     }
 
     public override void Use_Main()
@@ -118,10 +117,10 @@ public class VacuumCleaner : Tool
         {
             return;
         }
+        
         m_HitColliders = new Collider[5];
-
-        //base.HoldTrigger();
         Physics.OverlapBoxNonAlloc(m_ProjectileSpawnPoint.position, m_VacuumHalfExtents, m_HitColliders, Transform.rotation, m_LayerMask, QueryTriggerInteraction.Ignore);
+        
         foreach (var hitCollider in m_HitColliders)
         {
             if (m_VacuumedBunnies.Count < m_MaxVacuumedRabbitCount && hitCollider != null && hitCollider.TryGetComponent(out RabbitController rabbit))
@@ -135,7 +134,7 @@ public class VacuumCleaner : Tool
                 rabbit.Vacuum(m_ProjectileSpawnPoint);
                 rabbit.onVacuumed.AddListener(OnVaccumed);
 
-                UpdateUI();
+                UpdateLightBulb();
             }
         }
     }
@@ -238,6 +237,7 @@ public class VacuumCleaner : Tool
             rabbitBody.AddForce(Camera.main.transform.forward * m_ShootForce, ForceMode.Impulse);
             m_VacuumedBunnies.RemoveAt(m_VacuumedBunnies.Count - 1);
             //UnityEditor.EditorApplication.isPaused = true;
+            UpdateLightBulb();
         }
     }
 
@@ -249,8 +249,8 @@ public class VacuumCleaner : Tool
             .Append(Transform.DOLocalMoveY(0f, .1f));
     }
 
-    public void UpdateUI()
+    private void UpdateLightBulb()
     {
-        //UIWeaponController.Instance.vacuumLevelSlider.SetWeaponLevel(1f - CurrentWeaponLevel);
+        _bulb.material = m_VacuumedBunnies.Count >= m_MaxVacuumedRabbitCount ? _redBulbMaterial : _greenBulbMaterial;
     }
 }

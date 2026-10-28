@@ -116,6 +116,9 @@ MonoBehaviour:
   m_MaxVacuumedRabbitCount: 10
   m_ProjectileSpawnPoint: {fileID: 488379201291961597}
   m_ParticleEffect: {fileID: 0}
+  _bulb: {fileID: 6926823360685656950}
+  _greenBulbMaterial: {fileID: 2100000, guid: 0adfb68dda0991c47853b1ca4bf08253, type: 2}
+  _redBulbMaterial: {fileID: 2100000, guid: 94e6b54a5221d944fb61b09873655d02, type: 2}
 --- !u!1001 &7387803471166626277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,5 +211,10 @@ PrefabInstance:
 --- !u!4 &4294672325933412866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6710220115494759399, guid: da929349b369c6c4a80a4dc04acc0910, type: 3}
+  m_PrefabInstance: {fileID: 7387803471166626277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6926823360685656950 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 479568733585740435, guid: da929349b369c6c4a80a4dc04acc0910, type: 3}
   m_PrefabInstance: {fileID: 7387803471166626277}
   m_PrefabAsset: {fileID: 0}
