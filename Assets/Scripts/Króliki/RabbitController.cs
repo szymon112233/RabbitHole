@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
+
+public enum ERabbitType
+{ 
+    Default,
+    Golden,
+}
+
+
 public class RabbitController : CachedMonoBehaviour
 {
     [SerializeField] private Renderer Renderer;
@@ -32,6 +40,7 @@ public class RabbitController : CachedMonoBehaviour
     [SerializeField]
     protected BoxCollider BoxCollider;
 
+    [SerializeField] private Material _defualtRabbitMaterial;
     [SerializeField] private Material _goldRabbitMaterial;
     [SerializeField] private float _goldRabbitChance;
 
@@ -51,26 +60,39 @@ public class RabbitController : CachedMonoBehaviour
     [HideInInspector]
     public UnityEvent onVacuumed;
 
+    [SerializeField]
+    private ERabbitType m_RabbitType;
+    public ERabbitType RabbitType => m_RabbitType;
+    
     void Awake()
     {
         SphereCollider = GetComponent<SphereCollider>();
         BoxCollider = GetComponent<BoxCollider>();
-        Initialize();
+        Initialize(ERabbitType.Default);
     }
 
-    public void Initialize()
+    public void Initialize(ERabbitType rabbitType)
     {
         timeToHop = RandomHopCD();
         Transform.localScale = Vector3.one;
+        Rbody.isKinematic = false;
         frozen = false;
         readyToHop = false;
         m_IsVacuumed = false;
         hitWall = false;
         m_IsSlappable = false;
-
-        if (Random.value < _goldRabbitChance)
+        m_RabbitType = rabbitType;
+        SphereCollider.enabled = true;
+        BoxCollider.enabled = false;
+        switch (m_RabbitType)
         {
-            Renderer.material = _goldRabbitMaterial;
+            case ERabbitType.Golden:
+                Renderer.material = _goldRabbitMaterial;
+                break;
+            default:
+                Renderer.material = _defualtRabbitMaterial;
+                break;
+
         }
     }
 
@@ -237,7 +259,7 @@ public class RabbitController : CachedMonoBehaviour
 
     private IEnumerator GetVacuumedCoroutine(Transform vacuumPointTransform)
     {
-        float length = .3f;
+        float length = .1f;
         float timer = 0f;
 
         Vector3 startScale = Transform.localScale;
