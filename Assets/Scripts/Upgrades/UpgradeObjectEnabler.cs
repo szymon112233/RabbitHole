@@ -9,5 +9,6 @@ public class UpgradeObjectEnabler : MonoBehaviour
     void Start()
     {
         Upgrade.RuntimeFields.UpgradeBought += () => gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
