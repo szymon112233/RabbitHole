@@ -131,7 +131,7 @@ namespace EasyPeasyFirstPersonController
             if (currentLedgeCooldown > 0)
                 currentLedgeCooldown -= Time.deltaTime;
 
-            isGrounded = characterController.isGrounded || Physics.CheckSphere(groundCheck.position, characterController.radius * 0.9f, groundMask, QueryTriggerInteraction.Ignore);
+            isGrounded = /*characterController.isGrounded ||*/ Physics.CheckSphere(groundCheck.position, characterController.radius * 0.9f, groundMask, QueryTriggerInteraction.Ignore);
 
             currentState.UpdateState();
             HandleRotation();
