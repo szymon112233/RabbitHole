@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TelezakupyConfig
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.TelezakupyConfig
   _InitialUpgrades:
-  - {fileID: 11400000, guid: ac220e54212104949a17bbfb1ad68a1a, type: 2}
+  - {fileID: 11400000, guid: c2b8b11b666200149b560d0b3c1d1270, type: 2}
   _NoProgramm: {fileID: 32900000, guid: 45d5f0bb8b89c48cba350cfd7a90370b, type: 3}
   _TPlayerState: {fileID: 11400000, guid: e9452a00623254839a9e560c1f99f913, type: 2}

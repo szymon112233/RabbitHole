@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d92e85d8ad223de486bce0d8db9568d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  telezakupyPlayerState: {fileID: 11400000, guid: e9452a00623254839a9e560c1f99f913, type: 2}
   ActiveTool: {fileID: 5783637762575605015}
   Tools:
   - {fileID: 5783637762575605015}
@@ -206,6 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hand
   Rigidbody: {fileID: 4431150367535137068}
+  _UpgradeNode: {fileID: 11400000, guid: c2b8b11b666200149b560d0b3c1d1270, type: 2}
   joint: {fileID: 217587491000214121}
   cam: {fileID: 9130170562041830675}
   snapPosition: 1

@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        PlayerState.PurchasedUpgradeIds.Clear();
+        PlayerState.Clear();
     }
 
 

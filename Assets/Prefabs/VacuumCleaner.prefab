@@ -324,6 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VacuumCleaner
   Rigidbody: {fileID: 0}
+  _UpgradeNode: {fileID: 11400000, guid: ac220e54212104949a17bbfb1ad68a1a, type: 2}
   m_VacuumHalfExtents: {x: 3.33, y: 0.77, z: 0.45}
   m_ShootForce: 50
   m_MaxVacuumedRabbitCount: 10

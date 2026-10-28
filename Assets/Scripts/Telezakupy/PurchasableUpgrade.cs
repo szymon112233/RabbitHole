@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using UnityEditor;
 using UnityEngine.Video;
 
 namespace UnityEngine.Rendering.Universal {
-[Serializable]
+[Serializable][InitializeOnLoad]
 [CreateAssetMenu(fileName = "PurchasableUpgradeConfig", menuName = "RabbitHole/TVMango/PurchasableUpgradeConfig")]
 public class PurchasableUpgrade : ScriptableObject {
 
@@ -51,8 +52,9 @@ public class PurchasableUpgrade : ScriptableObject {
         }
     }
 
-    void Awake()
+    void OnEnable()
     {
+        Debug.Log("call");
         RuntimeFields = new Runtime();
     }
 

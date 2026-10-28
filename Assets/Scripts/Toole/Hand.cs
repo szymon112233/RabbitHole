@@ -12,6 +12,8 @@ public class Hand : Tool
 
     private HandController _handController;
 
+    private bool ThrowingEnabled = false;
+
     void Start()
     {
         _handController = FindAnyObjectByType<HandController>();
@@ -20,13 +22,23 @@ public class Hand : Tool
         {
             Debug.LogError("BROOO! Put HandController on the scene!");
         }
+
+        this.UpgradeNode.RuntimeFields.UpgradeBought += () => ThrowingEnabled = true;
     }
 
     public override void Use_Main()
     {
         if (IsHoldingARabbit())
         {
-            ThrowRabbit();
+            if (ThrowingEnabled)
+            {
+                ThrowRabbit();
+                
+            }
+            else
+            {
+                DropRabbit();
+            }
         }
         else
         {
