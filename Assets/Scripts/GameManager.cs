@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [SerializeField]
+    protected TelezakupyPlayerState PlayerState; 
 
     [SerializeField] private RabbitSpawnManager m_RabbitSpawnManager;
     public RabbitSpawnManager RabbitSpawnManager { get => m_RabbitSpawnManager; }
@@ -22,11 +25,16 @@ public class GameManager : MonoBehaviour
         } 
         else 
         {
-            Instance = this; 
+            Instance = this;
         } 
     }
-    
-    
+
+    void Start()
+    {
+        PlayerState.Clear();
+    }
+
+
     public int DisposedRabbits;
     public int Money;
 

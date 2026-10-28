@@ -26,5 +26,10 @@ public class TelezakupyPlayerState : ScriptableObject {
         return _PurchasedUpgradeIds.Contains(id);
     }
 
+    public void Clear()
+    {
+        _PurchasedUpgradeIds.Clear();
+    }
+
 }
 }

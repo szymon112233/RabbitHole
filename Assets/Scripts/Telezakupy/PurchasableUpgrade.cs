@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using UnityEditor;
 using UnityEngine.Video;
 
 namespace UnityEngine.Rendering.Universal {
-[Serializable]
+[Serializable][InitializeOnLoad]
 [CreateAssetMenu(fileName = "PurchasableUpgradeConfig", menuName = "RabbitHole/TVMango/PurchasableUpgradeConfig")]
 public class PurchasableUpgrade : ScriptableObject {
+
     [SerializeField] 
     private string _ID;
     
@@ -32,16 +34,38 @@ public class PurchasableUpgrade : ScriptableObject {
     public int Price => _Price;
     
     public ImmutableList<PurchasableUpgrade> Unlocks => _Unlocks.ToImmutableList();
+
+    [NonSerialized]
+    public Runtime RuntimeFields;
+
     #endregion
-    
-    private void OnValidate() {
+
+    private void OnValidate()
+    {
         if (string.IsNullOrEmpty(_ID))
         {
             _ID = System.Guid.NewGuid().ToString();
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
             // Tells Unity the asset has changed so it saves the ID to the disk file
             UnityEditor.EditorUtility.SetDirty(this);
-#endif
+        #endif
+        }
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("call");
+        RuntimeFields = new Runtime();
+    }
+
+
+    public class Runtime
+    {
+        public event Action UpgradeBought;
+
+        public void Bought()
+        {
+            UpgradeBought?.Invoke();
         }
     }
 }

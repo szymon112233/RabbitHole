@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using DefaultNamespace;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
+
 
 public class RabbitHoldController : MonoBehaviour
 {
+
+    [SerializeField]
+    protected TelezakupyPlayerState telezakupyPlayerState;
 
     public Tool ActiveTool;
 
@@ -88,6 +92,13 @@ public class RabbitHoldController : MonoBehaviour
 
     private void OnToolSwap(int id)
     {
+        Tool nextTool = Tools[id];
+
+        if(!telezakupyPlayerState.PurchasedUpgradeIds.Contains(nextTool.UpgradeNode.ID))
+        {
+            return;
+        }
+        
         ActiveTool.Deactivate();
         ActiveTool = Tools[id];
         ActiveTool.Activate();

@@ -46,12 +46,18 @@ public class TelezakupyController : MonoBehaviour {
             return;
 
         // register
-        _PlayerState.SavePurchasedUpgrade(currentUpgrade);
-        _CurrentProgram = 1;
-        UpdateVideoProgram();
+        if(GameManager.Instance.TrySpendMoney(currentUpgrade.Price))
+        {
+            currentUpgrade.RuntimeFields.Bought();
+            
+            _PlayerState.SavePurchasedUpgrade(currentUpgrade);
+            _CurrentProgram = 1;
+            UpdateVideoProgram();
 
-        var curr = CurrentlyAiringUpgrade();
-        _TelezakupyUIObserver.RaiseUpgradesForPurchase(curr);
+            var curr = CurrentlyAiringUpgrade();
+            _TelezakupyUIObserver.RaiseUpgradesForPurchase(curr);
+            
+        }
     }
 
     private PurchasableUpgrade CurrentlyAiringUpgrade() {

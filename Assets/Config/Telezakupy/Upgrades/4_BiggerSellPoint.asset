@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6f606b0c3f4464aa65497136a990f0, type: 3}
+  m_Name: 4_BiggerSellPoint
+  m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.PurchasableUpgrade
+  _ID: b305757b-009c-4428-a43e-e2885d97680b
+  _AdClip: {fileID: 32900000, guid: 196bdb33aab3bfc47bf8c2afb0ab0c2b, type: 3}
+  _Name: Bunny cage
+  _Price: 120
+  _Unlocks:
+  - {fileID: 11400000, guid: 8297ba95b84b04c07823c83bcb1f6cd6, type: 2}
