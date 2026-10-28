@@ -113,6 +113,8 @@ public class Hand : Tool
         _handController.ExitGrabState();
         joint.connectedBody = null;
         
+        rabbit.position = joint.transform.position;
+        rabbit.linearVelocity = Vector3.zero;
         rabbit.AddForce(cam.transform.forward * throwPower);
     }
 
