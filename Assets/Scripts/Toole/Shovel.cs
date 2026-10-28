@@ -8,7 +8,8 @@ public class Shovel : Tool
     public float SwingSpeed_DegreePerSecond;
     public float MaxSwingRoataion = 115.0f;
     public float SwingStrength = 6;
-    public Transform FrontPoint; 
+    public Transform FrontPoint;
+    public BoxCollider ShovelCollider;
 
     public override ToolType Type => ToolType.SHOVEL;
     public override bool UsesHandGraphics => false;
@@ -42,6 +43,7 @@ public class Shovel : Tool
             return;
         }
 
+        ShovelCollider.enabled = false;
         ThrowRabbits();
         isSwinging = true;
         dir = 1;
@@ -90,6 +92,8 @@ public class Shovel : Tool
                 euler.z = _original_rotation;
                 transform.localEulerAngles = euler;
                 isSwinging = false;
+                ShovelCollider.enabled = true;
+
                 return;
             }
 
@@ -99,20 +103,20 @@ public class Shovel : Tool
         }
 
     }
-
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.body.CompareTag("Rabbit"))
+        if (other.CompareTag("Rabbit"))
         {
-            rabbits.Add(collision.body.GetComponent<RabbitController>());
+            rabbits.Add(other.GetComponent<RabbitController>());
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnTriggerExit(Collider other)
     {
-        if (collision.body.CompareTag("Rabbit"))
+        if (other.CompareTag("Rabbit"))
         {
-            rabbits.Remove(collision.body.GetComponent<RabbitController>());
+            rabbits.Remove(other.GetComponent<RabbitController>());
         }
     }
+
 }

@@ -27,7 +27,7 @@ public class RabbitHoldController : MonoBehaviour
         InputSystem.actions.FindAction("Attack").performed += OnActionPerformed;
         InputSystem.actions.FindAction("Drop").started += OnAltActionPerformed;
         InputSystem.actions.FindAction("Attack").canceled += OnActionStop;
-        // InputSystem.actions.FindAction("Drop").canceled += OnAltActionPerformed;
+        InputSystem.actions.FindAction("Drop").canceled += OnAltActionStopped;
 
         toolSwappingCallbacks.Add((InputAction.CallbackContext x) => {OnToolSwap(0);});
         InputSystem.actions.FindAction("SwapToTool_0").performed += toolSwappingCallbacks[0];
@@ -37,10 +37,8 @@ public class RabbitHoldController : MonoBehaviour
         
         toolSwappingCallbacks.Add((InputAction.CallbackContext x) => {OnToolSwap(2);});
         InputSystem.actions.FindAction("SwapToTool_2").performed += toolSwappingCallbacks[2];
-        
-        
+                
         _handController = FindAnyObjectByType<HandController>();
-
 
         if (_handController == null)
         {
@@ -53,6 +51,9 @@ public class RabbitHoldController : MonoBehaviour
     {
         InputSystem.actions.FindAction("Attack").performed -= OnActionPerformed;
         InputSystem.actions.FindAction("Drop").performed -= OnAltActionPerformed;
+        InputSystem.actions.FindAction("Attack").canceled -= OnActionStop;
+        InputSystem.actions.FindAction("Drop").canceled -= OnAltActionStopped;
+
         InputSystem.actions.FindAction("SwapToTool_0").performed -= toolSwappingCallbacks[0];
         InputSystem.actions.FindAction("SwapToTool_1").performed -= toolSwappingCallbacks[1];
         InputSystem.actions.FindAction("SwapToTool_2").performed -= toolSwappingCallbacks[2];

@@ -16,6 +16,7 @@ public class VacuumCleaner : Tool
     private Sequence m_DoTweenSequence;
 
     public override ToolType Type => ToolType.VACUUM;
+    public override bool UsesHandGraphics => false;
 
     private bool m_IsVacuumTriggerHeld = false;
     private bool m_IsShootTriggerHeld = false;
@@ -34,6 +35,7 @@ public class VacuumCleaner : Tool
         {
             return;
         }
+
         PullVacuumTrigger();
     }
 

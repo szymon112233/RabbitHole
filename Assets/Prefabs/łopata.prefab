@@ -112,6 +112,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.2954705, y: 1, z: 1}
   m_Center: {x: 0.64773613, y: 0.00000000424849, z: -0.000000118459596}
+--- !u!1 &1765006538657550545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4020440801612514794}
+  - component: {fileID: 2369950285335274690}
+  m_Layer: 8
+  m_Name: Throw zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4020440801612514794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765006538657550545}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000000014901161, y: -0, z: 0.000000029802322, w: 1}
+  m_LocalPosition: {x: 0, y: -0.654, z: 0}
+  m_LocalScale: {x: 5.7306585, y: 0.60137606, z: 0.037451718}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3257135483376976276}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2369950285335274690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765006538657550545}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.044006, y: 2.72705, z: 25.952026}
+  m_Center: {x: 1.5219951, y: 0.48819098, z: 0.062430862}
 --- !u!1 &3799189142207678392
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +329,7 @@ MonoBehaviour:
   MaxSwingRoataion: 25
   SwingStrength: 8
   FrontPoint: {fileID: 3257135483376976276}
+  ShovelCollider: {fileID: 8787246959696250612}
   isSwinging: 0
   dir: 0
   _original_rotation: 0
@@ -534,7 +588,8 @@ Transform:
   m_LocalPosition: {x: -0.0000000029331, y: -1.824, z: -0.0000014718}
   m_LocalScale: {x: 0.1745, y: 1.662853, z: 26.701044}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4020440801612514794}
   m_Father: {fileID: 4804066411577480639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1159651516433490198
