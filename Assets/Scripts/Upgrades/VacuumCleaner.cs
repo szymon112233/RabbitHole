@@ -278,6 +278,11 @@ public class VacuumCleaner : Tool
     private void UpdateLightBulb()
     {
         _bulb.material = m_VacuumedBunnies.Count >= m_MaxVacuumedRabbitCount ? _redBulbMaterial : _greenBulbMaterial;
-        _rabbitDisplay.SetAmountDisplayed(m_VacuumedBunnies.Count);
+        //_rabbitDisplay.SetAmountDisplayed(m_VacuumedBunnies.Count);
+    }
+
+    public virtual void Activate()
+    {
+        gameObject.SetActive(true);
     }
 }

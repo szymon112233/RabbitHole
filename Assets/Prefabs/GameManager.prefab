@@ -147,4 +147,8 @@ MonoBehaviour:
   RabbitPrefab: {fileID: 407940998765757281, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
   MaxRabbitCount: 1500
   RabbitPool: []
-  m_RabbitTypeChanceDictionary: []
+  m_RabbitTypeChanceDictionary:
+  - key: 0
+    value: 1
+  - key: 1
+    value: 0.01

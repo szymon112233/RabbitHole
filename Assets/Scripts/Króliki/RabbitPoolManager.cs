@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class RabbitPoolManager : MonoBehaviour
@@ -8,23 +7,7 @@ public class RabbitPoolManager : MonoBehaviour
     [SerializeField] private int MaxRabbitCount = 1500;
     [SerializeField] private List<RabbitController> RabbitPool = new List<RabbitController>();
 
-    [SerializeField] private Dictionary<ERabbitType, float> m_RabbitTypeChanceDictionary = new Dictionary<ERabbitType, float>();
-
-
-    private void Awake()
-    {
-        m_RabbitTypeChanceDictionary.Add(ERabbitType.Default, 1f);
-        m_RabbitTypeChanceDictionary.Add(ERabbitType.Golden, 0.005f);
-    }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    [SerializeField] private Dictionary<ERabbitType, float> m_RabbitTypeChanceDictionary;
 
     public void ReturnToPool(RabbitController rabbit)
     {

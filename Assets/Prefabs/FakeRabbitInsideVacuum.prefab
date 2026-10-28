@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444b35bcaf26478d8997e246250a616f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Upgrades.FakeRabbitInsideVacuum
-  _maxRotationSpeed: 5
+  _maxRotationSpeed: 4
   _rabbitRenderer: {fileID: 2140915057771344464}
   _defaultMaterial: {fileID: 2100000, guid: e968d0e1cc5172249b037047c384e207, type: 2}
   _goldenMaterial: {fileID: 2100000, guid: 3a06a391d3c5c344aa93f6d422743088, type: 2}

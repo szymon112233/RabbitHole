@@ -42,7 +42,6 @@ public class RabbitController : CachedMonoBehaviour
 
     [SerializeField] private Material _defualtRabbitMaterial;
     [SerializeField] private Material _goldRabbitMaterial;
-    [SerializeField] private float _goldRabbitChance;
 
     public Action OnKilled;
 
