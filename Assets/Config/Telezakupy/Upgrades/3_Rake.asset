@@ -15,6 +15,6 @@ MonoBehaviour:
   _ID: 2332f0c9-9815-44f1-ac8d-298174fdf6bd
   _AdClip: {fileID: 32900000, guid: 196bdb33aab3bfc47bf8c2afb0ab0c2b, type: 3}
   _Name: Rake
-  _Price: 0
+  _Price: 140
   _Unlocks:
   - {fileID: 11400000, guid: ac220e54212104949a17bbfb1ad68a1a, type: 2}

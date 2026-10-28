@@ -15,6 +15,6 @@ MonoBehaviour:
   _ID: b305757b-009c-4428-a43e-e2885d97680b
   _AdClip: {fileID: 32900000, guid: 196bdb33aab3bfc47bf8c2afb0ab0c2b, type: 3}
   _Name: Bunny cage
-  _Price: 0
+  _Price: 80
   _Unlocks:
   - {fileID: 11400000, guid: 8297ba95b84b04c07823c83bcb1f6cd6, type: 2}
