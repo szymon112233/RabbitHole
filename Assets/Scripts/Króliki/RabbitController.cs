@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 
 public enum ERabbitType
@@ -15,6 +16,7 @@ public enum ERabbitType
 public class RabbitController : CachedMonoBehaviour
 {
     [SerializeField] private Renderer Renderer;
+    [SerializeField] private Transform m_ModelTransform;
 
     [SerializeField]
     protected float HopPower = 10.0f;
@@ -63,12 +65,22 @@ public class RabbitController : CachedMonoBehaviour
     [SerializeField]
     private ERabbitType m_RabbitType;
     public ERabbitType RabbitType => m_RabbitType;
-    
+
+    private Sequence m_DoTweenSequence;
+
+    public float m_Duration = .25f;
+    public float m_Strength = 10f;
+    public int m_Vibrato = 20;
+    public float m_Randomness = 45;
+
+
     void Awake()
     {
         SphereCollider = GetComponent<SphereCollider>();
         BoxCollider = GetComponent<BoxCollider>();
         Initialize(ERabbitType.Default);
+
+        //AnimateReadyToHopAndHop();
     }
 
     public void Initialize(ERabbitType rabbitType)
@@ -109,6 +121,11 @@ public class RabbitController : CachedMonoBehaviour
     
     void Update()
     {
+        /*if (Input.GetKeyDown(KeyCode.U))
+        {
+            AnimateReadyToHopAndHop();
+        }*/
+
         if(timeToHop > 0)
         {
             timeToHop -= Time.deltaTime;
@@ -135,7 +152,8 @@ public class RabbitController : CachedMonoBehaviour
         }
         else
         {
-            Hop();
+            AnimateReadyToHopAndHop();
+            //Hop();
         }
 
     }
@@ -148,6 +166,23 @@ public class RabbitController : CachedMonoBehaviour
     protected float RandomHopPower()
     {
         return UnityEngine.Random.Range(HopPower * 0.4f, HopPower);
+    }
+
+    protected void AnimateReadyToHopAndHop()
+    {
+        readyToHop = false;
+
+        m_DoTweenSequence = DOTween.Sequence();
+        m_DoTweenSequence
+            .Append(m_ModelTransform.DOScaleY(.6f, m_Duration))
+            .Join(m_ModelTransform.DOShakeRotation(m_Duration, m_Strength, m_Vibrato, m_Randomness, false))
+            .Append(m_ModelTransform.DOScaleY(1f, .1f))
+            .AppendCallback(Hop)
+            //.Append(m_ModelTransform.DOScaleY(1.1f, .05f))
+            //.Append(m_ModelTransform.DOScaleY(1f, .05f))
+            ;
+
+        //m_DoTweenSequence.SetLoops(-1);
     }
 
     protected void Hop()
@@ -173,7 +208,6 @@ public class RabbitController : CachedMonoBehaviour
         Quaternion lookRotation = Rbody.rotation * Quaternion.FromToRotation(-Rbody.transform.forward, forwardDir);
         Rbody.MoveRotation(lookRotation);
 
-        readyToHop = false;
         timeToHop = RandomHopCD();
     }
 
