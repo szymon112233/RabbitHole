@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 
 public class VacuumCleaner : Tool
 {
@@ -8,7 +9,6 @@ public class VacuumCleaner : Tool
     [SerializeField] private Vector3 m_VacuumHalfExtents;
     [SerializeField] private float m_ShootForce = 50;
     [SerializeField] private int m_MaxVacuumedRabbitCount = 10;
-    private int m_CurrentVacuumedRabbitCount;
 
     [SerializeField] protected Transform m_ProjectileSpawnPoint;
     [SerializeField] protected ParticleSystem m_ParticleEffect;
@@ -22,8 +22,13 @@ public class VacuumCleaner : Tool
     private bool m_IsShootTriggerHeld = false;
     private LayerMask m_LayerMask;
 
+    private List<ERabbitType> m_VacuumedBunnies = new List<ERabbitType>();
+
     protected void Awake()
     {
+        // apparently unity saves state of non-serialized variables between plays now???
+
+        m_VacuumedBunnies = new List<ERabbitType>();
         m_HitColliders = new Collider[5];
         m_LayerMask = LayerMask.GetMask("Rabbit");
 
@@ -109,24 +114,25 @@ public class VacuumCleaner : Tool
 
     protected void HoldVacuumTrigger()
     {
-        if (m_CurrentVacuumedRabbitCount >= m_MaxVacuumedRabbitCount)
+        if (m_VacuumedBunnies.Count >= m_MaxVacuumedRabbitCount)
         {
             return;
         }
+        m_HitColliders = new Collider[5];
 
         //base.HoldTrigger();
         Physics.OverlapBoxNonAlloc(m_ProjectileSpawnPoint.position, m_VacuumHalfExtents, m_HitColliders, Transform.rotation, m_LayerMask, QueryTriggerInteraction.Ignore);
         foreach (var hitCollider in m_HitColliders)
         {
-            if (m_CurrentVacuumedRabbitCount < m_MaxVacuumedRabbitCount && hitCollider != null && hitCollider.TryGetComponent(out RabbitController rabbit))
+            if (m_VacuumedBunnies.Count < m_MaxVacuumedRabbitCount && hitCollider != null && hitCollider.TryGetComponent(out RabbitController rabbit))
             {
                 if (rabbit.IsVacuumed)
                 {
                     continue;
                 }
 
+                m_VacuumedBunnies.Add(rabbit.RabbitType);
                 rabbit.Vacuum(m_ProjectileSpawnPoint);
-                m_CurrentVacuumedRabbitCount++;
                 rabbit.onVacuumed.AddListener(OnVaccumed);
 
                 UpdateUI();
@@ -215,21 +221,23 @@ public class VacuumCleaner : Tool
 
     private void Shoot()
     {
-        if (m_CurrentVacuumedRabbitCount <= 0)
+
+        if (m_VacuumedBunnies.Count <= 0)
         {
+            m_DoTweenSequence.Pause();
             m_DoTweenSequence.Kill();
             return;
         }
 
-        RabbitController rabbit = GameManager.Instance.RabbitPoolManager.RequestRabbit(m_ProjectileSpawnPoint.position);
+        RabbitController rabbit = GameManager.Instance.RabbitPoolManager.RequestRabbit(m_ProjectileSpawnPoint.position, m_VacuumedBunnies[m_VacuumedBunnies.Count - 1]);
         if (rabbit)
         {
             rabbit.m_IsSlappable = true;
             Rigidbody rabbitBody = rabbit?.GetComponent<Rigidbody>();
             // get proper vector
             rabbitBody.AddForce(Camera.main.transform.forward * m_ShootForce, ForceMode.Impulse);
+            m_VacuumedBunnies.RemoveAt(m_VacuumedBunnies.Count - 1);
             //UnityEditor.EditorApplication.isPaused = true;
-            m_CurrentVacuumedRabbitCount--;
         }
     }
 

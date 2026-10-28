@@ -126,12 +126,14 @@ MonoBehaviour:
   MinVelocityToSlap: 11
   SphereCollider: {fileID: 0}
   BoxCollider: {fileID: 0}
+  _defualtRabbitMaterial: {fileID: 2100000, guid: e968d0e1cc5172249b037047c384e207, type: 2}
   _goldRabbitMaterial: {fileID: 2100000, guid: 3a06a391d3c5c344aa93f6d422743088, type: 2}
   _goldRabbitChance: 0.005
   m_IsSlappable: 0
   onVacuumed:
     m_PersistentCalls:
       m_Calls: []
+  m_RabbitType: 0
 --- !u!1001 &754242192827772628
 PrefabInstance:
   m_ObjectHideFlags: 0
