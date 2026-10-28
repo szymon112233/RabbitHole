@@ -439,7 +439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6672330658428075992}
   m_Layer: 0
-  m_Name: BasicSellPoint
+  m_Name: Level 0 Sell Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
