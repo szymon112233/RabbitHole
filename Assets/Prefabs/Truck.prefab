@@ -1199,6 +1199,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2009887477784982176}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7c812456a4649542b16f316eadf8abb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6031217685585447259}
     - targetCorrespondingSourceObject: {fileID: -2311280193724949028, guid: e7c812456a4649542b16f316eadf8abb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 626015314146729528}
@@ -1235,6 +1238,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e7c812456a4649542b16f316eadf8abb, type: 3}
   m_PrefabInstance: {fileID: 7522324576301112087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6031217685585447259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7252417769127503430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c76114629d626248828d84b857c8467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeObjectEnabler
+  Upgrade: {fileID: 11400000, guid: bb6f804df7ec42cf58238d1478b4b28c, type: 2}
 --- !u!4 &8065405035005295868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e7c812456a4649542b16f316eadf8abb, type: 3}

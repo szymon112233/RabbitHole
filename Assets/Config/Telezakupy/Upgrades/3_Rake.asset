@@ -18,3 +18,4 @@ MonoBehaviour:
   _Price: 140
   _Unlocks:
   - {fileID: 11400000, guid: ac220e54212104949a17bbfb1ad68a1a, type: 2}
+  - {fileID: 11400000, guid: bb6f804df7ec42cf58238d1478b4b28c, type: 2}
