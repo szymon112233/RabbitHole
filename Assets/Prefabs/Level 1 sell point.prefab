@@ -3023,7 +3023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: Cooldown
-      value: 10
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: bUsesCapacity
@@ -3031,7 +3031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: MoneyForThisTrigger
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: ObjectToDisableOnCooldown
