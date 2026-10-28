@@ -12887,7 +12887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &1135544494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23606,7 +23606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4953937949849946604, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: DebugEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4953937949849946604, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: m_RabbitHoldController
@@ -23663,7 +23663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 210353330266957835, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1909.3978
+      value: 1908.1918
       objectReference: {fileID: 0}
     - target: {fileID: 210353330266957835, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -23843,7 +23843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6918586862719945387, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1814.6865
+      value: 1813.4805
       objectReference: {fileID: 0}
     - target: {fileID: 6918586862719945387, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.y
