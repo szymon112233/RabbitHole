@@ -56,7 +56,8 @@ public class RabbitController : CachedMonoBehaviour
     public bool IsVacuumed => m_IsVacuumed;
     public Rigidbody Rigidbody => Rbody;
 
-    private Vector3 lastWallNormal;
+    private Vector3 m_LastWallNormal;
+    private Vector3 m_LastUnflattenedPosition;
     [HideInInspector]
     public UnityEvent onVacuumed;
 
@@ -206,32 +207,46 @@ public class RabbitController : CachedMonoBehaviour
     {
         if (!hitWall && !frozen && m_IsSlappable && Vector3.Dot(collision.GetContact(0).normal, Vector3.up) < 0.5f && !collision.collider.CompareTag("Rabbit"))
         {
-            hitWall = true;
-            m_IsSlappable = false;
-            Transform.localScale = new Vector3(2.4f, 1.43f, 0.0056f);
-            Rbody.angularVelocity = Vector3.zero;
-            Rbody.linearVelocity = Vector3.zero;
-            Rbody.isKinematic = true;
+            
+            m_LastWallNormal = collision.GetContact(0).normal;
 
-            lastWallNormal = collision.GetContact(0).normal;
-
-            Transform.forward = UnityEngine.Random.value > 0.5f ? collision.GetContact(0).normal : -collision.GetContact(0).normal;
-            Transform.position = collision.GetContact(0).point + collision.GetContact(0).normal * 0.035f;
-            Transform.RotateAround(Transform.position, Transform.forward, UnityEngine.Random.Range(-20f, 20f));
-
-            SphereCollider.enabled = false;
-            BoxCollider.enabled = true;
-
-            frozen = true;
-
-            if (GameManager.Instance.RabbitHoldController.ActiveTool.Type == ToolType.HAND)
-            {
-                ((Hand)GameManager.Instance.RabbitHoldController.ActiveTool).DropRabbit(Rbody);
-                
-            }
+            GetFlattened(collision.GetContact(0).point + collision.GetContact(0).normal * 0.035f, UnityEngine.Random.value > 0.5f ? collision.GetContact(0).normal : -collision.GetContact(0).normal);
 
             StartCoroutine(FallOffCoroutine());
+            StartCoroutine(PopCoroutine(2.5f));
         }
+    }
+
+    public void GetFlattened(Vector3 rabbitPosition, Vector3 normalVector, float delay = 0f)
+    {
+        hitWall = true;
+        m_IsSlappable = false;
+        Rbody.angularVelocity = Vector3.zero;
+        Rbody.linearVelocity = Vector3.zero;
+        Rbody.isKinematic = true;
+        frozen = true;
+
+        if (GameManager.Instance.RabbitHoldController.ActiveTool.Type == ToolType.HAND)
+        {
+            ((Hand)GameManager.Instance.RabbitHoldController.ActiveTool).DropRabbit(Rbody);
+        }
+
+        SphereCollider.enabled = false;
+        StartCoroutine(GetFlattenedCoroutine(rabbitPosition, normalVector, delay));
+    }
+
+    private IEnumerator GetFlattenedCoroutine(Vector3 rabbitPosition, Vector3 normalVector, float delay)
+    { 
+        yield return new WaitForSeconds(delay);
+        Transform.localScale = new Vector3(2.4f, 1.43f, 0.0056f);
+        Transform.forward = normalVector;
+        m_LastUnflattenedPosition = Transform.position;
+        Transform.position = rabbitPosition;
+        Transform.RotateAround(Transform.position, Transform.forward, UnityEngine.Random.Range(-20f, 20f));
+        BoxCollider.enabled = true;
+
+        StartCoroutine(PopCoroutine(2.5f));
+
     }
 
     private IEnumerator FallOffCoroutine()
@@ -239,14 +254,19 @@ public class RabbitController : CachedMonoBehaviour
         yield return new WaitForSeconds(1f);
 
         Rbody.isKinematic = false;
-        Rbody.AddForceAtPosition(lastWallNormal * 40f, Transform.position + Vector3.up * 1.1f);
+        Rbody.AddForceAtPosition(m_LastWallNormal * 40f, Transform.position + Vector3.up * 1.1f);
+    }
 
-        yield return new WaitForSeconds(1.5f);
+    private IEnumerator PopCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
+        Rbody.isKinematic = false;
         SphereCollider.enabled = true;
         BoxCollider.enabled = false;
         Transform.localScale = Vector3.one;
         hitWall = false;
+        //Transform.position = m_LastUnflattenedPosition; // bugs out the wall slap
         Rbody.AddForce(new Vector3(UnityEngine.Random.Range(-.75f, .75f), 1f, UnityEngine.Random.Range(-.75f, .75f)).normalized * 5f, ForceMode.Impulse);
 
     }
@@ -283,4 +303,6 @@ public class RabbitController : CachedMonoBehaviour
     {
         Renderer.material = material;
     }
+
+    
 }
