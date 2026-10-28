@@ -1,6 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Linq;
+using DefaultNamespace.Upgrades;
 
 public class VacuumCleaner : Tool
 {
@@ -15,6 +17,7 @@ public class VacuumCleaner : Tool
     [SerializeField] protected MeshRenderer _bulb;
     [SerializeField] protected Material _greenBulbMaterial;
     [SerializeField] protected Material _redBulbMaterial;
+    [SerializeField] protected List<FakeRabbitInsideVacuum> _fakeRabbits;
 
     private Sequence m_DoTweenSequence;
 
@@ -31,6 +34,11 @@ public class VacuumCleaner : Tool
     {
         m_HitColliders = new Collider[5];
         m_LayerMask = LayerMask.GetMask("Rabbit");
+
+        foreach (FakeRabbitInsideVacuum fakeRabbit in _fakeRabbits)
+        {
+            fakeRabbit.gameObject.SetActive(false);
+        }
     }
 
     public override void Use_Main()
@@ -131,12 +139,28 @@ public class VacuumCleaner : Tool
                 }
 
                 m_VacuumedBunnies.Add(rabbit.RabbitType);
+                ActivateFakeRabbit(rabbit.RabbitType);
                 rabbit.Vacuum(m_ProjectileSpawnPoint);
                 rabbit.onVacuumed.AddListener(OnVaccumed);
 
                 UpdateLightBulb();
             }
         }
+    }
+
+    private void ActivateFakeRabbit(ERabbitType rabbitType)
+    {
+        var deactivatedFakeRabbits = _fakeRabbits.Where(r => r.gameObject.activeSelf == false).ToList();
+        var selectedFakeRabbit = deactivatedFakeRabbits[Random.Range(0, deactivatedFakeRabbits.Count)];
+        selectedFakeRabbit.SetType(rabbitType);
+        selectedFakeRabbit.gameObject.SetActive(true);
+    }
+
+    private void DeactivateFakeRabbit(ERabbitType rabbitType)
+    {
+        var activeFakeRabbitOfType = _fakeRabbits.Where(r => r.gameObject.activeSelf && r.Type == rabbitType).ToList();
+        var selectedFakeRabbit = activeFakeRabbitOfType[Random.Range(0, activeFakeRabbitOfType.Count)];
+        selectedFakeRabbit.gameObject.SetActive(false);
     }
 
     private void HoldShootTrigger()
@@ -236,6 +260,7 @@ public class VacuumCleaner : Tool
             // get proper vector
             rabbitBody.AddForce(Camera.main.transform.forward * m_ShootForce, ForceMode.Impulse);
             m_VacuumedBunnies.RemoveAt(m_VacuumedBunnies.Count - 1);
+            DeactivateFakeRabbit(rabbit.RabbitType);
             //UnityEditor.EditorApplication.isPaused = true;
             UpdateLightBulb();
         }
