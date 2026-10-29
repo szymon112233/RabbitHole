@@ -7,7 +7,7 @@ namespace DefaultNamespace
 	{
 		Idle,
 		Grab,
-		TVRemote
+		TVRemote,
 	}
 	
 	public class HandController : MonoBehaviour
@@ -28,6 +28,7 @@ namespace DefaultNamespace
 		[SerializeField] private GameObject _TVRemotePressed;
 		[SerializeField] private GameObject _BuyPhone;
 		[SerializeField] private GameObject _BuyPhonePressed;
+		[SerializeField] private GameObject _LegKick;
 
 		[SerializeField] private float _spriteShowDuration = 0.6f;
 
@@ -42,8 +43,9 @@ namespace DefaultNamespace
 		{
 			_spriteChangeTimer = _spriteShowDuration;
 			ChangeState(HandState.Idle);
+			_LegKick.SetActive(false);
 		}
-		
+
 		private void OnEnable() {
 			_Observer.SubscribeCanSwitchPrograms(OnCanSwitchPrograms);
 			_Observer.SubscribeProgramSwitched(OnProgramSwitched);
@@ -134,6 +136,16 @@ namespace DefaultNamespace
 		{
 			_HasGrabState = false;
 			ChangeState(HandState.Idle);
+		}
+
+		public void EnableKick()
+        {
+			_LegKick.SetActive(true);
+		}
+
+		public void DisableKick()
+		{
+			_LegKick.SetActive(false);
 		}
 
 		private void ChangeState(HandState newState) {
