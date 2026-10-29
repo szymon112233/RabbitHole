@@ -18,8 +18,11 @@ public class GameManager : MonoBehaviour
 
     public bool DebugEnabled;
 
-    private void Awake() 
-    { 
+    private VacuumCleaner _vacuumCleaner;
+
+    private void Awake()
+    {
+        _vacuumCleaner = FindAnyObjectByType<VacuumCleaner>(FindObjectsInactive.Include);
         // If there is an instance, and it's not me, delete myself.
     
         if (Instance != null && Instance != this) 
@@ -72,17 +75,6 @@ public class GameManager : MonoBehaviour
 
     public int GetUndisposedRabbitCount()
     {
-        if (m_RabbitSpawnManager == null)
-        {
-            m_RabbitSpawnManager = FindAnyObjectByType<RabbitSpawnManager>();
-        }
-
-        if (m_RabbitSpawnManager == null)
-        {
-            return -1;
-        }
-
-        return m_RabbitSpawnManager.GetRabbitCount();
+        return m_RabbitPoolManager.GetCurrentlyActiveRabbits().Count + _vacuumCleaner.GetVacuumedBunniesCount();
     }
-    
 }

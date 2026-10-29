@@ -31,6 +31,11 @@ public class VacuumCleaner : Tool
 
     private List<ERabbitType> m_VacuumedBunnies = new();
 
+    public int GetVacuumedBunniesCount()
+    {
+        return m_VacuumedBunnies.Count;
+    }
+
     protected void Awake()
     {
         m_HitColliders = new Collider[5];

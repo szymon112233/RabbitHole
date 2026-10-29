@@ -115,7 +115,6 @@ public class RabbitController : CachedMonoBehaviour
         Rbody.linearVelocity = Vector3.zero;
         // this could be merged somehow ig
         GameManager.Instance.RabbitPoolManager.ReturnToPool(this);
-        GameManager.Instance.RabbitSpawnManager.RemoveRabbit(this);
         OnKilled?.Invoke();
     }
     

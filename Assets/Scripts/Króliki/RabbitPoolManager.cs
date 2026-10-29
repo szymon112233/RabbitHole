@@ -5,23 +5,25 @@ public class RabbitPoolManager : MonoBehaviour
 {
     [SerializeField] private RabbitController RabbitPrefab;
     [SerializeField] private int MaxRabbitCount = 1500;
-    [SerializeField] private List<RabbitController> RabbitPool = new List<RabbitController>();
+    [SerializeField] private List<RabbitController> RabbitPool = new();
+    [SerializeField] private List<RabbitController> CurrentlyActiveRabbits = new();
 
     [SerializeField] private Dictionary<ERabbitType, float> m_RabbitTypeChanceDictionary;
+
+    public List<RabbitController> GetCurrentlyActiveRabbits()
+    {
+        return CurrentlyActiveRabbits;
+    }
 
     public void ReturnToPool(RabbitController rabbit)
     {
         // set position?
         rabbit.gameObject.SetActive(false);
         RabbitPool.Add(rabbit);
+        CurrentlyActiveRabbits.Remove(rabbit);
     }
 
     public RabbitController RequestRabbit()
-    {
-        return RequestRabbit(Vector3.zero);
-    }
-
-    public RabbitController RequestRabbit(Vector3 position)
     {
         return RequestRabbit(Vector3.zero, GetRandomRabbitType());
     }
@@ -40,6 +42,8 @@ public class RabbitPoolManager : MonoBehaviour
         {
             rabbitToRelease = SpawnRabbit();
         }
+        
+        CurrentlyActiveRabbits.Add(rabbitToRelease);
 
         if (rabbitToRelease)
         {
@@ -77,6 +81,5 @@ public class RabbitPoolManager : MonoBehaviour
         }
 
         return ERabbitType.Default;
-
     }
 }

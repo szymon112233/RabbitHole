@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +11,6 @@ public class RabbitSpawnManager : MonoBehaviour
     [Tooltip("Number of rabbits that will be checked every RabbitSpawnDeltaTime if they can have a baby!:)")]
     [SerializeField] private int QueryRabbitCount = 5;
     [SerializeField] private int MaxRabbitCount = 500;
-    
-    private List<RabbitController> RabbitList = new List<RabbitController>();
     private Transform T;
 
     void Start()
@@ -32,27 +29,24 @@ public class RabbitSpawnManager : MonoBehaviour
         }
     }
 
-    public int GetRabbitCount()
-    {
-        return RabbitList.Count;
-    }
-
     private IEnumerator SpawnRabbitCoroutine()
     {
-        if (RabbitList.Count == 0)
+        List<RabbitController> currentlyActiveRabbits = GameManager.Instance.RabbitPoolManager.GetCurrentlyActiveRabbits();
+        
+        if (currentlyActiveRabbits.Count == 0)
         {
             CreateRabbit(T.position);
             CreateRabbit(T.position);
         }
-        else if (RabbitList.Count < MaxRabbitCount)
+        else if (currentlyActiveRabbits.Count < MaxRabbitCount)
         {
             List<int> uniqueRabbitIDs = new List<int>();
 
             // [SO] It actually does *not* guarantee to query the nr of rabbits specified below, because there's no check for double randomized number;
             // maybe I'll fix this later.
-            for (int i = 0; i < Mathf.Min(QueryRabbitCount, RabbitList.Count); i++)
+            for (int i = 0; i < Mathf.Min(QueryRabbitCount, currentlyActiveRabbits.Count); i++)
             {
-                int randomID = Random.Range(0, RabbitList.Count);
+                int randomID = Random.Range(0, currentlyActiveRabbits.Count);
 
                 if (!uniqueRabbitIDs.Contains(randomID))
                 {
@@ -62,10 +56,11 @@ public class RabbitSpawnManager : MonoBehaviour
 
             for (int i = 0; i < uniqueRabbitIDs.Count; i++)
             {
-                RabbitController rabbit = RabbitList[uniqueRabbitIDs[i]];
+                RabbitController rabbit = currentlyActiveRabbits[uniqueRabbitIDs[i]];
+                
                 if (!rabbit.IsVisible())
                 {
-                    CreateRabbit(RabbitList[uniqueRabbitIDs[i]].transform.position);
+                    CreateRabbit(currentlyActiveRabbits[uniqueRabbitIDs[i]].transform.position);
                 }
             }
         }
@@ -83,12 +78,6 @@ public class RabbitSpawnManager : MonoBehaviour
         {
             Vector3 spawnPosition = addRandomOffset ? position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f)) : position;
             newRabbit.transform.position = spawnPosition;
-            RabbitList.Add(newRabbit);
         }
-    }
-
-    public void RemoveRabbit(RabbitController rabbit)
-    {
-        RabbitList.Remove(rabbit);
     }
 }
