@@ -116,7 +116,9 @@ public class Shovel : Tool
     {
         if (other.CompareTag("Rabbit"))
         {
-            rabbits.Add(other.GetComponent<RabbitController>());
+            RabbitController rabbit = other.GetComponent<RabbitController>();
+            rabbit.Grabbed();
+            rabbits.Add(rabbit);
         }
     }
 
@@ -124,6 +126,8 @@ public class Shovel : Tool
     {
         if (other.CompareTag("Rabbit"))
         {
+            RabbitController rabbit = other.GetComponent<RabbitController>();
+            rabbit.Thrown();
             rabbits.Remove(other.GetComponent<RabbitController>());
         }
     }

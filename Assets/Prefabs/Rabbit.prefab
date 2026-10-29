@@ -55,8 +55,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.25
+  m_Center: {x: 0, y: -0.13, z: 0}
 --- !u!65 &1582405670304876700
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -134,6 +134,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_RabbitType: 0
+  m_Duration: 0.25
+  m_Strength: 10
+  m_Vibrato: 20
+  m_Randomness: 45
 --- !u!1001 &754242192827772628
 PrefabInstance:
   m_ObjectHideFlags: 0

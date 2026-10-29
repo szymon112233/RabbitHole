@@ -24463,6 +24463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UltimateSellPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7066094167313413125, guid: d5542c29ec47eabfa8f812a60919e81d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24479,6 +24483,14 @@ PrefabInstance:
     - target: {fileID: 560870897366751330, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720660151078036987, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
+      propertyPath: QueryRabbitCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720660151078036987, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
+      propertyPath: RabbitSpawnDeltaTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4087888808758780379, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24530,7 +24542,7 @@ PrefabInstance:
       objectReference: {fileID: 1269256898}
     - target: {fileID: 5036787064451321631, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.79
+      value: 20.19
       objectReference: {fileID: 0}
     - target: {fileID: 5036787064451321631, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24538,7 +24550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5036787064451321631, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 33.4
+      value: 24.85
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24579,7 +24591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 210353330266957835, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2130.6785
+      value: 1908.3807
       objectReference: {fileID: 0}
     - target: {fileID: 210353330266957835, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -24759,7 +24771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6918586862719945387, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2035.967
+      value: 1813.6694
       objectReference: {fileID: 0}
     - target: {fileID: 6918586862719945387, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.y
