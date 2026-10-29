@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -21,10 +22,12 @@ public class GameManager : MonoBehaviour
     public bool DebugEnabled;
 
     private VacuumCleaner _vacuumCleaner;
+    private SoundManager _soundManager;
 
     private void Awake()
     {
         _vacuumCleaner = FindAnyObjectByType<VacuumCleaner>(FindObjectsInactive.Include);
+        _soundManager = FindAnyObjectByType<SoundManager>(FindObjectsInactive.Include);
         // If there is an instance, and it's not me, delete myself.
     
         if (Instance != null && Instance != this) 
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
     public void AddMoney(int moni)
     {
         Money += moni;
+        _soundManager.PlayCashMoneySound();
     }
 
     public bool HasMoney(int moni)
