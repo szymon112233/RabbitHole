@@ -14,5 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.TelezakupyConfig
   _InitialUpgrades:
   - {fileID: 11400000, guid: c2b8b11b666200149b560d0b3c1d1270, type: 2}
-  _NoProgramm: {fileID: 32900000, guid: 45d5f0bb8b89c48cba350cfd7a90370b, type: 3}
+  _NoProgramm:
+  - {fileID: 32900000, guid: 45d5f0bb8b89c48cba350cfd7a90370b, type: 3}
+  - {fileID: 32900000, guid: 2ab2c7442caf9439e95556a9dc5581d3, type: 3}
+  - {fileID: 32900000, guid: 8cfccddf5161f4127b57de1feeaed0a7, type: 3}
+  - {fileID: 32900000, guid: 4c525b6fd1b7b4dfbb08ff5f763d5650, type: 3}
+  - {fileID: 32900000, guid: 5cdc60b5d10ce411b8584a7b60f9d3f6, type: 3}
+  - {fileID: 32900000, guid: 196bdb33aab3bfc47bf8c2afb0ab0c2b, type: 3}
   _TPlayerState: {fileID: 11400000, guid: e9452a00623254839a9e560c1f99f913, type: 2}
