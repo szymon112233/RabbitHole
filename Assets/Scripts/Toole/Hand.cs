@@ -125,6 +125,8 @@ public class Hand : Tool
         _handController.ExitGrabState();
         joint.connectedBody = null;
         GameManager.Instance.mouseUI.SetEmptyHand();
+        m_HeldRabbit.OnKilled -= OnHeldRabbitKilled;
+        m_HeldRabbit = null;
     }
 
     void ThrowRabbit()
