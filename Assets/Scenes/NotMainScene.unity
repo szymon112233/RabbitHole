@@ -1393,7 +1393,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110318807}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f505847d624c7591bbaadb9a6f25f6, type: 3}
   m_Name: 
@@ -9557,7 +9557,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820262321}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f505847d624c7591bbaadb9a6f25f6, type: 3}
   m_Name: 
@@ -11649,7 +11649,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952939078}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f505847d624c7591bbaadb9a6f25f6, type: 3}
   m_Name: 
@@ -13110,7 +13110,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078766704}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f505847d624c7591bbaadb9a6f25f6, type: 3}
   m_Name: 
@@ -17833,6 +17833,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4434aee013d8d1745ba6e1a6313dc45c, type: 2}
+    - target: {fileID: 873698836166984689, guid: ff9c25b9c2622e04aa7426dedcc3fbd2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.0074
+      objectReference: {fileID: 0}
+    - target: {fileID: 873698836166984689, guid: ff9c25b9c2622e04aa7426dedcc3fbd2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ff9c25b9c2622e04aa7426dedcc3fbd2, type: 3}
       propertyPath: m_Name
       value: Funnel
@@ -17868,7 +17876,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594418058}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f505847d624c7591bbaadb9a6f25f6, type: 3}
   m_Name: 
@@ -20498,7 +20506,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784908923}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f505847d624c7591bbaadb9a6f25f6, type: 3}
   m_Name: 
