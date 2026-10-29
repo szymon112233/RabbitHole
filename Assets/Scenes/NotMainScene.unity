@@ -19612,6 +19612,7 @@ GameObject:
   - component: {fileID: 1784908926}
   - component: {fileID: 1784908925}
   - component: {fileID: 1784908924}
+  - component: {fileID: 1784908928}
   m_Layer: 9
   m_Name: "pod\u0142oga"
   m_TagString: Untagged
@@ -19712,6 +19713,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 799385575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1784908928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784908923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f505847d624c7591bbaadb9a6f25f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 65481ee8ff2b413ea03977df6560ae26, type: 2}
+  cullShader: {fileID: 7200000, guid: eb0c43b5269a4f19af2cd5b7dfd24852, type: 3}
+  castShadows: 0
+  receiveShadows: 0
+  density: 56.7
+  maxInstances: 1000000
+  seed: 1234
+  maxSlope: 37.7
+  surfaceColliders: []
+  densityMask: {fileID: 0}
+  patchNoiseScale: 0.12
+  patchiness: 0
+  bladeHeight: {x: 0.3, y: 0.5}
+  bladeWidth: {x: 0.15, y: 0.3}
+  clumpNoiseScale: 3.84
+  clumpStrength: 0.598
+  bladeSegments: 3
+  bladeSegmentsFar: 1
+  maxDrawDistance: 110
+  fadeStartDistance: 45
+  fadeWidthBoost: 1.5
+  lodDistance: 25
 --- !u!1001 &1807999476
 PrefabInstance:
   m_ObjectHideFlags: 0

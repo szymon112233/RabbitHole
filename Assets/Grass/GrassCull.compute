@@ -1,0 +1,69 @@
+// Per-camera frustum + distance culling of grass blades. Survivors are appended to a near or far LOD list
+// that is consumed by an indirect draw (see GrassRenderer.cs).
+#pragma kernel CullGrass
+
+struct GrassInstance
+{
+    float3 position;
+    float3 normal;
+    float height;
+    float width;
+    float rotation;
+    float random;
+};
+
+StructuredBuffer<GrassInstance> _Source;
+AppendStructuredBuffer<GrassInstance> _VisibleNear;
+AppendStructuredBuffer<GrassInstance> _VisibleFar;
+
+float4x4 _GrassTransform;
+float4 _FrustumPlanes[6];
+float3 _CameraPosition;
+uint _Count;
+float _MaxDistance;
+float _FadeStart;
+float _FadeWidthBoost;
+float _LodDistance;
+float _BoundsPadding;
+
+float Hash(float x)
+{
+    return frac(sin(x * 12.9898 + 78.233) * 43758.5453);
+}
+
+[numthreads(64, 1, 1)]
+void CullGrass(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _Count)
+        return;
+
+    GrassInstance g = _Source[id.x];
+    float3 root = mul(_GrassTransform, float4(g.position, 1.0)).xyz;
+    float3 up = normalize(mul((float3x3)_GrassTransform, g.normal));
+
+    float dist = distance(_CameraPosition, root);
+    if (dist > _MaxDistance)
+        return;
+
+    // Progressive thinning towards the max distance. Uses an independent hash so colour variation stays unbiased.
+    float fade = saturate((dist - _FadeStart) / max(_MaxDistance - _FadeStart, 0.001));
+    if (Hash(g.random) < fade * fade)
+        return;
+
+    // Sphere/frustum test. The blade can lean up to ~its height in any direction (bend + wind).
+    float radius = g.height + _BoundsPadding * 0.25;
+    float3 center = root + up * g.height * 0.5;
+    [unroll]
+    for (int i = 0; i < 6; i++)
+    {
+        if (dot(_FrustumPlanes[i].xyz, center) + _FrustumPlanes[i].w < -radius)
+            return;
+    }
+
+    g.width *= 1.0 + fade * _FadeWidthBoost;
+
+    if (dist < _LodDistance)
+        _VisibleNear.Append(g);
+    else
+        _VisibleFar.Append(g);
+}
