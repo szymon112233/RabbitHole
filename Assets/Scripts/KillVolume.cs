@@ -8,6 +8,8 @@ public class KillVolume : MonoBehaviour
     
     [Header("Capacity")]
     public bool bUsesCapacity;
+
+    public bool bDontReset;
     
     public int Capacity = 0;
     public RabbitPileDisplay display;
@@ -54,7 +56,7 @@ public class KillVolume : MonoBehaviour
                 Count++;
                 display.Increment();
 
-                if (Count >= Capacity)
+                if (!bDontReset && Count >= Capacity)
                 {
                     StartCooldown();
                 }

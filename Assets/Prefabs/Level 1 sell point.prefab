@@ -3046,6 +3046,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: bDontReset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: bUsesCapacity
       value: 1
       objectReference: {fileID: 0}
