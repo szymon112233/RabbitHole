@@ -129,9 +129,9 @@ public class RabbitController : CachedMonoBehaviour
         Rbody.angularVelocity = Vector3.zero;
         Rbody.linearVelocity = Vector3.zero;
         // this could be merged somehow ig
+        ResetEars();
         GameManager.Instance.RabbitPoolManager.ReturnToPool(this);
         OnKilled?.Invoke();
-        ResetEars();
     }
     
     void Update()
