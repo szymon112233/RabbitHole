@@ -25,7 +25,7 @@ public class UIMousePrompts : MonoBehaviour
     public void SetStrongHand()
     {
         ResetVisibility();
-        LPMText.text = "THROW!";
+        LPMText.text = "KICK!";
         RMBText.text = "Release";
     }
     public void SetRake()
