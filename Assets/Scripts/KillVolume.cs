@@ -37,9 +37,16 @@ public class KillVolume : MonoBehaviour
     {
         if (other.CompareTag(RabbitTag))
         {
+            RabbitController rc = other.GetComponent<RabbitController>();
+            
+            if (rc == null)
+            {
+                return;
+            }
+
             GameManager.Instance.DisposedRabbits += 1;
-            GameManager.Instance.AddMoney(MoneyForThisTrigger);
-            other.GetComponent<RabbitController>()?.Kill();
+            GameManager.Instance.AddMoney(rc.RabbitType == ERabbitType.Golden ? MoneyForThisTrigger * 2 : MoneyForThisTrigger);
+            rc.Kill();
 
 
             if (bUsesCapacity)

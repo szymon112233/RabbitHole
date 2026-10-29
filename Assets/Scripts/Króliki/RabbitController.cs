@@ -131,6 +131,7 @@ public class RabbitController : CachedMonoBehaviour
         // this could be merged somehow ig
         GameManager.Instance.RabbitPoolManager.ReturnToPool(this);
         OnKilled?.Invoke();
+        ResetEars();
     }
     
     void Update()
@@ -244,6 +245,11 @@ public class RabbitController : CachedMonoBehaviour
         m_IsSlappable = true;
         frozen = false;
 
+        ResetEars();
+    }
+
+    private void ResetEars()
+    {
         m_RightEarTransform.localPosition = m_RightEarPos;
         m_LeftEarTransform.localPosition = m_LeftEarPos;
         m_RightEarTransform.localRotation = m_RightEarRot;
