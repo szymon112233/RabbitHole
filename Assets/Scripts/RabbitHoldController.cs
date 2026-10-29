@@ -99,6 +99,8 @@ public class RabbitHoldController : MonoBehaviour
             return;
         }
         
+        (ActiveTool as Hand)?.DropRabbit();
+
         ActiveTool.Deactivate();
         ActiveTool = Tools[id];
         ActiveTool.Activate();

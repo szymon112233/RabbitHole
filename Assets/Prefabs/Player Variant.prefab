@@ -279,7 +279,7 @@ MonoBehaviour:
   cam: {fileID: 9130170562041830675}
   snapPosition: 0
   maxPickupDistance: 3.5
-  throwPower: 1000
+  throwPower: 1500
 --- !u!1 &5414940867790080468
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Upgrades.FakeRabbitInsideVacuum
   _maxRotationSpeed: 4
-  _rabbitRenderer: {fileID: 2140915057771344464}
+  _rabbitRenderer: {fileID: 8819115220574708022}
   _defaultMaterial: {fileID: 2100000, guid: e968d0e1cc5172249b037047c384e207, type: 2}
   _goldenMaterial: {fileID: 2100000, guid: 3a06a391d3c5c344aa93f6d422743088, type: 2}
 --- !u!1001 &754242192827772628
@@ -147,8 +147,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3c84ff10e0bccd7418f32848470920e5, type: 3}
   m_PrefabInstance: {fileID: 754242192827772628}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &2140915057771344464 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 3c84ff10e0bccd7418f32848470920e5, type: 3}
+--- !u!137 &8819115220574708022 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8076170013385740258, guid: 3c84ff10e0bccd7418f32848470920e5, type: 3}
   m_PrefabInstance: {fileID: 754242192827772628}
   m_PrefabAsset: {fileID: 0}

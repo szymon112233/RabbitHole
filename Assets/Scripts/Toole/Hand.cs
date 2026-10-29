@@ -1,5 +1,6 @@
 using UnityEngine;
 using DefaultNamespace;
+using System.Collections;
 
 public class Hand : Tool
 {
@@ -144,8 +145,15 @@ public class Hand : Tool
         rabbit.linearVelocity = Vector3.zero;
         rabbit.AddForce(cam.transform.forward * throwPower);
         m_HeldRabbit = null;
-        
         GameManager.Instance.mouseUI.SetEmptyHand();
+        _handController.EnableKick();
+        StartCoroutine(HandleKickCoroutine());
+    }
+
+    private IEnumerator HandleKickCoroutine()
+    {
+        yield return new WaitForSeconds(.3f);
+        _handController.DisableKick();
     }
 
     public void DropRabbit()
