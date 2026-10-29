@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public RabbitPoolManager RabbitPoolManager { get => m_RabbitPoolManager; }
     [SerializeField] private RabbitHoldController m_RabbitHoldController;
     public RabbitHoldController RabbitHoldController { get => m_RabbitHoldController; }
+    
+    public UIMousePrompts mouseUI;
 
     public bool DebugEnabled;
 

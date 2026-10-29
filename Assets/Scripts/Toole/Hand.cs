@@ -106,6 +106,16 @@ public class Hand : Tool
         _handController.EnterGrabState();
         joint.connectedBody = rabbit;
 
+        if (ThrowingEnabled)
+        {
+            GameManager.Instance.mouseUI.SetStrongHand();
+        }
+        else
+        {
+            GameManager.Instance.mouseUI.SetBasicHand();
+        }
+        
+
         return true;
     }
 
@@ -113,6 +123,7 @@ public class Hand : Tool
     {
         _handController.ExitGrabState();
         joint.connectedBody = null;
+        GameManager.Instance.mouseUI.SetEmptyHand();
     }
 
     void ThrowRabbit()
@@ -133,6 +144,8 @@ public class Hand : Tool
         rabbit.linearVelocity = Vector3.zero;
         rabbit.AddForce(cam.transform.forward * throwPower);
         m_HeldRabbit = null;
+        
+        GameManager.Instance.mouseUI.SetEmptyHand();
     }
 
     public void DropRabbit()
@@ -147,6 +160,8 @@ public class Hand : Tool
         _handController.ExitGrabState();
         joint.connectedBody = null;
         m_HeldRabbit = null;
+        
+        GameManager.Instance.mouseUI.SetEmptyHand();
     }
 
     public void DropRabbit(Rigidbody rabbitRB)
@@ -160,11 +175,15 @@ public class Hand : Tool
         { 
             joint.connectedBody = null;
         }
+        
+        GameManager.Instance.mouseUI.SetEmptyHand();
     }
 
     public override void Activate()
     {
         enabled = true;
+        
+        GameManager.Instance.mouseUI.SetEmptyHand();
     }
 
     public override void Deactivate()
