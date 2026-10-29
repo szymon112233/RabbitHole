@@ -14,6 +14,8 @@ public class Hand : Tool
 
     private bool ThrowingEnabled = false;
 
+    RabbitController m_HeldRabbit;
+
     void Start()
     {
         _handController = FindAnyObjectByType<HandController>();
@@ -24,6 +26,19 @@ public class Hand : Tool
         }
 
         this.UpgradeNode.RuntimeFields.UpgradeBought += () => ThrowingEnabled = true;
+    }
+
+    private void Update()
+    {
+        if (m_HeldRabbit)
+        {
+            m_HeldRabbit.LeftEarTransform.position = joint.transform.position;
+            m_HeldRabbit.RightEarTransform.position = joint.transform.position;
+
+            Vector3 fromRabbitToJoint = (joint.transform.position - m_HeldRabbit.Transform.position).normalized;
+            m_HeldRabbit.LeftEarTransform.up = fromRabbitToJoint;
+            m_HeldRabbit.RightEarTransform.up = fromRabbitToJoint;
+        }
     }
 
     public override void Use_Main()
@@ -85,8 +100,9 @@ public class Hand : Tool
         }
         
         rabbit.linearVelocity = Vector3.zero;
-        rabbit.GetComponent<RabbitController>().Grabbed();
-        rabbit.GetComponent<RabbitController>().OnKilled += OnHeldRabbitKilled;
+        m_HeldRabbit = rabbit.GetComponent<RabbitController>();
+        m_HeldRabbit.Grabbed();
+        m_HeldRabbit.OnKilled += OnHeldRabbitKilled;
         _handController.EnterGrabState();
         joint.connectedBody = rabbit;
 
@@ -116,6 +132,7 @@ public class Hand : Tool
         rabbit.position = joint.transform.position;
         rabbit.linearVelocity = Vector3.zero;
         rabbit.AddForce(cam.transform.forward * throwPower);
+        m_HeldRabbit = null;
     }
 
     public void DropRabbit()
@@ -129,7 +146,7 @@ public class Hand : Tool
         joint.connectedBody.GetComponent<RabbitController>().OnKilled -= OnHeldRabbitKilled;
         _handController.ExitGrabState();
         joint.connectedBody = null;
-
+        m_HeldRabbit = null;
     }
 
     public void DropRabbit(Rigidbody rabbitRB)
