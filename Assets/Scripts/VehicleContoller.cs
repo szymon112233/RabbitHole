@@ -26,9 +26,6 @@ public class VehicleContoller : MonoBehaviour
     {
         Vector2 moveInput = InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
 
-        speed = 0.1f;
-        rotateSpeed = 1;
-
         Vector3 moveVector = controlledRigidbody.transform.forward * moveInput.y * speed;
         Vector3 rotateVector = new Vector3(0.0f, moveInput.x * rotateSpeed, 0.0f);
         // controlledRigidbody.linearVelocity = moveVector;

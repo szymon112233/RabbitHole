@@ -135,6 +135,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "EnterVehicle",
+                    "type": "Button",
+                    "id": "c6649393-e229-458f-a8c9-0ae8bd2870d7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -608,6 +618,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwapToTool_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e100501-cb0d-490b-b867-72c41b834c57",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnterVehicle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
