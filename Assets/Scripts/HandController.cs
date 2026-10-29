@@ -161,12 +161,14 @@ namespace DefaultNamespace
 			switch (newState) {
 				case HandState.Idle:
 					_hand1.SetActive(true);
+					GameManager.Instance.mouseUI.SetEmptyHand();
 					break;
 				case HandState.Grab:
 					_grabHand.SetActive(true);
 					break;
 				case HandState.TVRemote:
 					_TVRemote.gameObject.SetActive(true);
+					GameManager.Instance.mouseUI.SetTV();
 					break;
 			}
 		}

@@ -24666,6 +24666,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4953937949849946604, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
+      propertyPath: mouseUI
+      value: 
+      objectReference: {fileID: 5218190639065620924}
+    - target: {fileID: 4953937949849946604, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: DebugEnabled
       value: 0
       objectReference: {fileID: 0}
@@ -24923,6 +24927,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+--- !u!114 &5218190639065620924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2831762408157540717, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+  m_PrefabInstance: {fileID: 5218190639065620923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd676000ad4044a7be1b08592c9d7773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIMousePrompts
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
