@@ -3051,7 +3051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: MoneyForThisTrigger
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: ObjectToDisableOnCooldown
