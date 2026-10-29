@@ -23606,7 +23606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4953937949849946604, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: DebugEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4953937949849946604, guid: 3628d650c0bae38489f0dc7ffecf7bd2, type: 3}
       propertyPath: m_RabbitHoldController
@@ -23731,7 +23731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4254363701011520260, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -46.18286
+      value: -46.182922
       objectReference: {fileID: 0}
     - target: {fileID: 4254363701011520260, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_AnchoredPosition.y
