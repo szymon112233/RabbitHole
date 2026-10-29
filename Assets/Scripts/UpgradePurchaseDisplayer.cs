@@ -17,12 +17,10 @@ public class UpgradePurchaseDisplayer : MonoBehaviour {
     
     private void OnEnable() {
         _Observer.SubscribeUpgradesForPurchase(OnNewPurchaseAvailable);
-        _Observer.SubscribeCanSwitchPrograms(OnCanSwitchPrograms);
     }
 
     private void OnDisable() {
         _Observer.UnsubscribeUpgradesForPurchase(OnNewPurchaseAvailable);
-        _Observer.UnsubscribeCanSwitchPrograms(OnCanSwitchPrograms);
     }
 
     private void OnNewPurchaseAvailable(PurchasableUpgrade upgrade) {
@@ -33,10 +31,6 @@ public class UpgradePurchaseDisplayer : MonoBehaviour {
             _PurchaseText.gameObject.SetActive(true);
             _PurchaseText.text = "[E] Buy("+upgrade.Price+"$) " + upgrade.Name;
         }
-    }
-    
-    private void OnCanSwitchPrograms(bool canSwitch) {
-        _UI.SetActive(canSwitch);
     }
 }
 }

@@ -23,8 +23,6 @@ public class TelezakupyController : MonoBehaviour {
     protected TelezakupyUIObserver _TelezakupyUIObserver;
 
     private int _CurrentProgram;
-
-    private bool _QPressRegistered;
     
     private bool _EPressRegistered;
 
@@ -134,8 +132,8 @@ public class TelezakupyController : MonoBehaviour {
         }
 
         if (isInteractionReady) {
-            if (Keyboard.current.qKey.isPressed && !_QPressRegistered) {
-                _QPressRegistered = true;
+            if (Mouse.current.leftButton.wasPressedThisFrame) {
+                _TelezakupyUIObserver.RaiseProgramSwitched();
                 SwitchProgram();
             }
             
@@ -143,10 +141,6 @@ public class TelezakupyController : MonoBehaviour {
                 _EPressRegistered = true;
                 TryBuyUpgrade();
             }
-        }
-
-        if (!Keyboard.current.qKey.isPressed) {
-            _QPressRegistered = false;
         }
         
         if (!Keyboard.current.eKey.isPressed) {
