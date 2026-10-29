@@ -38,4 +38,20 @@ public class VehicleContoller : MonoBehaviour
         
         // Debug.Log(moveVector.ToString());
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.body.CompareTag("Rabbit"))
+        {
+            collision.body.GetComponent<RabbitController>().Grabbed();
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.body.CompareTag("Rabbit"))
+        {
+            collision.body.GetComponent<RabbitController>().Thrown();
+        }
+    }
 }
