@@ -9,6 +9,7 @@ public class Shovel : Tool
     public float SwingStrength = 6;
     public Transform FrontPoint;
     public BoxCollider ShovelCollider;
+    [SerializeField] private GameObject _shovelModelRotationPivot;
 
     public override ToolType Type => ToolType.SHOVEL;
     public override bool UsesHandGraphics => false;
@@ -27,12 +28,16 @@ public class Shovel : Tool
     {
         _original_rotation = transform.localEulerAngles.z;
         rabbits = new List<RabbitController>();
-        
     }
 
-    public override void Activate()
+    private void OnEnable()
     {
-        base.Activate();
+        _shovelModelRotationPivot.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        _shovelModelRotationPivot.SetActive(false);
     }
 
     public override void Use_Main()
@@ -58,6 +63,11 @@ public class Shovel : Tool
             rabbit.Rigidbody.AddForce(forward_force, ForceMode.Impulse);
             rabbit.Rigidbody.AddForce(Vector3.up * SwingStrength*0.7f, ForceMode.Impulse);
         }
+    }
+
+    private void Update()
+    {
+        _shovelModelRotationPivot.transform.localRotation = transform.localRotation;
     }
 
     void FixedUpdate()
@@ -117,5 +127,4 @@ public class Shovel : Tool
             rabbits.Remove(other.GetComponent<RabbitController>());
         }
     }
-
 }
