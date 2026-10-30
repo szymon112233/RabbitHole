@@ -328,6 +328,7 @@ public class RabbitController : CachedMonoBehaviour
         BoxCollider.enabled = false;
         Transform.localScale = Vector3.one;
         hitWall = false;
+        m_IsSlappable = false;
         //Transform.position = m_LastUnflattenedPosition; // bugs out the wall slap
         Rbody.AddForce(new Vector3(UnityEngine.Random.Range(-.75f, .75f), 1f, UnityEngine.Random.Range(-.75f, .75f)).normalized * 5f, ForceMode.Impulse);
 

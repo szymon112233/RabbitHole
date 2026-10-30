@@ -2,6 +2,7 @@ using DefaultNamespace;
 using EasyPeasyFirstPersonController;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     private VacuumCleaner _vacuumCleaner;
     private SoundManager _soundManager;
 
+    public UnityAction OnMoneyStateChange;
     private void Awake()
     {
         _vacuumCleaner = FindAnyObjectByType<VacuumCleaner>(FindObjectsInactive.Include);
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
     {
         Money += moni;
         _soundManager.PlayCashMoneySound();
+        OnMoneyStateChange?.Invoke();
     }
 
     public bool HasMoney(int moni)
@@ -81,6 +84,7 @@ public class GameManager : MonoBehaviour
         if (HasMoney(moni))
         {
             Money -= moni;
+            OnMoneyStateChange?.Invoke();
             return true;
         }
 

@@ -23,6 +23,9 @@ public class TelezakupyController : MonoBehaviour {
     protected TelezakupyUIObserver _TelezakupyUIObserver;
 
     private int _LastReportedProgram = -1;
+        [SerializeField]
+        protected GameObject m_CTAText;
+        private int _LastReportedProgram = -1;
 
     private bool _WasIsInteractionReadz = false;
     
@@ -57,7 +60,22 @@ public class TelezakupyController : MonoBehaviour {
         }
     }
 
-    private PurchasableUpgrade CurrentlyAiringUpgrade() {
+        private void CanBuyUpgrade()
+        {
+            bool canBuyAnyUpgrade = false;
+            var availableUpgrades = _TelezakupyConfig.GetAvailableUpgrades();
+            for (int i = 0; i < availableUpgrades.Count; i++)
+            {
+                if (GameManager.Instance.HasMoney(availableUpgrades[i].Price))
+                {
+                    canBuyAnyUpgrade = true;
+                    break;
+                }
+            }
+
+            m_CTAText.SetActive(canBuyAnyUpgrade);
+        }
+        private PurchasableUpgrade CurrentlyAiringUpgrade() {
         var availableUpgrades = _TelezakupyConfig.GetAvailableUpgrades();
         var totalProgramsCount = availableUpgrades.Count + 1;
         var currProgramId = _PlayerState.CurrentProgram % totalProgramsCount;
@@ -92,7 +110,9 @@ public class TelezakupyController : MonoBehaviour {
     private void Start() {
         _PlayerState.Clear();
         SwitchProgram();
-    }
+            m_CTAText.SetActive(false);
+            GameManager.Instance.OnMoneyStateChange += CanBuyUpgrade;
+        }
 
     private void Update() {
         if(GameManager.Instance.DebugEnabled)
