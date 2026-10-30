@@ -25,7 +25,6 @@ public class TelezakupyController : MonoBehaviour {
     private int _LastReportedProgram = -1;
         [SerializeField]
         protected GameObject m_CTAText;
-        private int _LastReportedProgram = -1;
 
     private bool _WasIsInteractionReadz = false;
     
