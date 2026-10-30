@@ -11,6 +11,7 @@ public class RabbitSpawnManager : MonoBehaviour
     [Tooltip("Number of rabbits that will be checked every RabbitSpawnDeltaTime if they can have a baby!:)")]
     [SerializeField] private int QueryRabbitCount = 5;
     [SerializeField] private int MaxRabbitCount = 500;
+    [SerializeField] private int StartingAmountOfRabbits = 5;
     private Transform T;
 
     private bool IsActive;
@@ -43,8 +44,10 @@ public class RabbitSpawnManager : MonoBehaviour
         
         if (currentlyActiveRabbits.Count == 0)
         {
-            CreateRabbit(T.position);
-            CreateRabbit(T.position);
+            for (int i = 0; i < StartingAmountOfRabbits; i++)
+            {
+                CreateRabbit(T.position);
+            }
         }
         else if (currentlyActiveRabbits.Count < MaxRabbitCount)
         {
