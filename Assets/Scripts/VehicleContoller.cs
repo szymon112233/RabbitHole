@@ -44,4 +44,20 @@ public class VehicleContoller : MonoBehaviour
     {
         OnVehicleEntered.Invoke();
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.body.CompareTag("Rabbit"))
+        {
+            collision.body.GetComponent<RabbitController>().Grabbed();
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.body.CompareTag("Rabbit"))
+        {
+            collision.body.GetComponent<RabbitController>().Thrown();
+        }
+    }
 }
