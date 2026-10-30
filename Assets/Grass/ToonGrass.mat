@@ -25,18 +25,18 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _AmbientStrength: 1
+    - _AmbientStrength: 0
     - _Bend: 0.13
     - _BendVariation: 0.72
-    - _LightSmoothness: 0.179
-    - _LightSteps: 3
-    - _NormalBlend: 0.65
-    - _RimSize: 0.427
+    - _LightSmoothness: 0
+    - _LightSteps: 1
+    - _NormalBlend: 0
+    - _RimSize: 0
     - _RimStrength: 0.596
     - _RootDarkening: 0.281
-    - _ShadowSharpness: 0.85
-    - _SpecularSize: 0.12
-    - _SpecularStrength: 0.35
+    - _ShadowSharpness: 0
+    - _SpecularSize: 0
+    - _SpecularStrength: 0
     - _VariationStrength: 0.561
     - _WindGustScale: 0.466
     - _WindGustStrength: 0.7
@@ -44,12 +44,12 @@ Material:
     - _WindSpeed: 4.55
     - _WindStrength: 0.883
     m_Colors:
-    - _BaseColor: {r: 0.2999428, g: 0.4, b: 0.12156861, a: 1}
-    - _RimColor: {r: 0.9, g: 1, b: 0.7, a: 1}
-    - _ShadowColor: {r: 0.42, g: 0.5, b: 0.62, a: 1}
+    - _BaseColor: {r: 0.107467055, g: 0.14150941, b: 0.11177158, a: 1}
+    - _RimColor: {r: 0.9283674, g: 0.990566, b: 0.7989943, a: 1}
+    - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 0.9, a: 1}
-    - _TipColor: {r: 0.4887638, g: 0.9150943, b: 0.44459772, a: 1}
-    - _VariationColor: {r: 0.8113208, g: 0.7395835, b: 0.19517621, a: 1}
+    - _TipColor: {r: 0.58170795, g: 0.7830189, b: 0.52078146, a: 1}
+    - _VariationColor: {r: 0.20189597, g: 0.4433962, b: 0.18614274, a: 1}
     - _WindDirection: {r: 1, g: 0.35, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

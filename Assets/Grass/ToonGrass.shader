@@ -52,9 +52,9 @@ Shader "RabbitHole/Toon Grass (Indirect)"
             #pragma vertex Vert
             #pragma fragment Frag
 
+            // Only hard main-light shadows on purpose: the Web (WebGPU) build runs the Mobile quality level,
+            // which has no soft shadows and no SSAO. Not compiling those variants keeps PC looking identical.
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
-            #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
             #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Fog.hlsl"
 
             #include "ToonGrassCommon.hlsl"
@@ -119,19 +119,11 @@ Shader "RabbitHole/Toon Grass (Indirect)"
                 half ndl = saturate(dot(N, light.direction));
                 half lit = ToonRamp(ndl) * shadow;
 
-                #if defined(_SCREEN_SPACE_OCCLUSION)
-                    AmbientOcclusionFactor ao = GetScreenSpaceAmbientOcclusion(GetNormalizedScreenSpaceUV(input.positionCS));
-                    lit *= ao.directAmbientOcclusion;
-                #endif
-
                 half3 albedo = lerp(_BaseColor.rgb, _TipColor.rgb, uv.y);
                 albedo = lerp(albedo, albedo * _VariationColor.rgb * 1.6, random * _VariationStrength);
                 albedo *= lerp(1.0 - _RootDarkening, 1.0, uv.y);
 
                 half3 ambient = SampleSH(N) * _AmbientStrength;
-                #if defined(_SCREEN_SPACE_OCCLUSION)
-                    ambient *= ao.indirectAmbientOcclusion;
-                #endif
                 half3 diffuse = lerp(_ShadowColor.rgb, half3(1, 1, 1), lit) * light.color;
                 half3 color = albedo * (diffuse + ambient);
 
