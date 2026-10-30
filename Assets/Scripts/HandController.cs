@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DefaultNamespace.UI;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -30,7 +31,7 @@ namespace DefaultNamespace
 		[SerializeField] private GameObject _BuyPhone;
 		[SerializeField] private GameObject _BuyPhonePressed;
 		[SerializeField] private GameObject _LegKick;
-		[SerializeField] private Shaker _NoMoneyShaker;
+		[SerializeField] private List<Shaker> _NoMoneyShaker;
 
 		[SerializeField] private float _spriteShowDuration = 0.6f;
 
@@ -72,7 +73,7 @@ namespace DefaultNamespace
 			_PurchaseAttemptedTimer = 0.1f;
 			
 			if(!isSuccess)
-				_NoMoneyShaker.Shake();
+				_NoMoneyShaker.ForEach(x => x.Shake());
 		}
 
 		private void Update() {
