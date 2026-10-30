@@ -42,7 +42,7 @@ public class VehicleContoller : MonoBehaviour
 
     private void OnEnable()
     {
-        OnVehicleEntered.Invoke();
+        OnVehicleEntered?.Invoke();
     }
 
     void OnCollisionEnter(Collision collision)
