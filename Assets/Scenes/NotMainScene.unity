@@ -4825,6 +4825,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3088332319519361647, guid: 2648069f158e13049bbd3833f9da2118, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 3404536116172758622, guid: 2648069f158e13049bbd3833f9da2118, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3406436941130581330, guid: 2648069f158e13049bbd3833f9da2118, type: 3}
       propertyPath: m_Name
       value: BasicSellPoint

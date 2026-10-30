@@ -50,6 +50,7 @@ MonoBehaviour:
   m_RabbitSpawnManager: {fileID: 3720660151078036987}
   m_RabbitPoolManager: {fileID: 4460152226207828653}
   m_RabbitHoldController: {fileID: 0}
+  <CashMoneyParticles>k__BackingField: {fileID: 5970725261031741069, guid: 0cd8562ebd498b24dabdc19213708bfe, type: 3}
   mouseUI: {fileID: 0}
   DebugEnabled: 0
   DisposedRabbits: 0
