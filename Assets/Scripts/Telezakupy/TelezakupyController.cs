@@ -88,15 +88,10 @@ public class TelezakupyController : MonoBehaviour {
         }
     }
 
-    private void Awake() {
+    private void Start() {
         _PlayerState.CurrentProgram = 0;
         SwitchProgram();
     }
-
-        private void Start()
-        {
-
-        }
 
     private void Update() {
         if(GameManager.Instance.DebugEnabled)
