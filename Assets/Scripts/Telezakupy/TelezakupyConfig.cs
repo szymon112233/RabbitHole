@@ -17,7 +17,7 @@ public class TelezakupyConfig : ScriptableObject {
     [SerializeField]
     protected TelezakupyPlayerState _TPlayerState;
 
-    private int _NoProgramId = Random.Range(0, 666);
+    private int _NoProgramId = 0;
     
     public VideoClip NoProgramm {
         get {
