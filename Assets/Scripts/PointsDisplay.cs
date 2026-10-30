@@ -9,7 +9,7 @@ public class PointsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rabbitsText.text = $"Rabbits to deal with: {GameManager.Instance.GetUndisposedRabbitCount().ToString()}";
+        rabbitsText.text = $"{GameManager.Instance.GetUndisposedRabbitCount().ToString()}";
         moniText.text = $"{GameManager.Instance.Money.ToString()} $";
     }
 }
