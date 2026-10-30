@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271966782560674984}
   m_LocalRotation: {x: -0, y: 0.7070836, z: -0, w: 0.7071301}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 89.996, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -0.07519277}
+  m_AnchoredPosition: {x: 0, y: 0.036321133}
   m_SizeDelta: {x: 9.8, y: 2.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5872842686279577778
@@ -250,7 +250,7 @@ AudioSource:
   Priority: 203
   DopplerLevel: 1
   MinDistance: 0
-  MaxDistance: 13
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -640,6 +640,7 @@ MonoBehaviour:
   _InteractionDistance: 3
   _TelezakupyUIObserver: {fileID: 11400000, guid: d221a2797c8554354aaa0177c8b1ef31, type: 2}
   m_CTAText: {fileID: 3115035301252098623}
+  _Source: {fileID: 4043877559258494198}
 --- !u!328 &7583489798245356307
 VideoPlayer:
   m_ObjectHideFlags: 0
