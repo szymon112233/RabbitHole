@@ -39,11 +39,12 @@ public class TelezakupyController : MonoBehaviour {
         if (currentUpgrade == null)
             return;
 
-        _TelezakupyUIObserver.RaisePurchaseAttempted();
+        var hasMoney = GameManager.Instance.TrySpendMoney(currentUpgrade.Price);
+        
+        _TelezakupyUIObserver.RaisePurchaseAttempted(hasMoney);
         
         // register
-        if(GameManager.Instance.TrySpendMoney(currentUpgrade.Price))
-        {
+        if(hasMoney) {
             currentUpgrade.RuntimeFields.Bought();
 
             _PlayerState.SavePurchasedUpgrade(currentUpgrade);

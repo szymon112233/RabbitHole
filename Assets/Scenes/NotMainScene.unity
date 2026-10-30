@@ -24843,6 +24843,82 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: Duration
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: PerlinMoveSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].time
+      value: 0.7975941
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].time
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].value
+      value: 100.760864
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[0].inSlope
+      value: 295.9904
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].inSlope
+      value: -4.783302
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].inSlope
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[0].outSlope
+      value: 295.9904
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].inWeight
+      value: 0.08411119
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].outSlope
+      value: -4.783302
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].outSlope
+      value: 3.1626985
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[0].outWeight
+      value: 0.052543204
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].outWeight
+      value: 0.14323437
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234970112912356952, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].tangentMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2737079309952851652, guid: a4c664c021628f643b3aa2799aefbf8d, type: 3}
       propertyPath: m_Enabled
       value: 1
