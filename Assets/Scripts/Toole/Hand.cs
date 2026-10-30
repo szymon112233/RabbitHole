@@ -85,7 +85,7 @@ public class Hand : Tool
         // Does the ray intersect any objects excluding the player layer
         
         if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit,
-                maxPickupDistance, layerMask))
+                maxPickupDistance, layerMask, QueryTriggerInteraction.Collide))
         {
             // Debug.DrawRay(cam.transform.position, cam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             rabbit = hit.rigidbody;
@@ -128,8 +128,12 @@ public class Hand : Tool
         _handController.ExitGrabState();
         joint.connectedBody = null;
         GameManager.Instance.mouseUI.SetEmptyHand();
-        m_HeldRabbit.OnKilled -= OnHeldRabbitKilled;
-        m_HeldRabbit = null;
+
+        if (m_HeldRabbit != null)
+        {
+            m_HeldRabbit.OnKilled -= OnHeldRabbitKilled;
+            m_HeldRabbit = null;
+        }
     }
 
     void ThrowRabbit()
