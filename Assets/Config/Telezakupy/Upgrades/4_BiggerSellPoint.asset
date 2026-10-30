@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4_BiggerSellPoint
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.PurchasableUpgrade
   _ID: b305757b-009c-4428-a43e-e2885d97680b
-  _AdClip: {fileID: 32900000, guid: e17bbeb3a1abf1841a74a6a1c3e5d90a, type: 3}
+  _AdVideo: cage_ad.mp4
   _Name: Bunny cage
   _Price: 80
   _UpgradeIcon: {fileID: 1819116676684815114, guid: 7cee449c0ffc64b30b9cef012406506d, type: 3}

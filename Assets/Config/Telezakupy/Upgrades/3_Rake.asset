@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3_Rake
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.PurchasableUpgrade
   _ID: 2332f0c9-9815-44f1-ac8d-298174fdf6bd
-  _AdClip: {fileID: 32900000, guid: f3b5f99d376327b239cfe323f072bd66, type: 3}
+  _AdVideo: shovel_ad.mp4
   _Name: Rake
   _Price: 140
   _UpgradeIcon: {fileID: -3766519690804746565, guid: 67cde754b6e1d4a3b91546e20ea0d24e, type: 3}

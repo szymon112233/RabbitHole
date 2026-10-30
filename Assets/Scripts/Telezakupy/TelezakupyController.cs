@@ -97,9 +97,9 @@ public class TelezakupyController : MonoBehaviour {
 
         _PlayerState.CurrentlyAiringUpgrade = currProgram;
 
-        _VideoPlayer.clip = currProgram == null
+        TvVideo.Play(_VideoPlayer, currProgram == null
             ? _TelezakupyConfig.NoProgramm
-            : currProgram.AdClip;
+            : currProgram.AdVideo);
 
         if (currProgram == null) {
             GameManager.Instance?.mouseUI.SetTVnoBuy();
@@ -194,7 +194,7 @@ public class TelezakupyController : MonoBehaviour {
 
         _PlayerState.CurrentlyAiringUpgrade = upgrade;
 
-        _VideoPlayer.clip = upgrade.AdClip;
+        TvVideo.Play(_VideoPlayer, upgrade.AdVideo);
         SetAudioLoud();
     }
 
@@ -208,6 +208,15 @@ public class TelezakupyController : MonoBehaviour {
         _Source.rolloffMode = AudioRolloffMode.Linear;
         _Source.minDistance = 0;
         _Source.maxDistance = 7;
+    }
+
+    // On Web the VideoPlayer can only output audio directly (not through an AudioSource),
+    // so mirror the AudioSource's volume/linear rolloff onto the direct output every frame.
+    private void LateUpdate() {
+        if (!TvVideo.UsesDirectAudio || _Source == null || _VideoPlayer == null)
+            return;
+        TvVideo.ApplyDirectVolume(_VideoPlayer, _Source.transform.position,
+            _Source.volume, _Source.minDistance, _Source.maxDistance);
     }
 }
 }

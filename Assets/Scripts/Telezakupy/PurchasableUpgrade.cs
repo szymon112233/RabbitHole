@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using UnityEditor;
 using UnityEngine.UI;
-using UnityEngine.Video;
 
 namespace UnityEngine.Rendering.Universal {
 #if UNITY_EDITOR
@@ -16,8 +15,8 @@ public class PurchasableUpgrade : ScriptableObject {
     [SerializeField] 
     private string _ID;
     
-    [SerializeField] 
-    protected VideoClip _AdClip;
+    [SerializeField, Tooltip("Video file name inside Assets/StreamingAssets/Video, e.g. strong_ad.mp4")]
+    protected string _AdVideo;
 
     [SerializeField] 
     protected string _Name;
@@ -34,7 +33,8 @@ public class PurchasableUpgrade : ScriptableObject {
     #region Public API
     public string ID => _ID;
     
-    public VideoClip AdClip => _AdClip;
+    /// <summary>File name of the ad inside StreamingAssets/Video.</summary>
+    public string AdVideo => _AdVideo;
     
     public Sprite UpgradeIcon => _UpgradeIcon;
     

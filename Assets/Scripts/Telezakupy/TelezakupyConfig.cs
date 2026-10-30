@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Video;
 
 namespace UnityEngine.Rendering.Universal {
 [Serializable]
@@ -11,18 +10,21 @@ public class TelezakupyConfig : ScriptableObject {
     [SerializeField]
     protected List<PurchasableUpgrade> _InitialUpgrades;
     
-    [SerializeField] 
-    protected List<VideoClip> _NoProgramm;
+    [SerializeField, Tooltip("Video file names inside Assets/StreamingAssets/Video")]
+    protected List<string> _NoProgrammVideos;
     
     [SerializeField]
     protected TelezakupyPlayerState _TPlayerState;
 
     private int _NoProgramId = 0;
     
-    public VideoClip NoProgramm {
+    /// <summary>Cycles through the "no programme" filler videos. Returns a StreamingAssets/Video file name.</summary>
+    public string NoProgramm {
         get {
+            if (_NoProgrammVideos == null || _NoProgrammVideos.Count == 0)
+                return null;
             _NoProgramId++;
-            return _NoProgramm[_NoProgramId % _NoProgramm.Count];
+            return _NoProgrammVideos[_NoProgramId % _NoProgrammVideos.Count];
         }
     }
 

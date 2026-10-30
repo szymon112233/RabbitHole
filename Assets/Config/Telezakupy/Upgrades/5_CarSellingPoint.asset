@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5_CarSellingPoint
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.PurchasableUpgrade
   _ID: 7aacfc00-8ff3-4d6d-9e43-e04091e7dfb9
-  _AdClip: {fileID: 32900000, guid: 0d5edf63496d3a4e98512de2238ad7eb, type: 3}
+  _AdVideo: van_ad.mp4
   _Name: Delivery van
   _Price: 500
   _UpgradeIcon: {fileID: 4244246678225918853, guid: e2d5b3f2b09d64ef78aceee5a7cffcfe, type: 3}
