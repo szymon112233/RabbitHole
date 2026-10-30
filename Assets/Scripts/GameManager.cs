@@ -1,4 +1,6 @@
 using DefaultNamespace;
+using EasyPeasyFirstPersonController;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -16,7 +18,12 @@ public class GameManager : MonoBehaviour
     public RabbitPoolManager RabbitPoolManager { get => m_RabbitPoolManager; }
     [SerializeField] private RabbitHoldController m_RabbitHoldController;
     public RabbitHoldController RabbitHoldController { get => m_RabbitHoldController; }
-    
+    [SerializeField] private FirstPersonController m_Player;
+    public FirstPersonController Player { get => m_Player; }
+
+    [SerializeField]
+    public UnityEngine.UI.Image Blackscreen;
+    public AudioSource Ambient;
     public UIMousePrompts mouseUI;
 
     public bool DebugEnabled;

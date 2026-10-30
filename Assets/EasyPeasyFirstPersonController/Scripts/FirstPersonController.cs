@@ -100,6 +100,8 @@ namespace EasyPeasyFirstPersonController
         [Header("Debug")]
         public bool currentStateDebug = true;
 
+        public bool MovementBlocked = false;
+
         void OnGUI()
         {
             if (currentState != null && Application.isEditor && currentStateDebug)
@@ -133,7 +135,11 @@ namespace EasyPeasyFirstPersonController
 
             isGrounded = /*characterController.isGrounded ||*/ Physics.CheckSphere(groundCheck.position, characterController.radius * 0.9f, groundMask, QueryTriggerInteraction.Ignore);
 
-            currentState.UpdateState();
+            if (!MovementBlocked)
+            {
+                currentState.UpdateState();
+            }
+
             HandleRotation();
             UpdateVisuals();
         }

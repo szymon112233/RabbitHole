@@ -19,6 +19,8 @@ public class RabbitHoldController : MonoBehaviour
     private HandController _handController;
     private List<Action<InputAction.CallbackContext>> toolSwappingCallbacks;
 
+    private bool _blocked = false;
+
     void Awake()
     {
         toolSwappingCallbacks = new List<Action<InputAction.CallbackContext>>();
@@ -95,9 +97,20 @@ public class RabbitHoldController : MonoBehaviour
         OnToolSwap(0);
     }
 
+    public void RemoveAllTools()
+    {
+        ResetToolToHand();
+        _blocked = true;
+    }
+
 
     private void OnToolSwap(int id)
     {
+        if(_blocked)
+        {
+            return;    
+        }
+
         Tool nextTool = Tools[id];
 
         if(!telezakupyPlayerState.PurchasedUpgradeIds.Contains(nextTool.UpgradeNode.ID))

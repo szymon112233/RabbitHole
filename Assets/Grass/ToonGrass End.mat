@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ToonGrass End
+  m_Shader: {fileID: 4800000, guid: db1f05999a514703b2a2c7b21f792cc7, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AmbientStrength: 1
+    - _Bend: 0.13
+    - _BendVariation: 0.72
+    - _LightSmoothness: 0.179
+    - _LightSteps: 3
+    - _NormalBlend: 0.65
+    - _RimSize: 0.427
+    - _RimStrength: 0.596
+    - _RootDarkening: 0.281
+    - _ShadowSharpness: 0.85
+    - _SpecularSize: 0.12
+    - _SpecularStrength: 0.35
+    - _VariationStrength: 0.561
+    - _WindGustScale: 0.466
+    - _WindGustStrength: 0.7
+    - _WindScale: 0.35
+    - _WindSpeed: 4.55
+    - _WindStrength: 0.883
+    m_Colors:
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.9, g: 1, b: 0.7, a: 1}
+    - _ShadowColor: {r: 0.42, g: 0.5, b: 0.62, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 0.9, a: 1}
+    - _TipColor: {r: 0.8867924, g: 0.50466526, b: 0.35555357, a: 1}
+    - _VariationColor: {r: 0.3018868, g: 0.092466034, b: 0.0071199704, a: 1}
+    - _WindDirection: {r: 1, g: 0.35, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

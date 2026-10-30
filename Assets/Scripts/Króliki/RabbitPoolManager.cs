@@ -23,6 +23,16 @@ public class RabbitPoolManager : MonoBehaviour
         CurrentlyActiveRabbits.Remove(rabbit);
     }
 
+    public void ReturnToPoolALll()
+    {
+        List<RabbitController> rabbits = GetCurrentlyActiveRabbits();
+
+        for(int i = rabbits.Count - 1; i >= 0; i--)
+        {
+            ReturnToPool(rabbits[i]);
+        }
+    }
+
     public RabbitController RequestRabbit()
     {
         return RequestRabbit(Vector3.zero, GetRandomRabbitType());
