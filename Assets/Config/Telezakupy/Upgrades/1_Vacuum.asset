@@ -16,5 +16,6 @@ MonoBehaviour:
   _AdClip: {fileID: 32900000, guid: 4804a400ab180b34b97966554974dc0f, type: 3}
   _Name: Vacuum
   _Price: 400
+  _UpgradeIcon: {fileID: 7637588740618303777, guid: d0292d03bb1224dae8ddf495aec88a98, type: 3}
   _Unlocks:
   - {fileID: 11400000, guid: 4b6dd329ec3ad484a939c10f55bad1e7, type: 2}

@@ -16,6 +16,7 @@ MonoBehaviour:
   _AdClip: {fileID: 32900000, guid: f3b5f99d376327b239cfe323f072bd66, type: 3}
   _Name: Rake
   _Price: 140
+  _UpgradeIcon: {fileID: -3766519690804746565, guid: 67cde754b6e1d4a3b91546e20ea0d24e, type: 3}
   _Unlocks:
   - {fileID: 11400000, guid: ac220e54212104949a17bbfb1ad68a1a, type: 2}
   - {fileID: 11400000, guid: bb6f804df7ec42cf58238d1478b4b28c, type: 2}

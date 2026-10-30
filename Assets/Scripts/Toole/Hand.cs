@@ -16,9 +16,12 @@ public class Hand : Tool
     private bool ThrowingEnabled = false;
 
     RabbitController m_HeldRabbit;
+    
+    private SoundManager _soundManager;
 
     void Start()
     {
+        _soundManager = FindAnyObjectByType<SoundManager>(FindObjectsInactive.Include);
         _handController = FindAnyObjectByType<HandController>();
 
         if (_handController == null)
@@ -152,13 +155,16 @@ public class Hand : Tool
         rabbit.AddForce(cam.transform.forward * throwPower);
         m_HeldRabbit = null;
         GameManager.Instance.mouseUI.SetEmptyHand();
-        _handController.EnableKick();
         StartCoroutine(HandleKickCoroutine());
     }
 
     private IEnumerator HandleKickCoroutine()
     {
+        _handController.EnableKick();
+        _soundManager.PlayPunchSound();
+        
         yield return new WaitForSeconds(.3f);
+        
         _handController.DisableKick();
     }
 

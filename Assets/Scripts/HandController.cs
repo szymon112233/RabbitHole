@@ -69,7 +69,7 @@ namespace DefaultNamespace
 			_ProgramSwitchedTimer = 0.1f;
 		}
 
-		private void OnPurchaseAttempted(bool isSuccess) {
+		private void OnPurchaseAttempted(PurchasableUpgrade upgrade, bool isSuccess) {
 			_PurchaseAttemptedTimer = 0.1f;
 			
 			if(!isSuccess)

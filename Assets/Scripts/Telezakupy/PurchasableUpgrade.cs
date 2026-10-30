@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using UnityEditor;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 namespace UnityEngine.Rendering.Universal {
@@ -25,12 +26,17 @@ public class PurchasableUpgrade : ScriptableObject {
     protected int _Price;
     
     [SerializeField] 
+    protected Sprite _UpgradeIcon;
+    
+    [SerializeField] 
     protected List<PurchasableUpgrade> _Unlocks;
     
     #region Public API
     public string ID => _ID;
     
     public VideoClip AdClip => _AdClip;
+    
+    public Sprite UpgradeIcon => _UpgradeIcon;
     
     public string Name => _Name;
     

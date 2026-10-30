@@ -13,12 +13,17 @@ public class RabbitHoldController : MonoBehaviour
     protected TelezakupyPlayerState telezakupyPlayerState;
 
     public Tool ActiveTool;
+    
+    public int _RemovedTool;
 
     public List<Tool> Tools;
 
     private HandController _handController;
     private List<Action<InputAction.CallbackContext>> toolSwappingCallbacks;
 
+    [SerializeField] 
+    protected TelezakupyUIObserver _Observer;
+    
     private bool _blocked = false;
 
     void Awake()
@@ -70,6 +75,29 @@ public class RabbitHoldController : MonoBehaviour
     // {
     //     TryHoldRabbit();
     // }
+    
+    private void OnEnable() {
+        _Observer.SubscribePurchaseAttempted(OnPurchaseAttempted);
+    }
+
+    private void OnDisable() {
+        _Observer.UnsubscribePurchaseAttempted(OnPurchaseAttempted);
+    }
+
+    [SerializeField]
+    private PurchasableUpgrade upgrateToForceVacuum;
+    
+    [SerializeField]
+    private PurchasableUpgrade upgrateToForceRake;
+    
+    private void OnPurchaseAttempted(PurchasableUpgrade upgrade, bool isSuccess) {
+        if (isSuccess && upgrade.ID == upgrateToForceVacuum.ID) {
+            _RemovedTool = 2;
+        }
+        if (isSuccess && upgrade.ID == upgrateToForceRake.ID) {
+            _RemovedTool = 1;
+        }
+    }
 
     private void OnAltActionPerformed(InputAction.CallbackContext obj)
     {
@@ -92,9 +120,14 @@ public class RabbitHoldController : MonoBehaviour
         ActiveTool.Stop_Alt();
     }
 
-    public void ResetToolToHand()
+    public void ResetToolToHand() 
     {
         OnToolSwap(0);
+    }
+    
+    public void ResetToolToHandTool() 
+    {
+        OnToolSwap(_RemovedTool);
     }
 
     public void RemoveAllTools()
