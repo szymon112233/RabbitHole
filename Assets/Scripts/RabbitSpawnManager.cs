@@ -13,12 +13,20 @@ public class RabbitSpawnManager : MonoBehaviour
     [SerializeField] private int MaxRabbitCount = 500;
     private Transform T;
 
+    private bool IsActive;
+
     void Start()
     {
+        IsActive = true;
         T = transform;
         StartCoroutine(SpawnRabbitCoroutine());
         
         InputSystem.actions.FindAction("SpawnKrulkis").performed += OnCheatSpawnPerformed;
+    }
+
+    public void Stop()
+    {
+        IsActive = false;
     }
 
     private void OnCheatSpawnPerformed(InputAction.CallbackContext obj)
@@ -67,7 +75,12 @@ public class RabbitSpawnManager : MonoBehaviour
         // bonus: check if rabbit is out of view
 
         yield return new WaitForSeconds(RabbitSpawnDeltaTime);
-        StartCoroutine(SpawnRabbitCoroutine());
+
+        if (IsActive)
+        {
+            StartCoroutine(SpawnRabbitCoroutine());
+            
+        }
     }
 
     private void CreateRabbit(Vector3 position, bool addRandomOffset = true)
