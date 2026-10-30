@@ -77,6 +77,15 @@ public class TelezakupyController : MonoBehaviour {
         _VideoPlayer.clip = currProgram == null 
             ? _TelezakupyConfig.NoProgramm
             : currProgram.AdClip;
+        
+        if (currProgram == null)
+        {
+            GameManager.Instance?.mouseUI.SetTVnoBuy();
+        }
+        else
+        {
+            GameManager.Instance?.mouseUI.SetTV();
+        }
     }
 
     private void Awake() {
