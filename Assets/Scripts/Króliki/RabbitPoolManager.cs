@@ -4,7 +4,6 @@ using UnityEngine;
 public class RabbitPoolManager : MonoBehaviour
 {
     [SerializeField] private RabbitController RabbitPrefab;
-    [SerializeField] private int MaxRabbitCount = 1500;
     [SerializeField] private List<RabbitController> RabbitPool = new();
     [SerializeField] private List<RabbitController> CurrentlyActiveRabbits = new();
 
