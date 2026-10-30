@@ -50,7 +50,7 @@ public class KillVolume : MonoBehaviour
         }
 
         GameManager.Instance.DisposedRabbits += 1;
-        GameManager.Instance.AddMoney(rabbitController.RabbitType == ERabbitType.Golden ? MoneyForThisTrigger * 2 : MoneyForThisTrigger);
+        GameManager.Instance.AddMoney(rabbitController.RabbitType == ERabbitType.Golden ? MoneyForThisTrigger * 5 : MoneyForThisTrigger);
         Instantiate(GameManager.Instance.CashMoneyParticles, rabbitController.transform.position, Quaternion.identity);
         rabbitController.Kill();
         
