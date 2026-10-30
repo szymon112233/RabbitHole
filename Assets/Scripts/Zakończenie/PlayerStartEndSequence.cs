@@ -27,7 +27,7 @@ public class PlayerStartEndSequence : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         GameManager.Instance.Ambient.Stop();
-        GameManager.Instance.Ambient.loop = false;
+        //GameManager.Instance.Ambient.loop = false;
         GameManager.Instance.Ambient.clip = ChangeAmbient;
         GameManager.Instance.Ambient.Play();
 
