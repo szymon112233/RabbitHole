@@ -1,0 +1,138 @@
+name: Build & Deploy
+
+on:
+  # WebGL build + Pages deploy on every push to master
+  push:
+    branches: [master]
+    tags: ['v*']          # tags also build Windows + Linux
+  # Manual run: choose which extra platforms to build
+  workflow_dispatch:
+    inputs:
+      build_windows:
+        description: 'Build Windows (StandaloneWindows64)'
+        type: boolean
+        default: false
+      build_linux:
+        description: 'Build Linux (StandaloneLinux64)'
+        type: boolean
+        default: false
+
+# Needed for Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one Pages deploy at a time; newer pushes cancel older builds
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+  # Pro/Plus users: use UNITY_SERIAL instead of UNITY_LICENSE
+  # UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+
+jobs:
+  # ---------------------------------------------------------------- WebGL
+  build-webgl:
+    name: Build WebGL
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-WebGL-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-WebGL-
+            Library-
+
+      - uses: game-ci/unity-builder@v4
+        with:
+          targetPlatform: WebGL
+          unityVersion: auto
+          # buildName / buildsPath defaults -> build/WebGL/WebGL
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Build-WebGL
+          path: build/WebGL
+          retention-days: 7
+
+      # Package exactly what Pages should serve (index.html at the root)
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/WebGL/WebGL
+
+  # --------------------------------------------------------- Deploy Pages
+  deploy-pages:
+    name: Deploy to GitHub Pages
+    needs: build-webgl
+    # Only deploy from master, not from tags/manual runs on other branches
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ------------------------------------------------------ Windows / Linux
+  # Run only for version tags (v*) or when ticked in a manual run.
+  # (Two jobs instead of a matrix: `matrix` isn't available in a job-level `if`.)
+  build-windows:
+    name: Build Windows
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.build_windows)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-StandaloneWindows64-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-StandaloneWindows64-
+            Library-
+      - uses: game-ci/unity-builder@v4
+        with:
+          targetPlatform: StandaloneWindows64
+          unityVersion: auto
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Build-StandaloneWindows64
+          path: build/StandaloneWindows64
+          retention-days: 14
+
+  build-linux:
+    name: Build Linux
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.build_linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-StandaloneLinux64-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-StandaloneLinux64-
+            Library-
+      - uses: game-ci/unity-builder@v4
+        with:
+          targetPlatform: StandaloneLinux64
+          unityVersion: auto
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Build-StandaloneLinux64
+          path: build/StandaloneLinux64
+          retention-days: 14
