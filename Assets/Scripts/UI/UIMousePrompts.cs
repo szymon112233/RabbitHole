@@ -46,6 +46,13 @@ public class UIMousePrompts : MonoBehaviour
         LPMText.text = "Change channel";
         RMBText.text = "BUY";
     }
+    
+    public void SetTVnoBuy()
+    {
+        ResetVisibility();
+        LPMText.text = "Change channel";
+        RMBVisibility.SetActive(false);
+    }
 
     public void ResetVisibility()
     {
