@@ -3005,6 +3005,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Size.x
+      value: 0.1870803
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0614978
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Size.z
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Center.x
+      value: 0.5031488
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Center.y
+      value: 0.030749818
+      objectReference: {fileID: 0}
     - target: {fileID: 2719924995734402855, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: m_Name
       value: KillVolume
@@ -3026,12 +3046,16 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: bDontReset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: bUsesCapacity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: MoneyForThisTrigger
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: ObjectToDisableOnCooldown

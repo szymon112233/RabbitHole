@@ -10,6 +10,8 @@ public class TelezakupyUIObserver : ScriptableObject {
     private Action<bool> _CanSwitchPrograms;
     
     private Action _ProgramSwitched;
+    
+    private Action _PurchaseAttempted;
 
     // Call this method to trigger the event
     public void RaiseUpgradesForPurchase(PurchasableUpgrade purchasableUpgrade) {
@@ -18,6 +20,10 @@ public class TelezakupyUIObserver : ScriptableObject {
     
     public void RaiseProgramSwitched() {
         _ProgramSwitched?.Invoke();
+    }
+
+    public void RaisePurchaseAttempted() {
+        _PurchaseAttempted?.Invoke();
     }
 
     // Public methods handling subscription safety
@@ -49,6 +55,14 @@ public class TelezakupyUIObserver : ScriptableObject {
 
     public void UnsubscribeProgramSwitched(Action listener) {
         _ProgramSwitched -= listener;
+    }
+    
+    public void SubscribePurchaseAttempted(Action listener) {
+        _PurchaseAttempted += listener;
+    }
+
+    public void UnsubscribePurchaseAttempted(Action listener) {
+        _PurchaseAttempted -= listener;
     }
 }
 }

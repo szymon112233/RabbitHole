@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: PlayerTelezakupyState
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.TelezakupyPlayerState
   _PurchasedUpgradeIds: []
+  CurrentProgram: 13
+  CurrentlyAiringUpgrade: {fileID: 11400000, guid: 1c7fb1847247f8f4f887afe0eb9dbc1b, type: 2}

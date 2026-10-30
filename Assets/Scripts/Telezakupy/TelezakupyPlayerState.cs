@@ -12,6 +12,10 @@ public class TelezakupyPlayerState : ScriptableObject {
     
     public ImmutableList<string> PurchasedUpgradeIds => _PurchasedUpgradeIds.ToImmutableList();
     
+    public int CurrentProgram = 0;
+
+    public PurchasableUpgrade CurrentlyAiringUpgrade;
+    
     public void SavePurchasedUpgrade(PurchasableUpgrade upgrade) {
         if (!_PurchasedUpgradeIds.Contains(upgrade.ID)) {
             _PurchasedUpgradeIds.Add(upgrade.ID);

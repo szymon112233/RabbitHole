@@ -8,6 +8,8 @@ public class KillVolume : MonoBehaviour
     
     [Header("Capacity")]
     public bool bUsesCapacity;
+
+    public bool bDontReset;
     
     public int Capacity = 0;
     public RabbitPileDisplay display;
@@ -37,9 +39,16 @@ public class KillVolume : MonoBehaviour
     {
         if (other.CompareTag(RabbitTag))
         {
+            RabbitController rc = other.GetComponent<RabbitController>();
+            
+            if (rc == null)
+            {
+                return;
+            }
+
             GameManager.Instance.DisposedRabbits += 1;
-            GameManager.Instance.AddMoney(MoneyForThisTrigger);
-            other.GetComponent<RabbitController>()?.Kill();
+            GameManager.Instance.AddMoney(rc.RabbitType == ERabbitType.Golden ? MoneyForThisTrigger * 2 : MoneyForThisTrigger);
+            rc.Kill();
 
 
             if (bUsesCapacity)
@@ -47,7 +56,7 @@ public class KillVolume : MonoBehaviour
                 Count++;
                 display.Increment();
 
-                if (Count >= Capacity)
+                if (!bDontReset && Count >= Capacity)
                 {
                     StartCooldown();
                 }

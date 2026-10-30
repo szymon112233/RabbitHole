@@ -22,10 +22,6 @@ public class TelezakupyController : MonoBehaviour {
     [SerializeField]
     protected TelezakupyUIObserver _TelezakupyUIObserver;
 
-    private int _CurrentProgram;
-    
-    private bool _EPressRegistered;
-
     private int _LastReportedProgram = -1;
 
     private bool _WasIsInteractionReadz = false;
@@ -33,7 +29,7 @@ public class TelezakupyController : MonoBehaviour {
     public void SwitchProgram() {
         var availableUpgrades = _TelezakupyConfig.GetAvailableUpgrades();
         var totalProgramsCount = availableUpgrades.Count + 1;
-        _CurrentProgram = (_CurrentProgram + 1 % totalProgramsCount);
+        _PlayerState.CurrentProgram = (_PlayerState.CurrentProgram + 1 % totalProgramsCount);
         UpdateVideoProgram();
     }
 
@@ -43,13 +39,15 @@ public class TelezakupyController : MonoBehaviour {
         if (currentUpgrade == null)
             return;
 
+        _TelezakupyUIObserver.RaisePurchaseAttempted();
+        
         // register
         if(GameManager.Instance.TrySpendMoney(currentUpgrade.Price))
         {
             currentUpgrade.RuntimeFields.Bought();
 
             _PlayerState.SavePurchasedUpgrade(currentUpgrade);
-            _CurrentProgram = 1;
+            _PlayerState.CurrentProgram = 1;
             UpdateVideoProgram();
 
             var curr = CurrentlyAiringUpgrade();
@@ -61,7 +59,7 @@ public class TelezakupyController : MonoBehaviour {
     private PurchasableUpgrade CurrentlyAiringUpgrade() {
         var availableUpgrades = _TelezakupyConfig.GetAvailableUpgrades();
         var totalProgramsCount = availableUpgrades.Count + 1;
-        var currProgramId = _CurrentProgram % totalProgramsCount;
+        var currProgramId = _PlayerState.CurrentProgram % totalProgramsCount;
 
         if (currProgramId == 0) {
             return null;
@@ -73,6 +71,8 @@ public class TelezakupyController : MonoBehaviour {
 
     private void UpdateVideoProgram() {
         var currProgram = CurrentlyAiringUpgrade();
+
+        _PlayerState.CurrentlyAiringUpgrade = currProgram;
         
         _VideoPlayer.clip = currProgram == null 
             ? _TelezakupyConfig.NoProgramm
@@ -80,7 +80,7 @@ public class TelezakupyController : MonoBehaviour {
     }
 
     private void Awake() {
-        _CurrentProgram = 0;
+        _PlayerState.CurrentProgram = 0;
         SwitchProgram();
     }
 
@@ -94,7 +94,6 @@ public class TelezakupyController : MonoBehaviour {
             {
                 foreach(PurchasableUpgrade upgrade in _TelezakupyConfig.GetAvailableUpgrades())
                 {
-                    Debug.Log("Unlcoked: " + upgrade.Name);
                     upgrade.RuntimeFields.Bought();
                     _PlayerState.SavePurchasedUpgrade(upgrade);
 
@@ -122,7 +121,7 @@ public class TelezakupyController : MonoBehaviour {
             _TelezakupyUIObserver.RaiseCanSwitchPrograms(isInteractionReady);
         }
         
-        var newProgram = isInteractionReady ? _CurrentProgram : -1;
+        var newProgram = isInteractionReady ? _PlayerState.CurrentProgram : -1;
         if (newProgram != _LastReportedProgram) {
             _LastReportedProgram = newProgram;
             
@@ -137,14 +136,9 @@ public class TelezakupyController : MonoBehaviour {
                 SwitchProgram();
             }
             
-            if (Keyboard.current.eKey.isPressed && !_EPressRegistered) {
-                _EPressRegistered = true;
+            if (Mouse.current.rightButton.wasPressedThisFrame) {
                 TryBuyUpgrade();
             }
-        }
-        
-        if (!Keyboard.current.eKey.isPressed) {
-            _EPressRegistered = false;
         }
     }
 }

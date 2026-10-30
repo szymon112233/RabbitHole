@@ -286,8 +286,9 @@ public class VacuumCleaner : Tool
         //_rabbitDisplay.SetAmountDisplayed(m_VacuumedBunnies.Count);
     }
 
-    public virtual void Activate()
+    public override void Activate()
     {
         gameObject.SetActive(true);
+        GameManager.Instance.mouseUI.SetVacum();
     }
 }

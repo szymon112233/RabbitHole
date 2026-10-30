@@ -878,6 +878,30 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1052928
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3126442
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Size.z
+      value: 0.066581465
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Center.x
+      value: 0.008295405
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Center.y
+      value: -0.032707572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884379772389832775, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: m_Center.z
+      value: -0.47977483
+      objectReference: {fileID: 0}
     - target: {fileID: 2719924995734402855, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: m_Name
       value: KillVolume
@@ -895,12 +919,16 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
+      propertyPath: bDontReset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: bUsesCapacity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: MoneyForThisTrigger
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6665827704472947711, guid: 6ff655f9fb6390e41b07b5e83d59feac, type: 3}
       propertyPath: ObjectToDisableOnCooldown

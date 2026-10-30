@@ -10,6 +10,7 @@ public class VehicleContoller : MonoBehaviour
     public Transform camTransform;
     public float speed;
     public float rotateSpeed;
+    public Action OnVehicleEntered;
 
     private Vector3 camrafrombodydiff;
     
@@ -37,6 +38,11 @@ public class VehicleContoller : MonoBehaviour
         // camTransform.position = controlledRigidbody.position + camrafrombodydiff;
         
         // Debug.Log(moveVector.ToString());
+    }
+
+    private void OnEnable()
+    {
+        OnVehicleEntered.Invoke();
     }
 
     void OnCollisionEnter(Collision collision)

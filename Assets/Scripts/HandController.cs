@@ -7,7 +7,7 @@ namespace DefaultNamespace
 	{
 		Idle,
 		Grab,
-		TVRemote
+		TVRemote,
 	}
 	
 	public class HandController : MonoBehaviour
@@ -15,6 +15,9 @@ namespace DefaultNamespace
 		
 		[SerializeField] 
 		protected TelezakupyUIObserver _Observer;
+
+		[SerializeField] 
+		protected TelezakupyPlayerState _PlayerState;
 		
 		// TODO - use animation??
 
@@ -23,6 +26,9 @@ namespace DefaultNamespace
 		[SerializeField] private GameObject _grabHand;
 		[SerializeField] private GameObject _TVRemote;
 		[SerializeField] private GameObject _TVRemotePressed;
+		[SerializeField] private GameObject _BuyPhone;
+		[SerializeField] private GameObject _BuyPhonePressed;
+		[SerializeField] private GameObject _LegKick;
 
 		[SerializeField] private float _spriteShowDuration = 0.6f;
 
@@ -31,21 +37,25 @@ namespace DefaultNamespace
 		private bool _HasGrabState;
 		private bool _CanSwitchPrograms;
 		private float _ProgramSwitchedTimer;
+		private float _PurchaseAttemptedTimer;
 		
 		private void Start()
 		{
 			_spriteChangeTimer = _spriteShowDuration;
 			ChangeState(HandState.Idle);
+			_LegKick.SetActive(false);
 		}
-		
+
 		private void OnEnable() {
 			_Observer.SubscribeCanSwitchPrograms(OnCanSwitchPrograms);
 			_Observer.SubscribeProgramSwitched(OnProgramSwitched);
+			_Observer.SubscribePurchaseAttempted(OnPurchaseAttempted);
 		}
 
 		private void OnDisable() {
 			_Observer.UnsubscribeCanSwitchPrograms(OnCanSwitchPrograms);
 			_Observer.UnsubscribeProgramSwitched(OnProgramSwitched);
+			_Observer.UnsubscribePurchaseAttempted(OnPurchaseAttempted);
 		}
 		
 		private void OnCanSwitchPrograms(bool canSwitch) {
@@ -54,6 +64,10 @@ namespace DefaultNamespace
 		
 		private void OnProgramSwitched() {
 			_ProgramSwitchedTimer = 0.1f;
+		}
+
+		private void OnPurchaseAttempted() {
+			_PurchaseAttemptedTimer = 0.1f;
 		}
 
 		private void Update() {
@@ -94,6 +108,19 @@ namespace DefaultNamespace
 						_TVRemotePressed.gameObject.SetActive(false);
 						_TVRemote.gameObject.SetActive(true);
 					}
+
+					_BuyPhone.gameObject.SetActive(false);
+					_BuyPhonePressed.gameObject.SetActive(false);
+					if (_PlayerState.CurrentlyAiringUpgrade != null) {
+						if (_PurchaseAttemptedTimer > 0f) {
+							_PurchaseAttemptedTimer -= Time.deltaTime;
+							_BuyPhonePressed.gameObject.SetActive(true);
+						}
+						else {
+							_BuyPhone.gameObject.SetActive(true);
+						}
+					}
+					
 					break;
 			}
 			
@@ -111,6 +138,16 @@ namespace DefaultNamespace
 			ChangeState(HandState.Idle);
 		}
 
+		public void EnableKick()
+        {
+			_LegKick.SetActive(true);
+		}
+
+		public void DisableKick()
+		{
+			_LegKick.SetActive(false);
+		}
+
 		private void ChangeState(HandState newState) {
 			_currentState = newState;
 			_hand1.SetActive(false);
@@ -118,16 +155,20 @@ namespace DefaultNamespace
 			_grabHand.SetActive(false);
 			_TVRemote.SetActive(false);
 			_TVRemotePressed.SetActive(false);
+			_BuyPhone.SetActive(false);
+			_BuyPhonePressed.SetActive(false);
 			
 			switch (newState) {
 				case HandState.Idle:
 					_hand1.SetActive(true);
+					GameManager.Instance.mouseUI.SetEmptyHand();
 					break;
 				case HandState.Grab:
 					_grabHand.SetActive(true);
 					break;
 				case HandState.TVRemote:
 					_TVRemote.gameObject.SetActive(true);
+					GameManager.Instance.mouseUI.SetTV();
 					break;
 			}
 		}

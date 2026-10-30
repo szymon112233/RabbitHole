@@ -6,7 +6,7 @@ namespace DefaultNamespace.Upgrades
 	public class FakeRabbitInsideVacuum : MonoBehaviour
 	{
 		[SerializeField] private float _maxRotationSpeed;
-		[SerializeField] private  MeshRenderer _rabbitRenderer;
+		[SerializeField] private  Renderer _rabbitRenderer;
 		[SerializeField] private Material _defaultMaterial;
 		[SerializeField] private Material _goldenMaterial;
 		

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 0_Pifko
   m_EditorClassIdentifier: Assembly-CSharp::UnityEngine.Rendering.Universal.PurchasableUpgrade
   _ID: f223f1f9-6931-4386-b517-79d31b2630d6
-  _AdClip: {fileID: 32900000, guid: 196bdb33aab3bfc47bf8c2afb0ab0c2b, type: 3}
+  _AdClip: {fileID: 32900000, guid: 84eceb54229a5cffdac0eda36a7b2858, type: 3}
   _Name: Strong arm beer
   _Price: 40
   _Unlocks:

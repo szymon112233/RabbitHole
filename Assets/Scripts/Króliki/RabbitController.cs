@@ -15,7 +15,16 @@ public enum ERabbitType
 public class RabbitController : CachedMonoBehaviour
 {
     [SerializeField] private Renderer Renderer;
+    [SerializeField] private Renderer Renderer2;
     [SerializeField] private Transform m_ModelTransform;
+    [SerializeField] private Transform m_LeftEarTransform;
+    public Transform LeftEarTransform => m_LeftEarTransform;
+    [SerializeField] private Transform m_RightEarTransform;
+    public Transform RightEarTransform => m_RightEarTransform;
+    private Vector3 m_RightEarPos;
+    private Quaternion m_RightEarRot;
+    private Vector3 m_LeftEarPos;
+    private Quaternion m_LeftEarRot;
 
     [SerializeField]
     protected float HopPower = 10.0f;
@@ -79,6 +88,11 @@ public class RabbitController : CachedMonoBehaviour
         BoxCollider = GetComponent<BoxCollider>();
         Initialize(ERabbitType.Default);
 
+        m_RightEarPos = m_RightEarTransform.localPosition;
+        m_LeftEarPos = m_LeftEarTransform.localPosition;
+        m_RightEarRot = m_RightEarTransform.localRotation;
+        m_LeftEarRot = m_LeftEarTransform.localRotation;
+
         //AnimateReadyToHopAndHop();
     }
 
@@ -99,9 +113,11 @@ public class RabbitController : CachedMonoBehaviour
         {
             case ERabbitType.Golden:
                 Renderer.material = _goldRabbitMaterial;
+                Renderer2.material = _goldRabbitMaterial;
                 break;
             default:
                 Renderer.material = _defualtRabbitMaterial;
+                Renderer2.material = _defualtRabbitMaterial;
                 break;
 
         }
@@ -113,6 +129,7 @@ public class RabbitController : CachedMonoBehaviour
         Rbody.angularVelocity = Vector3.zero;
         Rbody.linearVelocity = Vector3.zero;
         // this could be merged somehow ig
+        ResetEars();
         GameManager.Instance.RabbitPoolManager.ReturnToPool(this);
         OnKilled?.Invoke();
     }
@@ -227,6 +244,16 @@ public class RabbitController : CachedMonoBehaviour
     {
         m_IsSlappable = true;
         frozen = false;
+
+        ResetEars();
+    }
+
+    private void ResetEars()
+    {
+        m_RightEarTransform.localPosition = m_RightEarPos;
+        m_LeftEarTransform.localPosition = m_LeftEarPos;
+        m_RightEarTransform.localRotation = m_RightEarRot;
+        m_LeftEarTransform.localRotation = m_LeftEarRot;
     }
 
     public bool IsVisible()
@@ -270,6 +297,8 @@ public class RabbitController : CachedMonoBehaviour
     { 
         yield return new WaitForSeconds(delay);
         Transform.localScale = new Vector3(2.4f, 1.43f, 0.0056f);
+        Renderer.gameObject.SetActive(false);
+        Renderer2.gameObject.SetActive(true);
         Transform.forward = normalVector;
         m_LastUnflattenedPosition = Transform.position;
         Transform.position = rabbitPosition;
@@ -292,6 +321,8 @@ public class RabbitController : CachedMonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        Renderer.gameObject.SetActive(true);
+        Renderer2.gameObject.SetActive(false);
         Rbody.isKinematic = false;
         SphereCollider.enabled = true;
         BoxCollider.enabled = false;
@@ -333,6 +364,7 @@ public class RabbitController : CachedMonoBehaviour
     public void SetRabbitMaterial(Material material)
     {
         Renderer.material = material;
+        Renderer2.material = material;
     }
 
     

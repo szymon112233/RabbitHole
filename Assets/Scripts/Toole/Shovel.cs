@@ -131,4 +131,10 @@ public class Shovel : Tool
             rabbits.Remove(other.GetComponent<RabbitController>());
         }
     }
+
+    public override void Activate()
+    {
+        base.Activate();
+        GameManager.Instance.mouseUI.SetRake();
+    }
 }
