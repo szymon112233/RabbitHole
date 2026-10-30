@@ -113,7 +113,12 @@ public class TelezakupyController : MonoBehaviour {
     private void Start() {
         _PlayerState.Clear();
         SwitchProgram();
-        m_CTAText.SetActive(false);
+        
+        if (m_CTAText != null)
+        {
+            m_CTAText.SetActive(false);
+        }
+        
         GameManager.Instance.OnMoneyStateChange += CanBuyUpgrade;
     }
 
