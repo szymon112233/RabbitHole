@@ -57,7 +57,6 @@ public class PurchasableUpgrade : ScriptableObject {
 
     void OnEnable()
     {
-        Debug.Log("call");
         RuntimeFields = new Runtime();
     }
 
