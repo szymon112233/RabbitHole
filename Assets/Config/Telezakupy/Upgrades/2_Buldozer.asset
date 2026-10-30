@@ -16,4 +16,5 @@ MonoBehaviour:
   _AdClip: {fileID: 32900000, guid: b59cecd7619d7dc449a31801734d012d, type: 3}
   _Name: Buldozer
   _Price: 2000
+  _UpgradeIcon: {fileID: -341184688689322481, guid: 26f2d67e3853740aab39b30171b8b50f, type: 3}
   _Unlocks: []

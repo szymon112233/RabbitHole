@@ -40,7 +40,7 @@ public class TelezakupyController : MonoBehaviour {
 
         var hasMoney = GameManager.Instance.TrySpendMoney(currentUpgrade.Price);
 
-        _TelezakupyUIObserver.RaisePurchaseAttempted(hasMoney);
+        _TelezakupyUIObserver.RaisePurchaseAttempted(currentUpgrade, hasMoney);
 
         // register
         if (hasMoney) {
