@@ -1020,6 +1020,7 @@ GameObject:
   - component: {fileID: 7142741097354719898}
   - component: {fileID: 6449129060315936902}
   - component: {fileID: 9073934201312335761}
+  - component: {fileID: 4659822261243520863}
   m_Layer: 5
   m_Name: MoniLabel
   m_TagString: Untagged
@@ -1146,6 +1147,44 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4659822261243520863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453616137850748091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0a2fde62634623b91bd47bcd717a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.UI.Shaker
+  IntensityOverDuration:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 111.59327
+      outSlope: 111.59327
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.03421052
+    - serializedVersion: 3
+      time: 1
+      value: 40
+      inSlope: -0.026087051
+      outSlope: -0.026087051
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10921061
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.5
+  PerlinMoveSpeed: 25
 --- !u!1 &8959832540320486939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,6 +1273,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandController
       objectReference: {fileID: 0}
+    - target: {fileID: 6673902571773471094, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: _NoMoneyShaker.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673902571773471094, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: '_NoMoneyShaker.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2234970112912356952}
+    - target: {fileID: 6673902571773471094, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: '_NoMoneyShaker.Array.data[1]'
+      value: 
+      objectReference: {fileID: 4659822261243520863}
     - target: {fileID: 6896706880276607071, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1326,11 +1377,106 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -374
       objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: Duration
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: PerlinMoveSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].time
+      value: 0.7975941
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].time
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[3].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].value
+      value: 100.760864
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[0].inSlope
+      value: 295.9904
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].inSlope
+      value: -4.783302
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].inSlope
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[0].outSlope
+      value: 295.9904
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].inWeight
+      value: 0.08411119
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].outSlope
+      value: -4.783302
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].outSlope
+      value: 3.1626985
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[0].outWeight
+      value: 0.052543204
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].outWeight
+      value: 0.14323437
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+      propertyPath: IntensityOverDuration.m_Curve.Array.data[2].tangentMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+--- !u!114 &2234970112912356952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8915080079742852355, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}
+  m_PrefabInstance: {fileID: 7258834345634999131}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0a2fde62634623b91bd47bcd717a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.UI.Shaker
 --- !u!224 &4254363701011520260 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6896706880276607071, guid: 90356a561fa178d45a8a3d4406e44c2a, type: 3}

@@ -51,11 +51,12 @@ MonoBehaviour:
   m_RabbitSpawnManager: {fileID: 3720660151078036987}
   m_RabbitPoolManager: {fileID: 4460152226207828653}
   m_RabbitHoldController: {fileID: 0}
+  <CashMoneyParticles>k__BackingField: {fileID: 0}
   m_Player: {fileID: 0}
   Blackscreen: {fileID: 0}
   Ambient: {fileID: 8893633360120198820}
   mouseUI: {fileID: 0}
-  DebugEnabled: 1
+  DebugEnabled: 0
   DisposedRabbits: 0
   Money: 0
 --- !u!1 &2067396286159578563
@@ -105,6 +106,7 @@ MonoBehaviour:
   RabbitSpawnDeltaTime: 3
   QueryRabbitCount: 5
   MaxRabbitCount: 1500
+  StartingAmountOfRabbits: 5
 --- !u!1 &4430892156176142327
 GameObject:
   m_ObjectHideFlags: 0

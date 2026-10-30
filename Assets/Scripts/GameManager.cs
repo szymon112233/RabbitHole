@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public RabbitPoolManager RabbitPoolManager { get => m_RabbitPoolManager; }
     [SerializeField] private RabbitHoldController m_RabbitHoldController;
     public RabbitHoldController RabbitHoldController { get => m_RabbitHoldController; }
+    [field: SerializeField] public ParticleSystem CashMoneyParticles { get; private set; }
+
     [SerializeField] private FirstPersonController m_Player;
     public FirstPersonController Player { get => m_Player; }
 

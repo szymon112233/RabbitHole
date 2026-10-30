@@ -37,29 +37,31 @@ public class KillVolume : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(RabbitTag))
+        if (!other.CompareTag(RabbitTag))
         {
-            RabbitController rc = other.GetComponent<RabbitController>();
+            return;
+        }
+        
+        RabbitController rabbitController = other.GetComponent<RabbitController>();
             
-            if (rc == null)
+        if (rabbitController == null)
+        {
+            return;
+        }
+
+        GameManager.Instance.DisposedRabbits += 1;
+        GameManager.Instance.AddMoney(rabbitController.RabbitType == ERabbitType.Golden ? MoneyForThisTrigger * 5 : MoneyForThisTrigger);
+        Instantiate(GameManager.Instance.CashMoneyParticles, rabbitController.transform.position, Quaternion.identity);
+        rabbitController.Kill();
+        
+        if (bUsesCapacity)
+        {
+            Count++;
+            display.Increment();
+
+            if (!bDontReset && Count >= Capacity)
             {
-                return;
-            }
-
-            GameManager.Instance.DisposedRabbits += 1;
-            GameManager.Instance.AddMoney(rc.RabbitType == ERabbitType.Golden ? MoneyForThisTrigger * 2 : MoneyForThisTrigger);
-            rc.Kill();
-
-
-            if (bUsesCapacity)
-            {
-                Count++;
-                display.Increment();
-
-                if (!bDontReset && Count >= Capacity)
-                {
-                    StartCooldown();
-                }
+                StartCooldown();
             }
         }
     }
