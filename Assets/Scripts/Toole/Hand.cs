@@ -192,8 +192,11 @@ public class Hand : Tool
     public override void Activate()
     {
         enabled = true;
-        
-        GameManager.Instance.mouseUI.SetEmptyHand();
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.mouseUI.SetEmptyHand();
+        }
     }
 
     public override void Deactivate()
