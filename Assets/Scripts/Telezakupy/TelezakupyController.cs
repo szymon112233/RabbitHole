@@ -89,57 +89,58 @@ public class TelezakupyController : MonoBehaviour {
 
         }
 
-        private void Update() {
-            if(GameManager.Instance.DebugEnabled)
-            {
-                foreach(PurchasableUpgrade upgrade in _TelezakupyConfig.GetAvailableUpgrades())
-                {
-                    upgrade.RuntimeFields.Bought();
-                    _PlayerState.SavePurchasedUpgrade(upgrade);
-
-                }
-            }
-        // 1. Define the origin and direction (e.g., forward from the camera or player)
-        Vector3 origin = Camera.main.transform.position;
-        Vector3 direction = Camera.main.transform.forward;
-        var isInteractionReady = false;
-        
-        // 2. Perform the Raycast forcing it to collide with Triggers
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, _InteractionDistance, _TriggerLayers, QueryTriggerInteraction.Collide))
+    private void Update() {
+        if(GameManager.Instance.DebugEnabled)
         {
-            
-            // 3. Double-check if the hit collider is actually a trigger
-            if (hit.collider.isTrigger) {
-                isInteractionReady = true;
+            foreach(PurchasableUpgrade upgrade in _TelezakupyConfig.GetAvailableUpgrades())
+            {
+                upgrade.RuntimeFields.Bought();
+                _PlayerState.SavePurchasedUpgrade(upgrade);
 
-                // Put your interaction or UI highlighting logic here
             }
         }
-
-        if (isInteractionReady != _WasIsInteractionReadz) {
-            _WasIsInteractionReadz = isInteractionReady;
-            _TelezakupyUIObserver.RaiseCanSwitchPrograms(isInteractionReady);
-        }
+    // 1. Define the origin and direction (e.g., forward from the camera or player)
+    Vector3 origin = Camera.main.transform.position;
+    Vector3 direction = Camera.main.transform.forward;
+    var isInteractionReady = false;
+    
+    // 2. Perform the Raycast forcing it to collide with Triggers
+    if (Physics.Raycast(origin, direction, out RaycastHit hit, _InteractionDistance, _TriggerLayers, QueryTriggerInteraction.Collide))
+    {
         
-        var newProgram = isInteractionReady ? _PlayerState.CurrentProgram : -1;
-        if (newProgram != _LastReportedProgram) {
-            _LastReportedProgram = newProgram;
-            
-            _TelezakupyUIObserver.RaiseUpgradesForPurchase(_LastReportedProgram < 0 
-                ? null
-                : CurrentlyAiringUpgrade());
-        }
+        // 3. Double-check if the hit collider is actually a trigger
+        if (hit.collider.isTrigger) {
+            isInteractionReady = true;
 
-        if (isInteractionReady) {
-            if (Mouse.current.leftButton.wasPressedThisFrame) {
-                _TelezakupyUIObserver.RaiseProgramSwitched();
-                SwitchProgram();
-            }
-            
-            if (Mouse.current.rightButton.wasPressedThisFrame) {
-                TryBuyUpgrade();
-            }
+            GameManager.Instance.RabbitHoldController.ResetToolToHand();    
+            // Put your interaction or UI highlighting logic here
         }
     }
+
+    if (isInteractionReady != _WasIsInteractionReadz) {
+        _WasIsInteractionReadz = isInteractionReady;
+        _TelezakupyUIObserver.RaiseCanSwitchPrograms(isInteractionReady);
+    }
+    
+    var newProgram = isInteractionReady ? _PlayerState.CurrentProgram : -1;
+    if (newProgram != _LastReportedProgram) {
+        _LastReportedProgram = newProgram;
+        
+        _TelezakupyUIObserver.RaiseUpgradesForPurchase(_LastReportedProgram < 0 
+            ? null
+            : CurrentlyAiringUpgrade());
+    }
+
+    if (isInteractionReady) {
+        if (Mouse.current.leftButton.wasPressedThisFrame) {
+            _TelezakupyUIObserver.RaiseProgramSwitched();
+            SwitchProgram();
+        }
+        
+        if (Mouse.current.rightButton.wasPressedThisFrame) {
+            TryBuyUpgrade();
+        }
+    }
+}
 }
 }

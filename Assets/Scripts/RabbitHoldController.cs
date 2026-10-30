@@ -22,12 +22,13 @@ public class RabbitHoldController : MonoBehaviour
     void Awake()
     {
         toolSwappingCallbacks = new List<Action<InputAction.CallbackContext>>();
-        ActiveTool.Activate();
     }
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ActiveTool.Activate();
+
         InputSystem.actions.FindAction("Attack").performed += OnActionPerformed;
         InputSystem.actions.FindAction("Drop").started += OnAltActionPerformed;
         InputSystem.actions.FindAction("Attack").canceled += OnActionStop;
@@ -87,6 +88,11 @@ public class RabbitHoldController : MonoBehaviour
     private void OnAltActionStopped(InputAction.CallbackContext obj)
     {
         ActiveTool.Stop_Alt();
+    }
+
+    public void ResetToolToHand()
+    {
+        OnToolSwap(0);
     }
 
 
