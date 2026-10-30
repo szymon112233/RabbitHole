@@ -16,8 +16,11 @@ public sealed class PixelArtVolume : VolumeComponent, IPostProcessComponent
     public BoolParameter enabled = new BoolParameter(false, true);
 
     [Header("Resolution")]
-    [Tooltip("Size of one virtual pixel measured in screen pixels. 1 = no pixelation.")]
+    [Tooltip("Size of one virtual pixel measured in screen pixels at Reference Height. 1 = no pixelation at the reference resolution.")]
     public ClampedIntParameter pixelSize = new ClampedIntParameter(4, 1, 32);
+
+    [Tooltip("Screen height (in pixels) at which Pixel Size applies 1:1. Higher resolutions scale Pixel Size up so the effect looks the same, e.g. 360 -> pixel size 1 becomes 3 at 1080p. 0 disables scaling.")]
+    public ClampedIntParameter referenceHeight = new ClampedIntParameter(360, 0, 2160);
 
     [Tooltip("If set (> 0), overrides Pixel Size and renders at a fixed vertical resolution, e.g. 240 for a PS1/Genesis look.")]
     public ClampedIntParameter targetHeight = new ClampedIntParameter(0, 0, 1080);
@@ -42,12 +45,21 @@ public sealed class PixelArtVolume : VolumeComponent, IPostProcessComponent
     [Tooltip("Darkening of every other virtual pixel row. 0 disables scanlines.")]
     public ClampedFloatParameter scanlines = new ClampedFloatParameter(0f, 0f, 1f);
 
+    /// <summary>Pixel size in screen pixels for the given screen height, scaled relative to <see cref="referenceHeight"/>.</summary>
+    public int GetScaledPixelSize(int screenHeight)
+    {
+        int size = Mathf.Max(1, pixelSize.value);
+        if (referenceHeight.value <= 0 || screenHeight <= 0)
+            return size;
+        return Mathf.Max(1, Mathf.RoundToInt(size * (screenHeight / (float)referenceHeight.value)));
+    }
+
     public bool IsActive()
     {
         if (!enabled.value)
             return false;
 
-        bool pixelates = pixelSize.value > 1 || targetHeight.value > 0;
+        bool pixelates = GetScaledPixelSize(Screen.height) > 1 || targetHeight.value > 0;
         bool grades = colorLevels.value > 0 || scanlines.value > 0f
                       || !Mathf.Approximately(saturation.value, 1f)
                       || !Mathf.Approximately(contrast.value, 1f)

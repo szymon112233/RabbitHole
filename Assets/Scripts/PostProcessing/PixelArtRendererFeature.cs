@@ -107,7 +107,7 @@ public sealed class PixelArtRendererFeature : ScriptableRendererFeature
             }
             else
             {
-                int pixelSize = Mathf.Max(1, volume.pixelSize.value);
+                int pixelSize = volume.GetScaledPixelSize(screenHeight);
                 lowWidth = Mathf.Max(1, screenWidth / pixelSize);
                 lowHeight = Mathf.Max(1, screenHeight / pixelSize);
             }
