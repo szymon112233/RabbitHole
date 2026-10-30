@@ -53,6 +53,11 @@ jobs:
             Library-WebGL-
             Library-
 
+      - name: Add swap
+        run: |
+          sudo fallocate -l 8G /swapfile && sudo chmod 600 /swapfile
+          sudo mkswap /swapfile && sudo swapon /swapfile
+
       - uses: game-ci/unity-builder@v4
         with:
           targetPlatform: WebGL
