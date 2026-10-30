@@ -561,6 +561,14 @@ PrefabInstance:
       propertyPath: DirectionalLight
       value: 
       objectReference: {fileID: 705507994}
+    - target: {fileID: 6643857616787043878, guid: e96081169b4ade140a188c4e2959bc33, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.775085
+      objectReference: {fileID: 0}
+    - target: {fileID: 6643857616787043878, guid: e96081169b4ade140a188c4e2959bc33, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 47.73
+      objectReference: {fileID: 0}
     - target: {fileID: 7043032846095829853, guid: e96081169b4ade140a188c4e2959bc33, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
@@ -571,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7043032846095829853, guid: e96081169b4ade140a188c4e2959bc33, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0006597872
+      value: -0.1013915
       objectReference: {fileID: 0}
     - target: {fileID: 7951700553093745167, guid: e96081169b4ade140a188c4e2959bc33, type: 3}
       propertyPath: m_LocalPosition.x
