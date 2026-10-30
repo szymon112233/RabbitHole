@@ -31,6 +31,11 @@ public class PlayerStartEndSequence : MonoBehaviour
         GameManager.Instance.Ambient.clip = ChangeAmbient;
         GameManager.Instance.Ambient.Play();
 
+        Invoke(nameof(ContinueWithChangingRooms), 0f);
+    }
+
+    private void ContinueWithChangingRooms()
+    {
         OldRoom.SetActive(false);
         NextRoom.SetActive(true);
         // Vector3 offset = NextRoomOffset.position -  NextRoom.transform.position;
@@ -44,5 +49,4 @@ public class PlayerStartEndSequence : MonoBehaviour
         GameManager.Instance.RabbitSpawnManager.Stop();
         GameManager.Instance.RabbitPoolManager.ReturnToPoolALll();
     }
-
 }
