@@ -90,7 +90,7 @@ public class TelezakupyController : MonoBehaviour {
     }
 
     private void Start() {
-        _PlayerState.CurrentProgram = 0;
+        _PlayerState.Clear();
         SwitchProgram();
     }
 

@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        PlayerState.Clear();
         
         InputSystem.actions.FindAction("GibMoni").performed += OnCheatMoniPerformed;
     }

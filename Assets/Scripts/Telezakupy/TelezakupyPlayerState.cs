@@ -32,6 +32,7 @@ public class TelezakupyPlayerState : ScriptableObject {
 
     public void Clear()
     {
+        CurrentProgram = 0;
         _PurchasedUpgradeIds.Clear();
     }
 
