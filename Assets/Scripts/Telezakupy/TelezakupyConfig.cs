@@ -12,13 +12,20 @@ public class TelezakupyConfig : ScriptableObject {
     protected List<PurchasableUpgrade> _InitialUpgrades;
     
     [SerializeField] 
-    protected VideoClip _NoProgramm;
+    protected List<VideoClip> _NoProgramm;
     
     [SerializeField]
     protected TelezakupyPlayerState _TPlayerState;
 
-    public VideoClip NoProgramm => _NoProgramm;
+    private int _NoProgramId = 0;
     
+    public VideoClip NoProgramm {
+        get {
+            _NoProgramId++;
+            return _NoProgramm[_NoProgramId % _NoProgramm.Count];
+        }
+    }
+
     public List<PurchasableUpgrade> GetPurchasedUpgrades() {
         var result = new List<PurchasableUpgrade>();
 
