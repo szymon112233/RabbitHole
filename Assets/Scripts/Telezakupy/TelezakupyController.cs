@@ -39,9 +39,8 @@ public class TelezakupyController : MonoBehaviour {
             return;
 
         var hasMoney = GameManager.Instance.TrySpendMoney(currentUpgrade.Price);
-
-        _TelezakupyUIObserver.RaisePurchaseAttempted(currentUpgrade, hasMoney);
-
+        var up = currentUpgrade;
+        
         // register
         if (hasMoney) {
             currentUpgrade.RuntimeFields.Bought();
@@ -59,6 +58,8 @@ public class TelezakupyController : MonoBehaviour {
             _TelezakupyUIObserver.RaiseUpgradesForPurchase(curr);
 
         }
+        
+        _TelezakupyUIObserver.RaisePurchaseAttempted(up, hasMoney);
     }
 
     private void CanBuyUpgrade() {
@@ -121,7 +122,7 @@ public class TelezakupyController : MonoBehaviour {
         
         GameManager.Instance.OnMoneyStateChange += CanBuyUpgrade;
     }
-
+    
     private void Update() {
         if (GameManager.Instance.DebugEnabled) {
             foreach (PurchasableUpgrade upgrade in _TelezakupyConfig.GetAvailableUpgrades()) {
@@ -153,6 +154,10 @@ public class TelezakupyController : MonoBehaviour {
             if (isInteractionReady != _WasIsInteractionReadz) {
                 _WasIsInteractionReadz = isInteractionReady;
                 _TelezakupyUIObserver.RaiseCanSwitchPrograms(isInteractionReady);
+                
+                if (!isInteractionReady) {
+                    GameManager.Instance.RabbitHoldController.ResetToolToHandTool();
+                }
             }
 
             var newProgram = isInteractionReady ? _PlayerState.CurrentProgram : -1;

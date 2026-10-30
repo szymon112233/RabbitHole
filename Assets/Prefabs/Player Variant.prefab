@@ -261,6 +261,9 @@ MonoBehaviour:
   - {fileID: 5783637762575605015}
   - {fileID: 6614959842189462667}
   - {fileID: 6002178823246345218}
+  _Observer: {fileID: 11400000, guid: d221a2797c8554354aaa0177c8b1ef31, type: 2}
+  upgrateToForceVacuum: {fileID: 11400000, guid: ac220e54212104949a17bbfb1ad68a1a, type: 2}
+  upgrateToForceRake: {fileID: 11400000, guid: 8297ba95b84b04c07823c83bcb1f6cd6, type: 2}
 --- !u!114 &5783637762575605015
 MonoBehaviour:
   m_ObjectHideFlags: 0
