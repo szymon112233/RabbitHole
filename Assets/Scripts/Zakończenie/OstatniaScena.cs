@@ -6,6 +6,9 @@ public class OstatniaScena : MonoBehaviour
 {
     [SerializeField]
     protected List<EvilBun> Actors;
+    
+    [SerializeField]
+    protected AudioSource ImportantSoundEffect;
 
     [SerializeField]
     protected float Rotation_time;
@@ -18,6 +21,7 @@ public class OstatniaScena : MonoBehaviour
     {
         GameManager.Instance.Player.MovementBlocked = true;
         StartCoroutine(RotationAnimation());
+        StartCoroutine(PlaySound());
 
     }
 
@@ -53,5 +57,11 @@ public class OstatniaScena : MonoBehaviour
         #else
         Application.Quit();
         #endif
+    }
+
+    IEnumerator PlaySound()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ImportantSoundEffect.Play();
     }
 }

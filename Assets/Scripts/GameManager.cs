@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private FirstPersonController m_Player;
     public FirstPersonController Player { get => m_Player; }
+    
+    
+    [SerializeField]
+    private AudioClip ambientAudioClip;
 
     [SerializeField]
     public UnityEngine.UI.Image Blackscreen;
@@ -55,6 +59,10 @@ public class GameManager : MonoBehaviour
     {
         
         InputSystem.actions.FindAction("GibMoni").performed += OnCheatMoniPerformed;
+        
+        Ambient.clip = ambientAudioClip;
+        Ambient.loop = true;
+        Ambient.Play();
     }
 
     private void OnCheatMoniPerformed(InputAction.CallbackContext obj)
