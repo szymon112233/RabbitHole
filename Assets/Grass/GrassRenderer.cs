@@ -110,8 +110,30 @@ public class GrassRenderer : MonoBehaviour
     static readonly int LodDistanceId = Shader.PropertyToID("_LodDistance");
     static readonly int BoundsPaddingId = Shader.PropertyToID("_BoundsPadding");
 
+    /// <summary>
+    /// The grass needs compute shaders (culling), structured buffers and indirect draws.
+    /// WebGL2 has none of these; WebGPU and all desktop/mobile APIs do.
+    /// </summary>
+    public static bool IsSupported =>
+        SystemInfo.supportsComputeShaders && SystemInfo.supportsInstancing;
+
+    static bool warnedUnsupported;
+
     void OnEnable()
     {
+        if (!IsSupported)
+        {
+            if (!warnedUnsupported)
+            {
+                warnedUnsupported = true;
+                Debug.LogWarning($"{nameof(GrassRenderer)}: compute shaders are not supported on " +
+                                 $"{SystemInfo.graphicsDeviceType}. Grass is disabled. On Web, put WebGPU first in " +
+                                 "Player Settings > Graphics APIs and run in a WebGPU-capable browser to enable it.");
+            }
+            enabled = false;
+            return;
+        }
+
         dirty = true;
         RenderPipelineManager.beginCameraRendering += OnBeginCameraRendering;
     }
