@@ -20,7 +20,7 @@ on:
         type: boolean
         default: true
 
-# Pages deployment + itch.io uploads (BUTLER_API_KEY secret; ITCH_USER / ITCH_GAME variables)
+# Needed for Pages deployment
 permissions:
   contents: read
   pages: write
@@ -74,17 +74,6 @@ jobs:
         with:
           path: build/WebGL/WebGL
 
-      - name: Upload to itch.io (html5)
-        if: github.ref == 'refs/heads/master'
-        uses: manleydev/butler-publish-itchio-action@master
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
-          CHANNEL: html5
-          ITCH_GAME: ${{ vars.ITCH_GAME }}
-          ITCH_USER: ${{ vars.ITCH_USER }}
-          PACKAGE: build/WebGL/WebGL
-          VERSION: ${{ github.run_number }}
-
   # --------------------------------------------------------- Deploy Pages
   deploy-pages:
     name: Deploy to GitHub Pages
@@ -127,16 +116,6 @@ jobs:
           path: build/StandaloneWindows64
           retention-days: 14
 
-      - name: Upload to itch.io (windows)
-        uses: manleydev/butler-publish-itchio-action@master
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
-          CHANNEL: windows
-          ITCH_GAME: ${{ vars.ITCH_GAME }}
-          ITCH_USER: ${{ vars.ITCH_USER }}
-          PACKAGE: build/StandaloneWindows64
-          VERSION: ${{ github.run_number }}
-
   build-linux:
     name: Build Linux
     if: github.event_name == 'push' || inputs.build_linux
@@ -162,12 +141,65 @@ jobs:
           path: build/StandaloneLinux64
           retention-days: 14
 
-      - name: Upload to itch.io (linux)
+  # ----------------------------------------------------------------- itch.io
+  # Needs: BUTLER_API_KEY secret, ITCH_USER / ITCH_GAME repository variables.
+  # Publishes whichever builds succeeded in this run (master only).
+  publish-itch:
+    name: Publish to itch.io
+    needs: [build-webgl, build-windows, build-linux]
+    if: >-
+      !cancelled() && github.ref == 'refs/heads/master' &&
+      (needs.build-webgl.result == 'success' ||
+       needs.build-windows.result == 'success' ||
+       needs.build-linux.result == 'success')
+    runs-on: ubuntu-latest
+    env:
+      BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+      ITCH_USER: ${{ vars.ITCH_USER }}
+      ITCH_GAME: ${{ vars.ITCH_GAME }}
+      VERSION: ${{ github.run_number }}
+    steps:
+      # ---- WebGL -> html5 channel
+      - name: Download WebGL build
+        if: needs.build-webgl.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: Build-WebGL
+          path: artifacts/webgl
+      - name: Upload WebGL to itch.io
+        if: needs.build-webgl.result == 'success'
         uses: manleydev/butler-publish-itchio-action@master
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+          CHANNEL: html5
+          PACKAGE: artifacts/webgl/WebGL
+
+      # ---- Windows -> windows channel
+      - name: Download Windows build
+        if: needs.build-windows.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: Build-StandaloneWindows64
+          path: artifacts/windows
+      - name: Upload Windows to itch.io
+        if: needs.build-windows.result == 'success'
+        uses: manleydev/butler-publish-itchio-action@master
+        env:
+          CHANNEL: windows
+          PACKAGE: artifacts/windows
+
+      # ---- Linux -> linux channel
+      - name: Download Linux build
+        if: needs.build-linux.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: Build-StandaloneLinux64
+          path: artifacts/linux
+      - name: Restore executable bit (artifacts don't keep file modes)
+        if: needs.build-linux.result == 'success'
+        run: find artifacts/linux -maxdepth 1 -type f ! -name '*.*' -exec chmod +x {} +
+      - name: Upload Linux to itch.io
+        if: needs.build-linux.result == 'success'
+        uses: manleydev/butler-publish-itchio-action@master
+        env:
           CHANNEL: linux
-          ITCH_GAME: ${{ vars.ITCH_GAME }}
-          ITCH_USER: ${{ vars.ITCH_USER }}
-          PACKAGE: build/StandaloneLinux64
-          VERSION: ${{ github.run_number }}
+          PACKAGE: artifacts/linux
