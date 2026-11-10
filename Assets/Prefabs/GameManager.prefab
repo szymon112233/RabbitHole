@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4087888808758780379}
   - component: {fileID: 4953937949849946604}
+  - component: {fileID: 8929047926974563122}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   m_RabbitHoldController: {fileID: 0}
   <CashMoneyParticles>k__BackingField: {fileID: 5970725261031741069, guid: 0cd8562ebd498b24dabdc19213708bfe, type: 3}
   m_Player: {fileID: 0}
+  volume: {fileID: 8929047926974563122}
   ambientAudioClip: {fileID: 8300000, guid: 526629099bdde9d4287cc4afcca17764, type: 3}
   Blackscreen: {fileID: 0}
   Ambient: {fileID: 8893633360120198820}
@@ -60,6 +62,23 @@ MonoBehaviour:
   DebugEnabled: 0
   DisposedRabbits: 0
   Money: 0
+--- !u!114 &8929047926974563122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560870897366751330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
 --- !u!1 &2067396286159578563
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RabbitPoolManager
   RabbitPrefab: {fileID: 407940998765757281, guid: afe5fc679444d40a489f310972e4ff98, type: 3}
-  MaxRabbitCount: 1500
   RabbitPool: []
   CurrentlyActiveRabbits: []
   m_RabbitTypeChanceDictionary:

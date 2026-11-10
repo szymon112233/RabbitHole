@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private FirstPersonController m_Player;
     public FirstPersonController Player { get => m_Player; }
+
+
+    public Volume volume;
     
     
     [SerializeField]
@@ -59,10 +63,18 @@ public class GameManager : MonoBehaviour
     {
         
         InputSystem.actions.FindAction("GibMoni").performed += OnCheatMoniPerformed;
+        InputSystem.actions.FindAction("TogglePostProcess").performed += OnTogglePostProcess;
         
         Ambient.clip = ambientAudioClip;
         Ambient.loop = true;
         Ambient.Play();
+    }
+
+    private void OnTogglePostProcess(InputAction.CallbackContext obj)
+    {
+        volume.profile.TryGet(out PixelArtVolume component);
+        BoolParameter boolp = new BoolParameter(!component.enabled.GetValue<bool>());
+        component.enabled.SetValue(boolp);
     }
 
     private void OnCheatMoniPerformed(InputAction.CallbackContext obj)

@@ -145,6 +145,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "TogglePostProcess",
+                    "type": "Button",
+                    "id": "5e410880-e5e5-4902-92aa-b4874566d668",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -629,6 +639,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "EnterVehicle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23fc352f-f481-40fe-9983-b7e6545288e2",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TogglePostProcess",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
