@@ -1,21 +1,24 @@
 name: Build & Deploy
 
 on:
-  # WebGL build + Pages deploy on every push to master
+  # Every push to master builds all platforms
   push:
     branches: [master]
-    tags: ['v*']          # tags also build Windows + Linux
-  # Manual run: choose which extra platforms to build
+  # Manual run: choose which platforms to build
   workflow_dispatch:
     inputs:
+      build_webgl:
+        description: 'Build WebGL (+ deploy to Pages / itch.io when run on master)'
+        type: boolean
+        default: true
       build_windows:
         description: 'Build Windows (StandaloneWindows64)'
         type: boolean
-        default: false
+        default: true
       build_linux:
         description: 'Build Linux (StandaloneLinux64)'
         type: boolean
-        default: false
+        default: true
 
 # Pages deployment + itch.io uploads (BUTLER_API_KEY secret; ITCH_USER / ITCH_GAME variables)
 permissions:
@@ -39,6 +42,7 @@ jobs:
   # ---------------------------------------------------------------- WebGL
   build-webgl:
     name: Build WebGL
+    if: github.event_name == 'push' || inputs.build_webgl
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -79,13 +83,13 @@ jobs:
           ITCH_GAME: ${{ vars.ITCH_GAME }}
           ITCH_USER: ${{ vars.ITCH_USER }}
           PACKAGE: build/WebGL/WebGL
-          VERSION: ${{ github.ref_type == 'tag' && github.ref_name || github.run_number }}
+          VERSION: ${{ github.run_number }}
 
   # --------------------------------------------------------- Deploy Pages
   deploy-pages:
     name: Deploy to GitHub Pages
     needs: build-webgl
-    # Only deploy from master, not from tags/manual runs on other branches
+    # Only deploy from master, not from manual runs on other branches
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     environment:
@@ -96,127 +100,11 @@ jobs:
         uses: actions/deploy-pages@v4
 
   # ------------------------------------------------------ Windows / Linux
-  # Run only for version tags (v*) or when ticked in a manual run.
+  # Run on every push, or when ticked in a manual run.
   # (Two jobs instead of a matrix: `matrix` isn't available in a job-level `if`.)
   build-windows:
     name: Build Windows
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.build_windows)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-      - uses: actions/cache@v4
-        with:
-          path: Library
-          key: Library-StandaloneWindows64-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-StandaloneWindows64-
-            Library-
-      - uses: game-ci/unity-builder@v4
-        with:name: Build & Deploy
-
-on:
-  # WebGL build + Pages deploy on every push to master
-  push:
-    branches: [master]
-    tags: ['v*']          # tags also build Windows + Linux
-  # Manual run: choose which extra platforms to build
-  workflow_dispatch:
-    inputs:
-      build_windows:
-        description: 'Build Windows (StandaloneWindows64)'
-        type: boolean
-        default: false
-      build_linux:
-        description: 'Build Linux (StandaloneLinux64)'
-        type: boolean
-        default: false
-
-# Pages deployment + itch.io uploads (BUTLER_API_KEY secret; ITCH_USER / ITCH_GAME variables)
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Only one Pages deploy at a time; newer pushes cancel older builds
-concurrency:
-  group: build-${{ github.ref }}
-  cancel-in-progress: true
-
-env:
-  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-  # UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-  # Personal license users: use this instead of UNITY_SERIAL
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-
-jobs:
-  # ---------------------------------------------------------------- WebGL
-  build-webgl:
-    name: Build WebGL
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-
-      - uses: actions/cache@v4
-        with:
-          path: Library
-          key: Library-WebGL-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-WebGL-
-            Library-
-
-      - uses: game-ci/unity-builder@v4
-        with:
-          targetPlatform: WebGL
-          unityVersion: auto
-          # buildName / buildsPath defaults -> build/WebGL/WebGL
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Build-WebGL
-          path: build/WebGL
-          retention-days: 7
-
-      # Package exactly what Pages should serve (index.html at the root)
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/WebGL/WebGL
-
-      - name: Upload to itch.io (html5)
-        if: github.ref == 'refs/heads/master'
-        uses: manleydev/butler-publish-itchio-action@master
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
-          CHANNEL: html5
-          ITCH_GAME: ${{ vars.ITCH_GAME }}
-          ITCH_USER: ${{ vars.ITCH_USER }}
-          PACKAGE: build/WebGL/WebGL
-          VERSION: ${{ github.ref_type == 'tag' && github.ref_name || github.run_number }}
-
-  # --------------------------------------------------------- Deploy Pages
-  deploy-pages:
-    name: Deploy to GitHub Pages
-    needs: build-webgl
-    # Only deploy from master, not from tags/manual runs on other branches
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
-
-  # ------------------------------------------------------ Windows / Linux
-  # Run only for version tags (v*) or when ticked in a manual run.
-  # (Two jobs instead of a matrix: `matrix` isn't available in a job-level `if`.)
-  build-windows:
-    name: Build Windows
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.build_windows)
+    if: github.event_name == 'push' || inputs.build_windows
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -247,11 +135,11 @@ jobs:
           ITCH_GAME: ${{ vars.ITCH_GAME }}
           ITCH_USER: ${{ vars.ITCH_USER }}
           PACKAGE: build/StandaloneWindows64
-          VERSION: ${{ github.ref_type == 'tag' && github.ref_name || github.run_number }}
+          VERSION: ${{ github.run_number }}
 
   build-linux:
     name: Build Linux
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.build_linux)
+    if: github.event_name == 'push' || inputs.build_linux
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -282,57 +170,4 @@ jobs:
           ITCH_GAME: ${{ vars.ITCH_GAME }}
           ITCH_USER: ${{ vars.ITCH_USER }}
           PACKAGE: build/StandaloneLinux64
-          VERSION: ${{ github.ref_type == 'tag' && github.ref_name || github.run_number }}
-
-          targetPlatform: StandaloneWindows64
-          unityVersion: auto
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Build-StandaloneWindows64
-          path: build/StandaloneWindows64
-          retention-days: 14
-
-      - name: Upload to itch.io (windows)
-        uses: manleydev/butler-publish-itchio-action@master
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
-          CHANNEL: windows
-          ITCH_GAME: ${{ vars.ITCH_GAME }}
-          ITCH_USER: ${{ vars.ITCH_USER }}
-          PACKAGE: build/StandaloneWindows64
-          VERSION: ${{ github.ref_type == 'tag' && github.ref_name || github.run_number }}
-
-  build-linux:
-    name: Build Linux
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.build_linux)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-      - uses: actions/cache@v4
-        with:
-          path: Library
-          key: Library-StandaloneLinux64-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-StandaloneLinux64-
-            Library-
-      - uses: game-ci/unity-builder@v4
-        with:
-          targetPlatform: StandaloneLinux64
-          unityVersion: auto
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Build-StandaloneLinux64
-          path: build/StandaloneLinux64
-          retention-days: 14
-
-      - name: Upload to itch.io (linux)
-        uses: manleydev/butler-publish-itchio-action@master
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
-          CHANNEL: linux
-          ITCH_GAME: ${{ vars.ITCH_GAME }}
-          ITCH_USER: ${{ vars.ITCH_USER }}
-          PACKAGE: build/StandaloneLinux64
-          VERSION: ${{ github.ref_type == 'tag' && github.ref_name || github.run_number }}
+          VERSION: ${{ github.run_number }}
